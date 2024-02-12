@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:44:10 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/12 13:54:42 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/12 16:26:31 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 # define DRAW_H
 
 # include <minirt/minirt.h>
-
-typedef t_size2	t_coord2;
-
-typedef struct s_coord3 {
-	int		x;
-	int		y;
-	int		z;
-}			t_coord3;
 
 typedef struct s_segment2 {
 	t_coord2	a;

@@ -1,0 +1,7 @@
+.objs/
+includes/*.h
+*.a
+libft/*.a
+libmlx/*.a
+./minirt
+.vscode/
