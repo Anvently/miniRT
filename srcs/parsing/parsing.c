@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:34 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/12 18:56:01 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/13 16:43:12 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static int	scene_parse(t_scene *scene, int fd)
 			free(line);
 			return (1);
 		}
+		free(line);
 	}
 	if (errno == ENOMEM)
 		return (error("parsing file"), errno);
@@ -45,24 +46,19 @@ static int	scene_parse(t_scene *scene, int fd)
 
 /// @brief Open given file and parse it
 /// @param path
-/// @return Allocated scene structure
-/// ```NULL``` if error (errors' context is printed)
-t_scene	*scene_open(char *path)
+/// @return ```0``` if no error occured (errors' context is printed)
+int	scene_open(char *path, t_scene *scene)
 {
-	t_scene	*scene;
 	int		fd;
 
-	scene = ft_calloc(1, sizeof(t_scene));
-	if (!scene)
-		return (error(NULL), NULL);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-	{
-		t_scene_free(&scene);
-		return (error_file("opening file", path), NULL);
-	}
+		return (error_file("opening file", path), 1);
 	if (scene_parse(scene, fd))
-		t_scene_free(&scene);
+	{
+		close(fd);
+		return (1);
+	}
 	close(fd);
-	return (scene);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:04:22 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/12 18:12:09 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/13 16:47:57 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,10 @@ int	scene_parse_line(t_scene *scene, char *line)
 
 	nbr++;
 	ptr = line;
+	while (ft_isspace(*ptr))
+		ptr++;
+	if (!*ptr)
+		return (0);
 	if (scene_parse_type(&ptr, &type))
 		return (error_parsing("object type", nbr, line), 1);
 	if (type == CAMERA && scene_parse_camera(scene, nbr, &ptr, line))

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/12 18:55:11 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/13 15:40:39 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <minirt/minirt.h>
 # include <minirt/objects.h>
+
+
+int		scene_open(char *path, t_scene *scene);
 
 int		scene_parse_line(t_scene *scene, char *line);
 int		scene_parse_ambiant(t_scene *scene, int nbr, char **ptr, char *line);
@@ -37,7 +40,6 @@ int		scene_parse_fov(char **ptr, int *fov);
 int		scene_parse_ratio(char **ptr, float *ratio);
 int		scene_parse_float(char **ptr, float *value);
 int		scene_parse_color(char **ptr, t_color *color);
-
 
 /* -------------------------------------------------------------------------- */
 /*                                   ERRORS                                   */

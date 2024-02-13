@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:27:05 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/12 18:56:21 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/13 16:46:59 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@ int	scene_parse_type(char **ptr, char *type)
 	char	*it;
 
 	it = *ptr;
-	if (!*it)
-		return (1);
-	while (ft_isspace(*it))
-		it++;
 	if (!ft_strncmp(it, "A", 1))
 		*type = AMBIANT;
 	else if (!ft_strncmp(it, "C", 1))
@@ -57,9 +53,23 @@ int	scene_parse_fov(char **ptr, int *fov)
 {
 	while (ft_isspace(**ptr))
 		*ptr = *ptr + 1;
-	if (ft_strtoi(*ptr, fov))
+	if (ft_strtoi(*ptr, fov) || *fov < 0 || *fov > 180)
 		return (1);
 	while (**ptr && !ft_isspace(**ptr))
 		*ptr = *ptr + 1;
+	return (0);
+}
+
+int	scene_parse_ratio(char **ptr, float *ratio)
+{
+	if (ft_strtof(*ptr, ratio, ptr) || *ratio < 0.0 || *ratio > 1.0)
+		return (1);
+	return (0);
+}
+
+int	scene_parse_float(char **ptr, float *value)
+{
+	if (ft_strtof(*ptr, value, ptr))
+		return (1);
 	return (0);
 }

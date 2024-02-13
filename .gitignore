@@ -3,5 +3,7 @@ includes/*.h
 *.a
 libft/*.a
 libmlx/*.a
-./minirt
+/minirt
 .vscode/
+/main.c
+/a.out

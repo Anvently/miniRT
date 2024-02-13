@@ -10,7 +10,7 @@ SRCS_FILES	=	main.c render.c error.c \
 				events/events.c events/handlers.c \
 				parsing/parsing.c parsing/parse_line.c parsing/parse_objects.c \
 				parsing/parse_value.c parsing/parse_value2.c \
-				struct/t_scene.c
+				struct/t_scene.c struct/print.c
 
 OBJS		=	$(addprefix $(OBJS_FOLDER),$(SRCS_FILES:.c=.o))
 SRCS		=	$(addprefix $(SRCS_FOLDER),$(SRCS_FILES))

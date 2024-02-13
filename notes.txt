@@ -1,0 +1,12 @@
+
+
+- generate rays for each pixel
+	- for each objects :
+		- check collision
+		- take first inter
+			- bounce ray
+			- for each light
+				- check if ray within light cone
+				- check if no collision to light
+		- calculate color of pixel.
+

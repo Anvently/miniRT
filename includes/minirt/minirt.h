@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/12 17:09:48 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/13 15:36:30 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,62 +16,30 @@
 # include <mlx.h>
 # include <mlx_int.h>
 # include <stdbool.h>
+# include <minirt/types.h>
 
 # define DFT_SIZE_X 800
 # define DFT_SIZE_Y 800
 
-typedef struct s_int2 {
-	int		x;
-	int		y;
-}			t_int2;
-
-typedef struct s_int3 {
-	int		x;
-	int		y;
-	int		z;
-}			t_int3;
-
-typedef struct s_color {
-	int		r;
-	int		g;
-	int		b;
-}			t_color;
-
-typedef struct s_float2 {
-	float		x;
-	float		y;
-}				t_float2;
-
-typedef struct s_float3 {
-	float		x;
-	float		y;
-	float		z;
-}				t_float3;
-
-typedef t_int2		t_vec2i;
-typedef t_int3		t_vec3i;
-typedef t_float2	t_vec2f;
-typedef t_float3	t_vec3f;
-typedef t_int2		t_coord2;
-typedef t_int3		t_coord3;
-typedef t_float3	t_coord3f;
-
 typedef struct s_data {
 
 	//Window
-	t_int2		size;
-	void		*img;
-	void		*mlx;
-	void		*win;
-	char		*addr;
-	int			bbp;
-	int			len_line;
-	int			endian;
+	t_int2			size;
+	void			*img;
+	void			*mlx;
+	void			*win;
+	char			*addr;
+	int				bbp;
+	int				len_line;
+	int				endian;
 
 	//User-inputs
-	bool		mouse_pressed;
-	t_int2		dnd;
-	float		zoom;
+	bool			mouse_pressed;
+	t_int2			dnd;
+	float			zoom;
+
+	//Scene
+	t_scene			scene;
 
 }				t_data;
 

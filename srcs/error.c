@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:36:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/12 18:54:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/13 16:33:42 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	error_parsing(char *context, int nbr, char *line)
 	{
 		ft_putstr_fd(" at line ", 2);
 		ft_putnbr_fd(nbr, 2);
-		ft_putstr_fd(" : '", 2);
+		ft_putstr_fd(" : ", 2);
 		ft_putstr_fd(line, 2);
-		ft_putstr_fd("'", 2);
 	}
-	ft_putstr_fd("\n", 2);
+	else
+		ft_putstr_fd("\n", 2);
 }
