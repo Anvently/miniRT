@@ -6,11 +6,12 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:02:35 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/12 16:25:32 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:36:07 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
+#include <minirt/types.h>
 
 /// @brief Convert t_color format to int format.
 /// @param color
@@ -30,9 +31,11 @@ int	color_getint(t_color *color)
 /// @brief Extract RGB colors from given int and put it in dest structure.
 /// @param color
 /// @param dest
-void	color_getcolor(int color, t_color *dest)
+t_color	color_getcolor(int icolor)
 {
-	dest->r = color_get_r(color);
-	dest->g = color_get_g(color);
-	dest->b = color_get_b(color);
+	t_color	color;
+
+	color.r = color_get_r(icolor);
+	color.g = color_get_g(icolor);
+	color.b = color_get_b(icolor);
 }

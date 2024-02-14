@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 10:46:53 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:35:26 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	data_init(t_data *data)
 	ft_memset(data, 0, sizeof(t_data));
 	data->size.x = DFT_SIZE_X;
 	data->size.y = DFT_SIZE_Y;
-	data->size_ratio = (float) data->size.y / (float) data->size.x;
+	data->size_ratio = (double) data->size.y / (double) data->size.x;
 	rt_update_camera(data);
 }
 

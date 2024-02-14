@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 10:30:32 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:35:26 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_data {
 
 	//Window
 	t_int2			size;
-	float			size_ratio;
+	double			size_ratio;
 	void			*img;
 	void			*mlx;
 	void			*win;
@@ -37,7 +37,7 @@ typedef struct s_data {
 	//User-inputs
 	bool			mouse_pressed;
 	t_int2			dnd;
-	float			zoom;
+	double			zoom;
 
 	//Scene
 	t_scene			scene;
@@ -66,7 +66,7 @@ int		handle_pan(t_data *data);
 /* -------------------------------------------------------------------------- */
 
 int		color_getint(t_color *color);
-void	color_getcolor(int color, t_color *dest);
+t_color	color_getcolor(int color);
 int		color_get_r(int color);
 int		color_get_g(int color);
 int		color_get_b(int color);

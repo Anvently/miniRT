@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:27:05 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/13 16:46:59 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:39:57 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 int		scene_parse_type(char **ptr, char *type);
 int		scene_parse_fov(char **ptr, int *fov);
-int		scene_parse_ratio(char **ptr, float *ratio);
-int		scene_parse_float(char **ptr, float *value);
+int		scene_parse_ratio(char **ptr, double *ratio);
+int		scene_parse_double(char **ptr, double *value);
 
 /// @brief Check if ptr points toward a valid type (```A, C, L, pl, sp, cy```)
 /// and assign it to ```type```.
@@ -60,16 +60,16 @@ int	scene_parse_fov(char **ptr, int *fov)
 	return (0);
 }
 
-int	scene_parse_ratio(char **ptr, float *ratio)
+int	scene_parse_ratio(char **ptr, double *ratio)
 {
-	if (ft_strtof(*ptr, ratio, ptr) || *ratio < 0.0 || *ratio > 1.0)
+	if (ft_strtod(*ptr, ratio, ptr) || *ratio < 0.0 || *ratio > 1.0)
 		return (1);
 	return (0);
 }
 
-int	scene_parse_float(char **ptr, float *value)
+int	scene_parse_double(char **ptr, double *value)
 {
-	if (ft_strtof(*ptr, value, ptr))
+	if (ft_strtod(*ptr, value, ptr))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 11:24:59 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:35:29 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,32 +32,32 @@ typedef struct s_color {
 	int		b;
 }			t_color;
 
-typedef struct s_float2 {
-	float		x;
-	float		y;
-}				t_float2;
+typedef struct s_double2 {
+	double		x;
+	double		y;
+}				t_double2;
 
-typedef struct s_float3 {
-	float		x;
-	float		y;
-	float		z;
-}				t_float3;
+typedef struct s_double3 {
+	double		x;
+	double		y;
+	double		z;
+}				t_double3;
 
 typedef t_int2		t_vec2i;
 typedef t_int3		t_vec3i;
-typedef t_float2	t_vec2f;
-typedef t_float3	t_vec3f;
+typedef t_double2	t_vec2f;
+typedef t_double3	t_vec3f;
 typedef t_int2		t_coord2;
 typedef t_int3		t_coord3;
-typedef t_float2	t_coord2f;
-typedef t_float3	t_coord3f;
+typedef t_double2	t_coord2f;
+typedef t_double3	t_coord3f;
 
 typedef struct s_ray {
 	t_coord3f	origin;
 	t_vec3f		dir;
 	t_coord3f	inter;
 	t_vec3f		normal;
-	float		t;
+	double		t;
 	t_color		color;
 }				t_ray;
 
@@ -77,7 +77,7 @@ typedef enum e_object_type
 /// @param origin x,y,z coordinates of light position
 typedef struct s_light {
 	t_color		color;
-	float		ratio;
+	double		ratio;
 	t_coord3f	origin;
 }				t_light;
 
@@ -120,8 +120,8 @@ typedef struct s_scene {
 typedef struct s_object {
 	char		type;
 	t_coord3f	origin;
-	float		diameter;
-	float		height;
+	double		diameter;
+	double		height;
 	t_color		color;
 	t_vec3f		orientation;
 }				t_object;
