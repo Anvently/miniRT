@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/13 17:18:18 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:27:06 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,13 @@ typedef t_float2	t_vec2f;
 typedef t_float3	t_vec3f;
 typedef t_int2		t_coord2;
 typedef t_int3		t_coord3;
+typedef t_float2	t_coord2f;
 typedef t_float3	t_coord3f;
 
 typedef struct s_ray {
 	t_coord3f	origin;
 	t_vec3f		dir;
+	t_color		color;
 }				t_ray;
 
 typedef enum e_object_type

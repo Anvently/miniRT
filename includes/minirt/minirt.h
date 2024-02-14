@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/13 15:36:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:30:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_data {
 
 	//Window
 	t_int2			size;
+	float			size_ratio;
 	void			*img;
 	void			*mlx;
 	void			*win;
