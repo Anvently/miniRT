@@ -6,17 +6,18 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:53:31 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/14 11:52:16 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/14 17:54:39 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt/calculus.h"
+#include "../../includes/minirt/types.h"
 
 double	scalar_product(t_vec3f *t_u, t_vec3f *t_v)
 {
 	double	res;
 
-	res = t_u->x * t_u->x + t_u->y * t_v->y + t_u->z * t_v->z;
+	res = t_u->x * t_v->x + t_u->y * t_v->y + t_u->z * t_v->z;
 	return (res);
 }
 
