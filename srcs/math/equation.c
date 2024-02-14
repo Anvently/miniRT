@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:18:35 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/14 17:46:59 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/14 18:23:16 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ t_vec3f	get_inter_point(t_ray *ray)
 	impact.z = ray->origin.z + ray->dir.z * ray->t;
 	return (impact);
 }
-#include <stdio.h>
+
 void	display_vector(t_vec3f	*vec)
 {
-	printf("x:%f || y:%f || z:%f\n", vec->x, vec->y, vec->z);
+	ft_printf("x:%f || y:%f || z:%f\n", vec->x, vec->y, vec->z);
 }
