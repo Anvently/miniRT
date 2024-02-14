@@ -6,12 +6,13 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 10:31:59 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:46:53 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
 #include <minirt/parsing.h>
+#include <minirt/raytracing.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <X11/X.h>
@@ -46,6 +47,7 @@ static void	data_init(t_data *data)
 	data->size.x = DFT_SIZE_X;
 	data->size.y = DFT_SIZE_Y;
 	data->size_ratio = (float) data->size.y / (float) data->size.x;
+	rt_update_camera(data);
 }
 
 static int	hook_init(t_data *data)

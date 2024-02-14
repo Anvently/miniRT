@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 10:27:06 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:43:19 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,17 @@ typedef struct s_light {
 }				t_light;
 
 /// @brief
+/// ```_variables``` are updated when screen changes ratio.
+/// @param _u horizontal pixel vector
+/// @param _v vertical pixel vector
+/// @param _c vector to reach center of the pixel
 /// @param origin x,y,z coordinates of camera position
 /// @param dir orientation vector (x,y,z) in range [-1.0;1.0]
 /// @param fov horizontal fov in range [0;180]
 typedef struct s_camera {
+	t_coord2f	_u;
+	t_coord2f	_v;
+	t_coord2f	_c;
 	t_coord3f	origin;
 	t_vec3f		dir;
 	int			fov;
