@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 10:43:19 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:24:59 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ typedef t_float3	t_coord3f;
 typedef struct s_ray {
 	t_coord3f	origin;
 	t_vec3f		dir;
+	t_coord3f	inter;
+	t_vec3f		normal;
+	float		t;
 	t_color		color;
 }				t_ray;
 
@@ -89,7 +92,7 @@ typedef struct s_light {
 typedef struct s_camera {
 	t_coord2f	_u;
 	t_coord2f	_v;
-	t_coord2f	_c;
+	t_coord2f	_r;
 	t_coord3f	origin;
 	t_vec3f		dir;
 	int			fov;
@@ -107,7 +110,7 @@ typedef struct s_scene {
 }				t_scene;
 
 /// @brief
-/// @param id type of object
+/// @param type type of object
 /// @param origin x,y,z coordinates of center
 /// @param diameter sphere or cylinder diameter
 /// @param height height of the cylinder
@@ -115,7 +118,7 @@ typedef struct s_scene {
 /// @param orientation Orientation of the object (x, y, z) in the range [-1;1]
 /// For cylinders, correspond to its axis.
 typedef struct s_object {
-	char		id;
+	char		type;
 	t_coord3f	origin;
 	float		diameter;
 	float		height;

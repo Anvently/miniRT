@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/13 16:26:14 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:24:33 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ void	t_object_print(void *object_ptr)
 	t_object	*object;
 
 	object = (t_object *)object_ptr;
-	printf("Type: %s\n", (char *[3]){"sp", "pl", "cy"}[object->id - SPHERE]);
+	printf("Type: %s\n", (char *[3]){"sp", "pl", "cy"}[object->type - SPHERE]);
 	printf("Origin: %.3f, %.3f, %.3f\n",
 		object->origin.x, object->origin.y, object->origin.z);
-	if (object->id == SPHERE || object->id == CYLINDER)
+	if (object->type == SPHERE || object->type == CYLINDER)
 		printf("Diameter: %.3f\n", object->diameter);
-	if (object->id == CYLINDER)
+	if (object->type == CYLINDER)
 		printf("Height: %.3f\n", object->height);
 	printf("Color: %d, %d, %d\n", object->color.r, object->color.g,
 		object->color.b);
-	if (object->id != SPHERE)
+	if (object->type != SPHERE)
 		printf("Orientation: %.3f, %.3f, %.3f\n",
 			object->orientation.x, object->orientation.y,
 			object->orientation.z);

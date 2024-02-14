@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 10:45:50 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:24:35 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 void	generate_ray(t_ray *ray, t_coord2 *pxl, t_data *data)
 {
 	ray->origin = data->scene.camera.origin;
+	ray->dir =
 	//ray->dir = camera_dir + (pxl.x * data->scene.camera.u)
 	//	+ (pxl.y * data->scene.camera.u)
 	//	+ data->scene.camera.center
