@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 11:32:02 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 11:55:16 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ t_ray	generate_ray(t_coord2 *pxl, t_data *data)
 {
 	t_ray	ray;
 
-	ray->origin = data->scene.camera.origin;
-	ray->dir =
-	//ray->dir = camera_dir + (pxl.x * data->scene.camera.u)
-	//	+ (pxl.y * data->scene.camera.u)
-	//	+ data->scene.camera.center
-
+	ray.origin = data->scene.camera.origin;
+	ray.dir = vec3_sum(&data->scene.camera.dir, &data->scene.camera._r);
+	ray.dir.x += (float) pxl->x * data->scene.camera._u.x;
+	ray.dir.y += (float) pxl->y * data->scene.camera._v.y;
+	ray.dir.z = 0.0;
+	ray.dir = vec3_sum(&ray.dir, &data->scene.camera.dir);
+	return (ray);
 }
 
 /// @brief Compute ray properties of a given pixel
