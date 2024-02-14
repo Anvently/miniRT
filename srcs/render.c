@@ -6,48 +6,21 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:28:36 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 11:40:11 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 13:30:49 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
+#include <minirt/raytracing.h>
 
-/*
-
-Generate a ray for each pixel
-
-
-
-*/
-
-
-/*
-
-
-*/
-
-void	get_next_pixel(t_coord2 *pxl, t_coord2 *size)
+int	render(void	*data_ptr)
 {
+	t_data	*data;
 
-}
-
-
-/*
-
-Let's define size of the screen :
-
-Camera origin vector is the 1 norm.
-Each vector are camera_dir + (x * u) + (y * v) OK
-But u = ?
-	v = ?
-*/
-
-
-
-
-
-int	render(void	*data)
-{
-	(void) data;
+	data = (t_data *)data_ptr;
+	generate_rays(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	if (PFPS)
+		pfps();
 	return (0);
 }

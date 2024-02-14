@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 11:35:26 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 13:29:03 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define DFT_SIZE_X 800
 # define DFT_SIZE_Y 800
+# define PFPS 1
 
 typedef struct s_data {
 
@@ -77,5 +78,7 @@ int		color_get_t(int color);
 /* -------------------------------------------------------------------------- */
 
 void	error(char *context);
+
+void	pfps(void);
 
 #endif

@@ -5,12 +5,14 @@ INCLUDES	=	includes/
 SRCS_FOLDER	=	srcs/
 OBJS_FOLDER	=	.objs/
 
-SRCS_FILES	=	main.c render.c error.c \
+SRCS_FILES	=	main.c render.c error.c fps.c \
 				draw/draw.c draw/util.c draw/line.c draw/color.c draw/color2.c \
 				events/events.c events/handlers.c \
 				parsing/parsing.c parsing/parse_line.c parsing/parse_objects.c \
 				parsing/parse_value.c parsing/parse_value2.c \
-				struct/t_scene.c struct/print.c
+				struct/t_scene.c struct/print.c \
+				math/geometry_ope.c \
+				raytracing/camera.c raytracing/rays.c
 
 OBJS		=	$(addprefix $(OBJS_FOLDER),$(SRCS_FILES:.c=.o))
 SRCS		=	$(addprefix $(SRCS_FOLDER),$(SRCS_FILES))

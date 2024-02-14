@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:02:35 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 11:36:07 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:26:28 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ t_color	color_getcolor(int icolor)
 	color.r = color_get_r(icolor);
 	color.g = color_get_g(icolor);
 	color.b = color_get_b(icolor);
+	return (color);
 }
