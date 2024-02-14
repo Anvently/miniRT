@@ -5,7 +5,8 @@ INCLUDES	=	includes/
 SRCS_FOLDER	=	srcs/
 OBJS_FOLDER	=	.objs/
 
-SRCS_FILES	=	main.c render.c error.c fps.c \
+SRCS_FILES	=	main.c error.c \
+				render/render.c render/fps.c render/image.c render/thread.c \
 				draw/draw.c draw/util.c draw/line.c draw/color.c draw/color2.c \
 				events/events.c events/handlers.c \
 				parsing/parsing.c parsing/parse_line.c parsing/parse_objects.c \

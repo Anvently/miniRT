@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:19:17 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/12 14:01:25 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 18:13:04 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,16 @@ int	event_button_press(int keycode, int x, int y, t_data *data)
 		data->dnd.y = y;
 	}
 	else if (keycode == Button4) //molette avant
-	{
 		data->zoom *= 1.5;
-	}
 	else if (keycode == Button5) //molette arriere
-	{
-
 		data->zoom /= 1.5;
-	}
 	return (0);
 }
 
 int	event_button_release(int keycode, int x, int y, t_data *data)
 {
-	(void)x;
-	(void)y;
+	(void) x;
+	(void) y;
 	if (keycode == Button1) //Left click
 		data->mouse_pressed = false;
 	else if (keycode == Button3) //Right click
@@ -65,5 +60,10 @@ int	event_key_release(int keycode, t_data *data)
 	else if (keycode == XK_Right || keycode == XK_Left
 		|| keycode == XK_Up || keycode == XK_Down)
 		handle_pan(data);
+	else if (keycode == 58 || keycode == XK_bracketleft
+		|| keycode == 33 || keycode == XK_bracketright)
+		handle_threads_nbr(keycode, data);
+	else if (keycode == 61 || keycode == XK_minus)
+		handle_ppc(keycode, data);
 	return (0);
 }

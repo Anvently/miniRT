@@ -1,9 +1,9 @@
 /*
-** mlx_new_window.c for MiniLibX in 
-** 
+** mlx_new_window.c for MiniLibX in
+**
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>
-** 
+**
 ** Started on  Mon Jul 31 17:29:02 2000 Charlie Root
 ** Last update Thu Oct  4 15:44:43 2001 Charlie Root
 */
@@ -40,7 +40,7 @@ void	*mlx_new_window(t_xvar *xvar,int size_x,int size_y,char *title)
 					0,CopyFromParent,InputOutput,xvar->visual,
 					CWEventMask|CWBackPixel|CWBorderPixel|
 					CWColormap,&xswa);
-	mlx_int_anti_resize_win(xvar,new_win->window,size_x,size_y);
+	//mlx_int_anti_resize_win(xvar,new_win->window,size_x,size_y);
 	XStoreName(xvar->display,new_win->window,title);
 	XSetWMProtocols(xvar->display, new_win->window, &(xvar->wm_delete_window), 1);
 	xgcv.foreground = -1;

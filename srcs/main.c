@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 12:32:40 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 18:01:39 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,27 @@
 #include <X11/X.h>
 #include <libft.h>
 
-static int	window_init(t_data *data)
+static int	display_init(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		return (1);
-	data->img = mlx_new_image(data->mlx, data->size.x, data->size.y);
-	data->win = mlx_new_window(data->mlx, data->size.x,
-			data->size.y, "MiniRT");
-	data->addr = mlx_get_data_addr(data->img, &data->bbp,
-			&data->len_line, &data->endian);
-	if (!data->img || !data->win || !data->addr)
-	{
-		if (data->img)
-			mlx_destroy_image(data->mlx, data->img);
-		if (data->win)
-			mlx_destroy_window(data->mlx, data->win);
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-		return (1);
-	}
+		handle_close(data);
+	img_update(data);
+	data->win = mlx_new_window(data->mlx, data->win_size.x,
+			data->win_size.y, "MiniRT");
+	if (!data->win)
+		handle_close(data);
 	return (0);
 }
 
 static void	data_init(t_data *data)
 {
 	ft_memset(data, 0, sizeof(t_data));
-	data->size.x = DFT_SIZE_X;
-	data->size.y = DFT_SIZE_Y;
-	data->size_ratio = (double) data->size.y / (double) data->size.x;
-	rt_update_camera(data);
+	data->win_size.x = DFT_SIZE_X;
+	data->win_size.y = DFT_SIZE_Y;
+	data->img_ppc = DFT_IMG_PPC;
+	data->nbr_threads = DFT_NBR_THREADS;
+	pthread_mutex_init(&data->thread_mutex, NULL);
 }
 
 static int	hook_init(t_data *data)
@@ -60,6 +51,7 @@ static int	hook_init(t_data *data)
 	mlx_hook(data->win, MotionNotify, PointerMotionMask,
 		event_mouse_move, data);
 	mlx_hook(data->win, DestroyNotify, ButtonPressMask, handle_close, data);
+	mlx_hook(data->win, ConfigureNotify, StructureNotifyMask, handle_resize, data);
 	mlx_loop_hook(data->mlx, render, data);
 	return (0);
 }
@@ -71,11 +63,11 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_putendl_fd("wrong number of arguments", 2), 0);
 	data_init(&data);
-	if (scene_open(argv[1], &data.scene) || window_init(&data)
+	if (scene_open(argv[1], &data.scene) || display_init(&data)
 		|| hook_init(&data))
 		return (t_scene_free(&data.scene), 1);
 	t_scene_print(&data.scene);
-	rt_update_camera(&data);
+	img_update_camera(&data);
 	mlx_loop(data.mlx);
 	handle_close(&data);
 	return (0);

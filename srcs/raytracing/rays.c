@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 13:41:43 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 18:23:26 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <minirt/calculus.h>
 #include <libft.h>
 
-t_ray	generate_ray(t_coord2 *pxl, t_data *data)
+t_ray	generate_pxl_ray(t_coord2 *pxl, t_data *data)
 {
 	t_ray	ray;
 
@@ -53,12 +53,12 @@ void	generate_rays(t_data *data)
 	t_ray		ray;
 
 	pxl.x = 0;
-	while (pxl.x < data->size.x)
+	while (pxl.x < data->img_size.x)
 	{
 		pxl.y = 0;
-		while (pxl.y < data->size.y)
+		while (pxl.y < data->img_size.y)
 		{
-			ray = generate_ray(&pxl, data);
+			ray = generate_pxl_ray(&pxl, data);
 			ray.color = get_ray_color(&ray);
 			draw_pxl(data, pxl, color_getint(&ray.color));
 			//printf("color = %d\n", color_getint(&ray.color));

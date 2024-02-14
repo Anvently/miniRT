@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 13:29:03 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/14 18:09:20 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,18 @@
 # include <mlx_int.h>
 # include <stdbool.h>
 # include <minirt/types.h>
+# include <pthread.h>
 
 # define DFT_SIZE_X 800
 # define DFT_SIZE_Y 800
 # define PFPS 1
+# define DFT_NBR_THREADS 16
+# define DFT_IMG_PPC 16
 
 typedef struct s_data {
 
 	//Window
-	t_int2			size;
-	double			size_ratio;
+	t_int2			win_size;
 	void			*img;
 	void			*mlx;
 	void			*win;
@@ -34,6 +36,17 @@ typedef struct s_data {
 	int				bbp;
 	int				len_line;
 	int				endian;
+
+	//Threads
+	int				nbr_threads;
+	int				thread_i;
+	pthread_t		*threads_id;
+	pthread_mutex_t	thread_mutex;
+
+	//Image
+	t_int2			img_size;
+	double			img_ratio;
+	int				img_ppc;
 
 	//User-inputs
 	bool			mouse_pressed;
@@ -50,6 +63,11 @@ typedef struct s_data {
 /* -------------------------------------------------------------------------- */
 
 int		render(void	*data);
+int		render_threads(t_data *data);
+void	render_thread_chunk(t_data *data, t_coord2 *start, t_coord2 *dimension);
+void	img_update(t_data *data);
+int		img_put(t_data *data);
+void	img_update_camera(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                   EVENTS                                   */
@@ -60,7 +78,10 @@ int		event_button_release(int keycode, int x, int y, t_data *data);
 int		event_mouse_move(int x, int y, t_data *data);
 int		event_key_release(int keycode, t_data *data);
 int		handle_close(t_data *data);
+int		handle_resize(t_data *data);
 int		handle_pan(t_data *data);
+int		handle_threads_nbr(int keycode, t_data *data);
+int		handle_ppc(int keycode, t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                   COLORS                                   */
