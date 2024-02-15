@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/15 11:54:17 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/15 14:10:33 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void	sphere_intersec(t_object *sphere, t_ray *ray);
 /*------------CYLINDER-----------------*/
 int	top_cap_intersec(t_object *cyld, t_ray *ray, double *t);
 int	bot_cap_intersec(t_object *cyld, t_ray *ray, double *t);
+void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 
 #endif

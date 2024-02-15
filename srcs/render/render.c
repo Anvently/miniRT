@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:28:36 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 14:13:27 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 14:14:44 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,17 @@ static void	chunk_draw(t_data *data, t_coord2 *start, int color)
 
 void	launch_ray(t_data *data, t_ray *ray)
 {
-	t_object	*plane;
-
-	plane = (t_object *)data->scene.objects->content;
-	plane_intersec(plane, ray);
+	// t_object	*plane;
+	// t_object	*sphere;
+		t_object	*cyld;
+	// plane = (t_object *)data->scene.objects->content;
+	// sphere = (t_object *)data->scene.objects->next->content;
+	// plane_intersec(plane, ray);
+	// sphere_intersec(sphere, ray);
 	//printf("t=%f\n", ray->t);
-	if (ray->t != INFINITY)
-		ray->color = plane->color;
-	else
+	cyld = (t_object *)data->scene.objects->content;
+	cylinder_intersec(cyld, ray);
+	if (ray->t == INFINITY)
 		ray->color = color_getcolor(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:20:20 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/15 08:59:03 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/15 14:06:47 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	sphere_normal(t_object *sphere, t_ray *ray)
 {
 	t_vec3f	impact;
 
-	impact = get_inter_point(ray);
+	impact = get_inter_point(ray, ray->t);
 	ray->normal = vec3_diff(&impact, &sphere->origin);
-	ray->normal.x /= sphere->diameter;
-	ray->normal.y /= sphere->diameter;
-	ray->normal.z /= sphere->diameter;
+	ray->normal.x /= sphere->radius;
+	ray->normal.y /= sphere->radius;
+	ray->normal.z /= sphere->radius;
 }
 
 void	sphere_intersec(t_object *sphere, t_ray *ray)
@@ -37,10 +37,11 @@ void	sphere_intersec(t_object *sphere, t_ray *ray)
 	t_r = vec3_diff(&ray->origin, &sphere->origin);
 	a = scalar_product(&ray->dir, &ray->dir);
 	b = 2 * scalar_product(&t_r, &ray->dir);
-	c = scalar_product(&t_r, &t_r) - sphere->diameter * sphere->diameter;
+	c = scalar_product(&t_r, &t_r) - sphere->radius * sphere->radius;
 	if (quadra_solver(a, b, c, &t) && t >= 1 && t < ray->t)
 	{
 		ray->t = t;
+		ray->color = sphere->color;
 		sphere_normal(sphere, ray);
 	}
 
