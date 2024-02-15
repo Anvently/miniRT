@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 18:01:39 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 12:13:34 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <X11/X.h>
 #include <libft.h>
+#include <math.h>
 
 static int	display_init(t_data *data)
 {
@@ -24,6 +25,7 @@ static int	display_init(t_data *data)
 	if (!data->mlx)
 		handle_close(data);
 	img_update(data);
+	img_update_chunk(data);
 	data->win = mlx_new_window(data->mlx, data->win_size.x,
 			data->win_size.y, "MiniRT");
 	if (!data->win)
@@ -37,7 +39,7 @@ static void	data_init(t_data *data)
 	data->win_size.x = DFT_SIZE_X;
 	data->win_size.y = DFT_SIZE_Y;
 	data->img_ppc = DFT_IMG_PPC;
-	data->nbr_threads = DFT_NBR_THREADS;
+	data->threads_nbr = DFT_NBR_THREADS;
 	pthread_mutex_init(&data->thread_mutex, NULL);
 }
 

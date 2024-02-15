@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 18:14:44 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 12:21:56 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <X11/keysym.h>
 #include <X11/Xlib.h>
 #include <pthread.h>
+#include <math.h>
 
 int	handle_close(t_data *data)
 {
@@ -57,7 +58,7 @@ int	handle_resize(t_data *data)
 	data->win_size.x = attr.width;
 	data->win_size.y = attr.height;
 	img_update(data);
-	printf("new size: x = %d, y = %d\n", attr.width, attr.height);
+	printf("Window size: x = %d, y = %d\n", attr.width, attr.height);
 	return (0);
 }
 
@@ -65,14 +66,15 @@ int	handle_threads_nbr(int keycode, t_data *data)
 {
 	if (keycode == 33 || keycode == XK_bracketright)
 	{
-		if (data->nbr_threads == 0)
-			data->nbr_threads = 1;
-		else if (data->nbr_threads != 1024)
-			data->nbr_threads *= 4;
+		if (data->threads_nbr == 0)
+			data->threads_nbr = 1;
+		else if (data->threads_nbr != 1024)
+			data->threads_nbr *= 2;
 	}
 	else if (keycode == 58 || keycode == XK_bracketleft)
-		data->nbr_threads /= 4;
-	printf("%d threads\n", data->nbr_threads);
+		data->threads_nbr /= 2;
+	img_update_chunk(data);
+	printf("%d threads\n", data->threads_nbr);
 	return (0);
 }
 
@@ -97,5 +99,7 @@ int	handle_ppc(int keycode, t_data *data)
 			data->img_ppc /= 4;
 	}
 	printf("%d ppc\n", data->img_ppc);
+	img_update(data);
+	img_update_chunk(data);
 	return (0);
 }

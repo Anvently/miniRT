@@ -6,12 +6,12 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:37:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 17:05:01 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 12:22:05 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
-
+#include <math.h>
 
 static bool	check_new_img(t_data *data)
 {
@@ -38,6 +38,7 @@ void	img_update(t_data *data)
 {
 	if (check_new_img(data) == false)
 		return ;
+	printf("Image size: x = %d, y = %d\n", data->img_size.x, data->img_size.y);
 	if (data->img)
 	{
 		mlx_destroy_image(data->mlx, data->img);
@@ -65,5 +66,14 @@ int	img_put(t_data *data)
 	y = (data->win_size.y - data->img_size.y) / 2;
 	if (mlx_put_image_to_window(data->mlx, data->win, data->img, x, y))
 		return (1);
+	return (0);
+}
+
+int	img_update_chunk(t_data *data)
+{
+	data->img_chunk_nbr = (data->img_size.x * data->img_size.y) / data->img_ppc;
+	data->img_chunk_size = sqrt((double) data->img_ppc);
+	data->thread_chunk_nbr = data->img_chunk_nbr / data->threads_nbr;
+	data->img_chunk_cell = sqrt((double)data->img_chunk_nbr);
 	return (0);
 }

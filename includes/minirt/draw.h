@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:44:10 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/12 16:26:31 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 11:40:46 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_line {
 /*                                  DRAW                                      */
 /* -------------------------------------------------------------------------- */
 
-void	draw_pxl(t_data *data, t_coord2 coord, int color);
+void	draw_pxl(t_data *data, t_coord2 *coord, int color);
 void	draw_line(t_data *data, t_coord2 a, t_coord2 b, int color);
 void	draw_segment(t_data *data, t_segment2 seg, int color);
 void	draw_rect(t_data *data, t_coord2 a, t_coord2 b, int color);
