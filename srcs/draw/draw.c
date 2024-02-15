@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 10:05:12 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 14:25:39 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 11:56:19 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include <math.h>
 #include <libft.h>
 
-void	draw_pxl(t_data *data, t_coord2 coord, int color)
+void	draw_pxl(t_data *data, t_coord2 *coord, int color)
 {
-	*(int *)(data->addr + (coord.y * data->len_line
-				+ coord.x * (data->bbp / 8))) = color;
+	*(int *)(data->addr + (coord->y * data->len_line
+				+ coord->x * (data->bbp / 8))) = color;
 }
 
 void	draw_segment(t_data *data, t_segment2 seg, int color)
@@ -35,7 +35,7 @@ void	draw_segment(t_data *data, t_segment2 seg, int color)
 	{
 		if (is_inside(seg.a.x, data->img_size.x)
 			&& is_inside(seg.a.y, data->img_size.y))
-			draw_pxl(data, seg.a, color);
+			draw_pxl(data, &seg.a, color);
 		seg.a.y += dir.y;
 		seg.a.x += dir.x;
 	}
@@ -51,7 +51,7 @@ void	draw_rect(t_data *data, t_coord2 a, t_coord2 b, int color)
 		pxl.y = a.y;
 		while (pxl.y < b.y)
 		{
-			draw_pxl(data, pxl, color);
+			draw_pxl(data, &pxl, color);
 			pxl.y++;
 		}
 		pxl.x++;

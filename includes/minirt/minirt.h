@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 18:09:20 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 12:17:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define DFT_SIZE_Y 800
 # define PFPS 1
 # define DFT_NBR_THREADS 16
-# define DFT_IMG_PPC 16
+# define DFT_IMG_PPC 64
 
 typedef struct s_data {
 
@@ -38,15 +38,19 @@ typedef struct s_data {
 	int				endian;
 
 	//Threads
-	int				nbr_threads;
+	int				threads_nbr;
 	int				thread_i;
 	pthread_t		*threads_id;
 	pthread_mutex_t	thread_mutex;
+	int				thread_chunk_nbr;
 
 	//Image
 	t_int2			img_size;
 	double			img_ratio;
 	int				img_ppc;
+	int				img_chunk_nbr;
+	int				img_chunk_size;
+	int				img_chunk_cell;
 
 	//User-inputs
 	bool			mouse_pressed;
@@ -64,10 +68,11 @@ typedef struct s_data {
 
 int		render(void	*data);
 int		render_threads(t_data *data);
-void	render_thread_chunk(t_data *data, t_coord2 *start, t_coord2 *dimension);
+void	render_chunk(t_data *data, int i);
 void	img_update(t_data *data);
 int		img_put(t_data *data);
 void	img_update_camera(t_data *data);
+int		img_update_chunk(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                   EVENTS                                   */
