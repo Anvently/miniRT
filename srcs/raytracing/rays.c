@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 13:12:40 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 13:27:04 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_ray	generate_ray(t_coord2 *pxl, t_data *data)
 	ray.dir.x += (double) pxl->x * data->scene.camera._u.x;
 	ray.dir.y += (double) pxl->y * data->scene.camera._v.y;
 	ray.dir.z = 1.0;
+	ray.t = INFINITY;
 	ray.dir = vec3_sum(&ray.dir, &data->scene.camera.dir);
 	normalize_vec(&ray.dir);
 	return (ray);

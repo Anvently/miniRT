@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_inter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/15 11:59:52 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/15 13:20:26 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ void	get_tube_intersec(t_object *cyld, t_ray *ray, t_vec3f *v_a, t_vec3f *v_o)
 
 void	tube_intersec(t_object *cyld, t_ray *ray)
 {
-	double	a;
-	double	b;
-	double	c;
 	t_vec3f	v_a;
 	t_vec3f	v_o;
 	t_vec3f	origins;

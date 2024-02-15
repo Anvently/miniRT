@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 11:24:33 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 13:17:33 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	t_object_print(void *object_ptr)
 	printf("Origin: %.3f, %.3f, %.3f\n",
 		object->origin.x, object->origin.y, object->origin.z);
 	if (object->type == SPHERE || object->type == CYLINDER)
-		printf("Diameter: %.3f\n", object->diameter);
+		printf("Radius: %.3f\n", object->radius);
 	if (object->type == CYLINDER)
 		printf("Height: %.3f\n", object->height);
 	printf("Color: %d, %d, %d\n", object->color.r, object->color.g,

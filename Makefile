@@ -12,7 +12,9 @@ SRCS_FILES	=	main.c error.c \
 				parsing/parsing.c parsing/parse_line.c parsing/parse_objects.c \
 				parsing/parse_value.c parsing/parse_value2.c \
 				struct/t_scene.c struct/print.c \
-				math/geometry_ope.c \
+				math/geometry_ope.c math/geometry_ope2.c \
+				 math/plane_inter.c \
+				math/equation.c \
 				raytracing/camera.c raytracing/rays.c
 
 OBJS		=	$(addprefix $(OBJS_FOLDER),$(SRCS_FILES:.c=.o))
