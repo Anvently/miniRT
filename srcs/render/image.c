@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:37:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 16:17:14 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 17:02:09 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,14 @@ int	img_put(t_data *data)
 
 int	img_update_chunk(t_data *data)
 {
-	data->img_chunk_cell_w = data->img_size.x / data->img_chunk_size;
-	data->img_chunk_cell_h = data->img_size.y / data->img_chunk_size;
+	int	chunk_size;
+
+	if (data->img_chunk_size >= 0)
+		chunk_size = data->img_chunk_size;
+	else
+		chunk_size = 1;
+	data->img_chunk_cell_w = data->img_size.x / chunk_size;
+	data->img_chunk_cell_h = data->img_size.y / chunk_size;
 	data->img_chunk_nbr = data->img_chunk_cell_w * data->img_chunk_cell_h;
 	if (data->img_chunk_nbr % data->threads_nbr != 0)
 	{

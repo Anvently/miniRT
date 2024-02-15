@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:10:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 16:24:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 17:56:53 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 static void	*render_routine(void *data_ptr)
 {
 	t_data		*data;
+	t_color		*colors;
 	int			thread_i;
 	int			i;
 	int			max;
@@ -27,10 +28,19 @@ static void	*render_routine(void *data_ptr)
 	thread_i = data->thread_i;
 	data->thread_i = -1;
 	pthread_mutex_unlock(&data->thread_mutex);
+	colors = NULL;
+	if (data->img_chunk_size < 0)
+	{
+		colors = ft_calloc(data->img_chunk_size * data->img_chunk_size,
+				sizeof(t_color));
+		if (!colors)
+			return (NULL);
+	}
 	i = thread_i * data->thread_chunk_nbr;
 	max = i + data->thread_chunk_nbr;
 	while (i < max)
-		render_chunk(data, i++);
+		render_chunk(data, i++, colors);
+	free(colors);
 	return (NULL);
 }
 

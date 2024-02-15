@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 16:32:06 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 17:05:18 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,14 @@ int	handle_chunk_size(int keycode, t_data *data)
 		else if (data->img_chunk_size > 0 && data->img_chunk_size != 32)
 			data->img_chunk_size *= 2;
 		else if (data->img_chunk_size < 0)
-			data->img_chunk_size /= 2;
+			data->img_chunk_size++;
 	}
 	else if (keycode == XK_minus)
 	{
 		if (data->img_chunk_size == 1)
 			data->img_chunk_size = -2;
-		else if (data->img_chunk_size < 0 && data->img_chunk_size != -32)
-			data->img_chunk_size *= 2;
+		else if (data->img_chunk_size < 0 && data->img_chunk_size != -8)
+			data->img_chunk_size--;
 		else if (data->img_chunk_size > 0)
 			data->img_chunk_size /= 2;
 	}

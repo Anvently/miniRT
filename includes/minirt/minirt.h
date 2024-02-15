@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 16:15:01 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 17:51:26 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_data {
 
 int		render(void	*data);
 int		render_threads(t_data *data);
-void	render_chunk(t_data *data, int i);
+void	render_chunk(t_data *data, int i, t_color *antialiasing);
 void	img_update(t_data *data);
 int		img_put(t_data *data);
 void	img_update_camera(t_data *data);
@@ -99,6 +99,7 @@ int		color_get_r(int color);
 int		color_get_g(int color);
 int		color_get_b(int color);
 int		color_get_t(int color);
+t_color	color_average(t_color *colors, int size);
 
 /* -------------------------------------------------------------------------- */
 /*                                   ERRORS                                   */
