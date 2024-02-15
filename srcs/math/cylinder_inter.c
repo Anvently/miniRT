@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_inter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/15 13:20:26 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 14:12:20 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	get_tube_intersec(t_object *cyld, t_ray *ray, t_vec3f *v_a, t_vec3f *v_o)
 	double	t;
 	t_vec3f	temp;
 
-	a = scalar_product(&v_a, &v_a);
-	b = 2 * scalar_product(&v_a, &v_o);
-	c = scalar_product(&v_o, &v_o) - cyld->radius * cyld->radius;
+	a = scalar_product(v_a, v_a);
+	b = 2 * scalar_product(v_a, v_o);
+	c = scalar_product(v_o, v_o) - cyld->radius * cyld->radius;
 	if (quadra_solver(a, b, c, &t) && t >= 1 && t < ray->t)
 	{
 		temp = get_inter_point(ray, t);
@@ -83,6 +83,7 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 	{
 		ray->t = t_cap;
 		ray->normal = cylinder->orientation;
+		ray->color = cylinder->color;
 		normalize_vec(&ray->normal);
 	}
 	tube_intersec(cylinder, ray);

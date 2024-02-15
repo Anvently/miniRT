@@ -13,7 +13,8 @@ SRCS_FILES	=	main.c error.c \
 				parsing/parse_value.c parsing/parse_value2.c \
 				struct/t_scene.c struct/print.c \
 				math/geometry_ope.c math/geometry_ope2.c \
-				 math/plane_inter.c \
+				math/plane_inter.c math/sphere_inter.c\
+				math/cylinder_inter.c math/cylinder_inter2.c \
 				math/equation.c \
 				raytracing/camera.c raytracing/rays.c
 
