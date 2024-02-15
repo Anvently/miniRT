@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:19:17 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 15:53:25 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 18:45:14 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ int	event_mouse_move(int x, int y, t_data *data)
 {
 	if (data->mouse_pressed)
 	{
-		// data->move_x -= ((double)(x - data->dnd.x)
-		// 		/ data->size_x / 2.f) / data->zoom;
-		// data->move_y -= ((double)(y - data->dnd.y)
-		// 		/ data->size_y / 2.f) / data->zoom;
+		data->dnd.x -= x;
+		data->dnd.y -= y;
+		handle_rotation(data);
 		data->dnd.x = x;
 		data->dnd.y = y;
 	}
@@ -59,7 +58,7 @@ int	event_key_release(int keycode, t_data *data)
 		handle_close(data);
 	else if (keycode == XK_Right || keycode == XK_Left
 		|| keycode == XK_Up || keycode == XK_Down)
-		handle_pan(data);
+		handle_pan(data, keycode);
 	else if (keycode == 58 || keycode == XK_bracketleft
 		|| keycode == 33 || keycode == XK_bracketright)
 		handle_threads_nbr(keycode, data);
