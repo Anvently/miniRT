@@ -6,11 +6,12 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 12:21:56 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:32:06 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
+#include <minirt/calculus.h>
 #include <X11/keysym.h>
 #include <X11/Xlib.h>
 #include <pthread.h>
@@ -58,47 +59,52 @@ int	handle_resize(t_data *data)
 	data->win_size.x = attr.width;
 	data->win_size.y = attr.height;
 	img_update(data);
+	img_update_chunk(data);
 	printf("Window size: x = %d, y = %d\n", attr.width, attr.height);
 	return (0);
 }
 
 int	handle_threads_nbr(int keycode, t_data *data)
 {
+	int	max;
+
+	max = data->img_chunk_nbr;
 	if (keycode == 33 || keycode == XK_bracketright)
 	{
-		if (data->threads_nbr == 0)
-			data->threads_nbr = 1;
-		else if (data->threads_nbr != 1024)
-			data->threads_nbr *= 2;
+		if (max > 1024)
+			max = 1024;
+		data->threads_nbr = get_sup_multiple(data->img_chunk_nbr,
+				data->threads_nbr, max);
 	}
 	else if (keycode == 58 || keycode == XK_bracketleft)
-		data->threads_nbr /= 2;
+		data->threads_nbr = get_inf_multiple(data->img_chunk_nbr,
+				data->threads_nbr);
 	img_update_chunk(data);
 	printf("%d threads\n", data->threads_nbr);
 	return (0);
 }
 
-int	handle_ppc(int keycode, t_data *data)
+int	handle_chunk_size(int keycode, t_data *data)
 {
 	if (keycode == 61)
 	{
-		if (data->img_ppc == -4)
-			data->img_ppc = 1;
-		else if (data->img_ppc > 0 && data->img_ppc != 1024)
-			data->img_ppc *= 4;
-		else if (data->img_ppc < 0)
-			data->img_ppc /= 4;
+		if (data->img_chunk_size == -2)
+			data->img_chunk_size = 1;
+		else if (data->img_chunk_size > 0 && data->img_chunk_size != 32)
+			data->img_chunk_size *= 2;
+		else if (data->img_chunk_size < 0)
+			data->img_chunk_size /= 2;
 	}
 	else if (keycode == XK_minus)
 	{
-		if (data->img_ppc == 1)
-			data->img_ppc = -4;
-		else if (data->img_ppc < 0 && data->img_ppc != -1024)
-			data->img_ppc *= 4;
-		else if (data->img_ppc > 0)
-			data->img_ppc /= 4;
+		if (data->img_chunk_size == 1)
+			data->img_chunk_size = -2;
+		else if (data->img_chunk_size < 0 && data->img_chunk_size != -32)
+			data->img_chunk_size *= 2;
+		else if (data->img_chunk_size > 0)
+			data->img_chunk_size /= 2;
 	}
-	printf("%d ppc\n", data->img_ppc);
+	printf("chunk size = %d\n", data->img_chunk_size);
 	img_update(data);
 	img_update_chunk(data);
 	return (0);

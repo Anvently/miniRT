@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:19:17 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 18:13:04 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 15:53:25 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ int	event_key_release(int keycode, t_data *data)
 		|| keycode == 33 || keycode == XK_bracketright)
 		handle_threads_nbr(keycode, data);
 	else if (keycode == 61 || keycode == XK_minus)
-		handle_ppc(keycode, data);
+		handle_chunk_size(keycode, data);
 	return (0);
 }

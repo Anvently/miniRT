@@ -6,20 +6,21 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:37:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 12:22:05 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:17:14 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
+#include <minirt/calculus.h>
 #include <math.h>
 
 static bool	check_new_img(t_data *data)
 {
 	t_int2	new_size;
 
-	new_size.x = data->win_size.x - data->win_size.x % data->img_ppc;
-	new_size.y = data->win_size.y - data->win_size.y % data->img_ppc;
-	if (new_size.x < data->img_ppc || new_size.y < data->img_ppc)
+	new_size.x = data->win_size.x - data->win_size.x % data->img_chunk_size;
+	new_size.y = data->win_size.y - data->win_size.y % data->img_chunk_size;
+	if (new_size.x < data->img_chunk_size || new_size.y < data->img_chunk_size)
 		return (false);
 	if (data->img == NULL)
 	{
@@ -71,9 +72,15 @@ int	img_put(t_data *data)
 
 int	img_update_chunk(t_data *data)
 {
-	data->img_chunk_nbr = (data->img_size.x * data->img_size.y) / data->img_ppc;
-	data->img_chunk_size = sqrt((double) data->img_ppc);
+	data->img_chunk_cell_w = data->img_size.x / data->img_chunk_size;
+	data->img_chunk_cell_h = data->img_size.y / data->img_chunk_size;
+	data->img_chunk_nbr = data->img_chunk_cell_w * data->img_chunk_cell_h;
+	if (data->img_chunk_nbr % data->threads_nbr != 0)
+	{
+		data->threads_nbr = get_inf_multiple(data->img_chunk_nbr,
+				data->threads_nbr);
+		printf("%d threads\n", data->threads_nbr);
+	}
 	data->thread_chunk_nbr = data->img_chunk_nbr / data->threads_nbr;
-	data->img_chunk_cell = sqrt((double)data->img_chunk_nbr);
 	return (0);
 }

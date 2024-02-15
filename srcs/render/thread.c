@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:10:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 12:07:46 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:24:30 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	start_threads(t_data *data)
 			return (1);
 		while (1)
 		{
-			usleep(10);
+			usleep(1);
 			pthread_mutex_lock(&data->thread_mutex);
 			if (data->thread_i < 0)
 			{
@@ -70,8 +70,7 @@ int	render_threads(t_data *data)
 	data->thread_i = 0;
 	if (data->threads_nbr <= 0)
 		render_routine(data);
-	if (data->threads_nbr > 1024
-		|| (data->threads_nbr > 1 && data->threads_nbr % 4))
+	if (data->threads_nbr == 0)
 		handle_close(data);
 	start_threads(data);
 	i = 0;

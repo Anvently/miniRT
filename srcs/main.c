@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 14:11:16 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 15:37:51 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	data_init(t_data *data)
 	ft_memset(data, 0, sizeof(t_data));
 	data->win_size.x = DFT_SIZE_X;
 	data->win_size.y = DFT_SIZE_Y;
-	data->img_ppc = DFT_IMG_PPC;
+	data->img_chunk_size = DFT_IMG_CHUNK_SIZE;
 	data->threads_nbr = DFT_NBR_THREADS;
 	pthread_mutex_init(&data->thread_mutex, NULL);
 }

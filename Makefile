@@ -15,7 +15,7 @@ SRCS_FILES	=	main.c error.c \
 				math/geometry_ope.c math/geometry_ope2.c \
 				math/plane_inter.c math/sphere_inter.c\
 				math/cylinder_inter.c math/cylinder_inter2.c \
-				math/equation.c \
+				math/equation.c math/multiple.c \
 				raytracing/camera.c raytracing/rays.c
 
 OBJS		=	$(addprefix $(OBJS_FOLDER),$(SRCS_FILES:.c=.o))

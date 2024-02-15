@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 14:02:20 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:15:01 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define DFT_SIZE_Y 800
 # define PFPS 1
 # define DFT_NBR_THREADS 16
-# define DFT_IMG_PPC 64
+# define DFT_IMG_CHUNK_SIZE 4
 
 typedef struct s_data {
 
@@ -47,10 +47,10 @@ typedef struct s_data {
 	//Image
 	t_int2			img_size;
 	double			img_ratio;
-	int				img_ppc;
 	int				img_chunk_nbr;
 	int				img_chunk_size;
-	int				img_chunk_cell;
+	int				img_chunk_cell_w;
+	int				img_chunk_cell_h;
 
 	//User-inputs
 	bool			mouse_pressed;
@@ -87,7 +87,7 @@ int		handle_resize(t_data *data);
 int		handle_resize_click(t_data *data);
 int		handle_pan(t_data *data);
 int		handle_threads_nbr(int keycode, t_data *data);
-int		handle_ppc(int keycode, t_data *data);
+int		handle_chunk_size(int keycode, t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                   COLORS                                   */
