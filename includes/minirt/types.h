@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 18:20:10 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/15 11:08:27 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ typedef struct s_scene {
 typedef struct s_object {
 	char		type;
 	t_coord3f	origin;
-	double		diameter;
+	t_coord3f	top;
+	double		radius;
 	double		height;
 	t_color		color;
 	t_vec3f		orientation;

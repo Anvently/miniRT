@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:18:35 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/14 18:23:16 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/15 10:37:28 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ int	quadra_solver(double a, double b, double c, double *t)
 	return (1);
 }
 
-t_vec3f	get_inter_point(t_ray *ray)
+t_vec3f	get_inter_point(t_ray *ray, double t)
 {
 	t_vec3f	impact;
 
-	impact.x = ray->origin.x + ray->dir.x * ray->t;
-	impact.y = ray->origin.y + ray->dir.y * ray->t;
-	impact.z = ray->origin.z + ray->dir.z * ray->t;
+	impact.x = ray->origin.x + ray->dir.x * t;
+	impact.y = ray->origin.y + ray->dir.y * t;
+	impact.z = ray->origin.z + ray->dir.z * t;
 	return (impact);
 }
 
