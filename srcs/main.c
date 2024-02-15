@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 12:13:34 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 14:11:16 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static int	hook_init(t_data *data)
 	mlx_hook(data->win, MotionNotify, PointerMotionMask,
 		event_mouse_move, data);
 	mlx_hook(data->win, DestroyNotify, ButtonPressMask, handle_close, data);
-	mlx_hook(data->win, ConfigureNotify, StructureNotifyMask, handle_resize, data);
+	mlx_hook(data->win, ConfigureNotify, StructureNotifyMask,
+		handle_resize, data);
 	mlx_loop_hook(data->mlx, render, data);
 	return (0);
 }

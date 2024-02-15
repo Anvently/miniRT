@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 12:17:32 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/15 14:02:20 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int		event_mouse_move(int x, int y, t_data *data);
 int		event_key_release(int keycode, t_data *data);
 int		handle_close(t_data *data);
 int		handle_resize(t_data *data);
+int		handle_resize_click(t_data *data);
 int		handle_pan(t_data *data);
 int		handle_threads_nbr(int keycode, t_data *data);
 int		handle_ppc(int keycode, t_data *data);
