@@ -27,7 +27,8 @@ LIBMLX		=	libmlx/libmlx.a
 
 HEADERS		=	$(INCLUDES)libft.h $(INCLUDES)mlx.h $(INCLUDES)mlx_int.h \
 				$(INCLUDES)$(NAME)/$(NAME).h $(INCLUDES)$(NAME)/draw.h \
-				$(INCLUDES)$(NAME)/objects.h $(INCLUDES)$(NAME)/raytracing.h
+				$(INCLUDES)$(NAME)/objects.h $(INCLUDES)$(NAME)/raytracing.h \
+				$(INCLUDES)$(NAME)/types.h $(INCLUDES)$(NAME)/calculus.h
 
 DEPS		=	$(LIBFT) $(LIBMLX) $(HEADERS)
 

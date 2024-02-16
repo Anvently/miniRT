@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:43:56 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/16 18:43:44 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:59:27 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ void	img_update_camera(t_data *data)
 		- (screen_h / 2.0) * data->scene.camera._v.y;
 	data->scene.camera._r.z = (-screen_w / 2.0) * data->scene.camera._u.z
 		- (screen_h / 2.0) * data->scene.camera._v.z;
-	printf("dir.x=%f, dir.y=%f, dir.z=%f\n", data->scene.camera.dir.x, data->scene.camera.dir.y,
-		data->scene.camera.dir.z);
-	printf("cx.x=%f, cx.y=%f, cx.z=%f\n", data->scene.camera.cx.x, data->scene.camera.cx.y,
-		data->scene.camera.cx.z);
-	printf("cy.x=%f, cy.y=%f, cy.z=%f\n", data->scene.camera.cy.x, data->scene.camera.cy.y,
-		data->scene.camera.cy.z);
-	printf("ux=%f, uy=%f, uz=%f\n", data->scene.camera._u.x, data->scene.camera._u.y,
-		data->scene.camera._u.z);
-	printf("vx=%f, vy=%f, vz=%f\n", data->scene.camera._v.x, data->scene.camera._v.y,
-		data->scene.camera._v.z);
-	printf("cx=%f, cy=%f, cz=%f\n", data->scene.camera._r.x, data->scene.camera._r.y,
-		data->scene.camera._r.z);
+	// printf("dir.x=%f, dir.y=%f, dir.z=%f\n", data->scene.camera.dir.x, data->scene.camera.dir.y,
+	// 	data->scene.camera.dir.z);
+	// printf("cx.x=%f, cx.y=%f, cx.z=%f\n", data->scene.camera.cx.x, data->scene.camera.cx.y,
+	// 	data->scene.camera.cx.z);
+	// printf("cy.x=%f, cy.y=%f, cy.z=%f\n", data->scene.camera.cy.x, data->scene.camera.cy.y,
+	// 	data->scene.camera.cy.z);
+	// printf("ux=%f, uy=%f, uz=%f\n", data->scene.camera._u.x, data->scene.camera._u.y,
+	// 	data->scene.camera._u.z);
+	// printf("vx=%f, vy=%f, vz=%f\n", data->scene.camera._v.x, data->scene.camera._v.y,
+	// 	data->scene.camera._v.z);
+	// printf("cx=%f, cy=%f, cz=%f\n", data->scene.camera._r.x, data->scene.camera._r.y,
+	// 	data->scene.camera._r.z);
 }

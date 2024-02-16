@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/16 13:28:52 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/16 19:12:54 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	handle_rotation(t_data *data)
 	//print_t_double3(&dir);
 	// data->scene.camera.dir = dir;
 	// normalize_vec(&data->scene.camera.dir);
-	print_t_double3(&dir);
+	//print_t_double3(&dir);
 	data->scene.camera.dir = dir;
 	img_update_camera(data);
 	return (0);
