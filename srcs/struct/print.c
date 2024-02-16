@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 13:17:33 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/16 11:24:46 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,9 @@ void	t_scene_print(t_scene *scene)
 	printf("Objects\n");
 	ft_lstprint(scene->objects, &t_object_print);
 	printf("\n");
+}
+
+void	print_t_double3(t_double3 *vec)
+{
+	printf("X=%f | Y = %f | Z = %f\n", vec->x, vec->y, vec->z);
 }

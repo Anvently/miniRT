@@ -6,11 +6,12 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 18:43:28 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/16 13:28:52 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
+#include <minirt/calculus.h>
 #include <X11/keysym.h>
 #include <X11/Xlib.h>
 #include <pthread.h>
@@ -25,9 +26,18 @@ int	handle_resize_click(t_data *data)
 
 int	handle_rotation(t_data *data)
 {
-	printf("x=%d,y=%d\n", data->dnd.x, data->dnd.y);
-	data->scene.camera.dir.y -= (double) data->dnd.y / 100.f;
-	data->scene.camera.dir.x -= (double) data->dnd.x / 100.f;
+	t_vec3f	dir;
+	double	angle_x;
+	double	angle_y;
+
+	angle_x = -data->dnd.y / 250.f;
+	angle_y = data->dnd.x / 250.f;
+	dir = vec3f_rotate(&data->scene.camera.dir, angle_x, angle_y, 0.0);
+	//print_t_double3(&dir);
+	// data->scene.camera.dir = dir;
+	// normalize_vec(&data->scene.camera.dir);
+	print_t_double3(&dir);
+	data->scene.camera.dir = dir;
 	img_update_camera(data);
 	return (0);
 }
