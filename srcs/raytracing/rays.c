@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 17:58:52 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:45:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_ray	generate_ray(t_coord2f *pxl, t_data *data)
 
 	ft_memset(&ray, 0, sizeof(t_ray));
 	ray.origin = data->scene.camera.origin;
+	//ray.dir = vec3_sun
 	ray.dir = vec3_sum(&data->scene.camera.dir, &data->scene.camera._r);
 	ray.dir.x += pxl->x * data->scene.camera._u.x;
 	ray.dir.y += pxl->y * data->scene.camera._v.y;
@@ -43,6 +44,7 @@ t_ray	generate_ray(t_coord2f *pxl, t_data *data)
 	ray.t = INFINITY;
 	ray.dir = vec3_sum(&ray.dir, &data->scene.camera.dir);
 	normalize_vec(&ray.dir);
+	//print_t_double3(&ray.dir);
 	return (ray);
 }
 

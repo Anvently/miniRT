@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_ope2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:04:58 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/15 10:40:09 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/16 18:41:06 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ double	distance(t_vec3f *a, t_vec3f *b)
 	double	dist;
 
 	dist = scalar_product(a, b);
-	dist *= scalar_product(a ,b);
+	dist *= scalar_product(a,b);
 	return (dist);
 }
