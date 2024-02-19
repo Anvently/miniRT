@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:18:35 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 13:39:12 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/19 18:26:11 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ int	quadra_solver(double a, double b, double c, double *t)
 		return (0);
 	sol1 = - half_b + sqrt(delta);
 	sol2 = - 2 * half_b - sol1;
-	if ( c >= 0 && sol1 >= 0)
+	if ( c >= 0 && sol1 >= 0 && sol2 >= 1)
 		*t = sol2;
+	else if (c >= 0 && sol1 >= 0 && sol2 < 1)
+		*t = sol1;
 	else if (c >= 0 && sol1 < 0)
 		return (0);
 	else if (c < 0 && sol1 > 0)
