@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/16 19:12:54 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 13:39:14 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,25 @@ int	handle_resize_click(t_data *data)
 
 int	handle_rotation(t_data *data)
 {
-	t_vec3f	dir;
-	double	angle_x;
-	double	angle_y;
+	t_matrix4f	matrix;
 
-	angle_x = -data->dnd.y / 250.f;
-	angle_y = data->dnd.x / 250.f;
-	dir = vec3f_rotate(&data->scene.camera.dir, angle_x, angle_y, 0.0);
-	//print_t_double3(&dir);
-	// data->scene.camera.dir = dir;
-	// normalize_vec(&data->scene.camera.dir);
-	//print_t_double3(&dir);
-	data->scene.camera.dir = dir;
+	matrix = matrix_rotate(0.0, -data->dnd.y / 250.f, 0.0);
+	data->scene.camera._cx = vec3f_matrix(&data->scene.camera._cx, &matrix);
+	data->scene.camera._cz = vec3f_matrix(&data->scene.camera._cz, &matrix);
+	matrix = matrix_rotate(0.0, 0.0, data->dnd.x / 250.f);
+	data->scene.camera._cx = vec3f_matrix(&data->scene.camera._cx, &matrix);
+	data->scene.camera._cy = vec3f_matrix(&data->scene.camera._cy, &matrix);
 	img_update_camera(data);
+	return (0);
+}
+
+int	handle_zoom(t_data *data, int keycode)
+{
+	if (keycode == Button4)
+		data->scene.camera.origin = vec3_sum(&data->scene.camera.origin,
+				&data->scene.camera._cx);
+	else if (keycode == Button5)
+		data->scene.camera.origin = vec3_diff(&data->scene.camera.origin,
+				&data->scene.camera._cx);
 	return (0);
 }

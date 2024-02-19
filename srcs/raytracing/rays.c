@@ -6,26 +6,38 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/16 19:16:28 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 12:43:08 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
 #include <minirt/draw.h>
 #include <minirt/calculus.h>
+#include <minirt/types.h>
 #include <libft.h>
+
+static void	check_inter(t_data *data, t_ray *ray)
+{
+	t_list		*node;
+	t_object	*obj;
+
+	node = data->scene.objects;
+	while (node)
+	{
+		obj = (t_object *)node->content;
+		if (obj->type == PLAN)
+			plane_intersec(obj, ray);
+		else if (obj->type == SPHERE)
+			sphere_intersec(obj, ray);
+		else if (obj->type == CYLINDER)
+			cylinder_intersec(obj, ray);
+		node = node->next;
+	}
+}
 
 void	launch_ray(t_data *data, t_ray *ray)
 {
-	t_object	*plane;
-	t_object	*sphere;
-	plane = (t_object *)data->scene.objects->content;
-	sphere = (t_object *)data->scene.objects->next->content;
-	plane_intersec(plane, ray);
-	sphere_intersec(sphere, ray);
-	//printf("t=%f\n", ray->t);
-	// cyld = (t_object *)data->scene.objects->content;
-	// cylinder_intersec(cyld, ray);
+	check_inter(data, ray);
 	if (ray->t == INFINITY)
 		ray->color = color_getcolor(0);
 }
@@ -38,15 +50,20 @@ t_ray	generate_ray(t_coord2f *pxl, t_data *data)
 
 	ft_memset(&ray, 0, sizeof(t_ray));
 	ray.origin = data->scene.camera.origin;
-	//ray.dir = vec3_sun
-	ray.dir = vec3_sum(&data->scene.camera.dir, &data->scene.camera._r);
-	upxl = vec3_scale(&data->scene.camera._u, pxl->x);
-	vpxl = vec3_scale(&data->scene.camera._v, pxl->y);
+	ray.dir = vec3_sum(&data->scene.camera._cx, &data->scene.camera._r);
+	upxl = vec3_scale(&data->scene.camera._u, (double) pxl->x);
+	vpxl = vec3_scale(&data->scene.camera._v, (double) pxl->y);
 	ray.dir = vec3_sum(&ray.dir, &upxl);
 	ray.dir = vec3_sum(&ray.dir, &vpxl);
 	ray.t = INFINITY;
 	normalize_vec(&ray.dir);
-	//print_t_double3(&ray.dir);
+	// if (((int) pxl->x == 0 && (int) pxl->y == data->img_size.y - 1) || ((int) pxl->x == 0 && (int) pxl->y == 0)
+	// 	|| ((int) pxl->x == data->img_size.x - 1 && (int) pxl->y == data->img_size.y - 1)
+	// 	|| ((int) pxl->x == data->img_size.x - 1 && (int) pxl->y == 0))
+	// {
+	// 	printf("x=%f, y=%f\n", pxl->x, pxl->y);
+	// 	print_t_double3(&ray.dir);
+	// }
 	return (ray);
 }
 
@@ -61,30 +78,3 @@ t_color	get_ray_color(t_ray *ray)
 	color.b = (1.0 - a) * 44 + a * 94;
 	return (color);
 }
-
-// /// @brief Compute ray properties of a given pixel
-// /// @param ray
-// /// @param x
-// /// @param y
-// /// @param camera
-// void	generate_rays(t_data *data)
-// {
-// 	t_coord2	pxl;
-// 	t_ray		ray;
-
-// 	pxl.x = 0;
-// 	while (pxl.x < data->img_size.x)
-// 	{
-// 		pxl.y = 0;
-// 		while (pxl.y < data->img_size.y)
-// 		{
-// 			ray = generate_ray(&pxl, data);
-// 			ray.color = get_ray_color(&ray);
-// 			draw_pxl(data, pxl, color_getint(&ray.color));
-// 			//printf("color = %d\n", color_getint(&ray.color));
-// 			//printf("vx=%f, vy=%f, vz=%f\n", ray.dir.x, ray.dir.y, ray.dir.z);
-// 			pxl.y++;
-// 		}
-// 		pxl.x++;
-// 	}
-// }

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/16 17:30:08 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 10:59:46 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,9 @@ typedef struct s_light {
 /// @param _c vector to reach center of the pixel
 /// @param origin x,y,z coordinates of camera position
 /// @param dir orientation vector (x,y,z) in range [-1.0;1.0]
-/// @param cy unit vector for camera up dimension
-/// @param cx unit vector for camera left/right dimension
+/// @param _cz unit vector for camera up dimension
+/// @param _cz unit vector for camera forward/backward dimension
+/// @param _cy unit vector for camera left/right dimension
 /// @param fov horizontal fov in range [0;180]
 typedef struct s_camera {
 	t_coord3f	_u;
@@ -97,8 +98,9 @@ typedef struct s_camera {
 	t_coord3f	_r;
 	t_coord3f	origin;
 	t_vec3f		dir;
-	t_vec3f		cy;
-	t_vec3f		cx;
+	t_vec3f		_cz;
+	t_vec3f		_cy;
+	t_vec3f		_cx;
 	int			fov;
 }				t_camera;
 

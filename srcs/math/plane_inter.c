@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_inter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:56:02 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/15 14:06:26 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/19 12:44:01 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "../../includes/minirt/calculus.h"
 
 
-/// @brief check if a given ray intersect a given plane. If so update the ray data.
+/// @brief check if a given ray intersect a given plane.
+/// If so update the ray data.
 /// @param plane
 /// @param ray
 void	plane_intersec(t_object *plane, t_ray *ray)

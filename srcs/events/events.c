@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:19:17 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 18:45:14 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 12:14:06 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ int	event_button_press(int keycode, int x, int y, t_data *data)
 		data->dnd.x = x;
 		data->dnd.y = y;
 	}
-	else if (keycode == Button4) //molette avant
-		data->zoom *= 1.5;
-	else if (keycode == Button5) //molette arriere
-		data->zoom /= 1.5;
+	else if (keycode == Button4 || keycode == Button5)
+		handle_zoom(data, keycode);
 	return (0);
 }
 
