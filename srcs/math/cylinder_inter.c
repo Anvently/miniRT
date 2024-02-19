@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 18:06:08 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/19 18:54:24 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	get_tube_intersec(t_object *cyld, t_ray *ray, t_vec3f *v_a, t_vec3f *v_o)
 	a = scalar_product(v_a, v_a);
 	b = 2 * scalar_product(v_a, v_o);
 	c = scalar_product(v_o, v_o) - cyld->radius * cyld->radius;
-	if (quadra_solver(a, b, c, &t) && t >= 1 && t < ray->t)
+	if (quadra_solver(a, b, c, &t) && t > ray->t_min && t < ray->t)
 	{
 		temp = get_inter_point(ray, t);
 		if (!check_sol_tube(cyld, &temp))
@@ -52,7 +52,8 @@ void	get_tube_intersec(t_object *cyld, t_ray *ray, t_vec3f *v_a, t_vec3f *v_o)
 		temp = vector_product(&cyld->orientation, &temp);
 		normalize_vec(&temp);
 		ray->normal = temp;
-		ray->color = cyld->color;
+		if (ray->t_min > 0)
+			ray->color = cyld->color;
 	}
 }
 
@@ -74,18 +75,20 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 {
 	double	t_cap;
 
-	if (bot_cap_intersec(cylinder, ray, &t_cap) && t_cap < ray->t && t_cap >= 1)
+	if (bot_cap_intersec(cylinder, ray, &t_cap) && t_cap < ray->t && t_cap > ray->t_min)
 	{
 		ray->t = t_cap;
 		ray->normal = vec3_scale(&cylinder->orientation, -1);
-		ray->color = cylinder->color;
+		if (ray->t_min > 0)
+			ray->color = cylinder->color;
 		normalize_vec(&ray->normal);
 	}
-	if (top_cap_intersec(cylinder, ray, &t_cap) && t_cap < ray->t && t_cap >= 1)
+	if (top_cap_intersec(cylinder, ray, &t_cap) && t_cap < ray->t && t_cap > ray->t_min)
 	{
 		ray->t = t_cap;
 		ray->normal = cylinder->orientation;
-		ray->color = cylinder->color;
+		if (ray->min > 0)
+			ray->color = cylinder->color;
 		normalize_vec(&ray->normal);
 	}
 	tube_intersec(cylinder, ray);

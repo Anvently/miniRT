@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:20:20 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/15 14:06:47 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/19 18:50:48 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ void	sphere_intersec(t_object *sphere, t_ray *ray)
 	a = scalar_product(&ray->dir, &ray->dir);
 	b = 2 * scalar_product(&t_r, &ray->dir);
 	c = scalar_product(&t_r, &t_r) - sphere->radius * sphere->radius;
-	if (quadra_solver(a, b, c, &t) && t >= 1 && t < ray->t)
+	if (quadra_solver(a, b, c, &t) && t > ray->t_min && t < ray->t)
 	{
 		ray->t = t;
-		ray->color = sphere->color;
+		if (ray->t_min == 1)
+			ray->color = sphere->color;
 		sphere_normal(sphere, ray);
 	}
 

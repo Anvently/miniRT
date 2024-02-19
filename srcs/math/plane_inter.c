@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_inter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:56:02 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 12:44:01 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 18:50:00 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	plane_intersec(t_object *plane, t_ray *ray)
 	a = scalar_product(&ray->dir, &plane->orientation);
 	c = scalar_product(&plane->orientation, &plane->origin);
 	b = scalar_product(&plane->orientation, &ray->origin) - c;
-	if (linear_solver(a, b, &c) && c < ray->t && c >= 1)
+	if (linear_solver(a, b, &c) && c < ray->t && c > ray->t_min)
 	{
 		ray->t = c;
 		ray->normal = plane->orientation;
