@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 10:59:46 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 14:14:19 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ typedef t_int2		t_coord2;
 typedef t_int3		t_coord3;
 typedef t_double2	t_coord2f;
 typedef t_double3	t_coord3f;
+
+typedef struct s_matrix4f {
+	double		m1[4];
+	double		m2[4];
+	double		m0[4];
+	double		m3[4];
+}				t_matrix4f;
+
+typedef struct s_matrix3f {
+	double		m0[3];
+	double		m1[3];
+	double		m2[3];
+}				t_matrix3f;
 
 typedef struct s_ray {
 	t_coord3f	origin;
@@ -110,6 +123,7 @@ typedef struct s_camera {
 /// @param lights list of light sources
 typedef struct s_scene {
 	t_camera	camera;
+	t_matrix3f	matrix;
 	t_light		ambiant_light;
 	t_list		*objects;
 	t_list		*lights;

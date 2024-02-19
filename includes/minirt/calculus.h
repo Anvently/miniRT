@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculus.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 13:37:31 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/19 17:04:55 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,6 @@
 # include <math.h>
 # include <minirt/types.h>
 
-typedef struct s_matrix4f {
-	double		m1[4];
-	double		m2[4];
-	double		m0[4];
-	double		m3[4];
-}				t_matrix4f;
-
-typedef struct s_matrix3f {
-	double		m0[3];
-	double		m1[3];
-	double		m2[3];
-}				t_matrix3f;
-
 /*-------GEOMETRY OPE-------*/
 double		scalar_product(t_vec3f *t_u, t_vec3f *t_v);
 void		normalize_vec(t_vec3f *t_u);
@@ -36,7 +23,7 @@ t_vec3f		vector_product(t_vec3f *t_u, t_vec3f *t_v);
 t_vec3f		vec3_sum(t_vec3f *t_u, t_vec3f *t_v);
 t_vec3f		vec3_diff(t_vec3f *t_u, t_vec3f *t_v);
 t_vec3f		vec3_scale(t_vec3f *vector, double scale);
-t_vec3f		vec3f_matrix(t_vec3f *vec, t_matrix4f *matrix);
+t_vec3f		vec3f_matrix4f(t_vec3f *vec, t_matrix4f *matrix);
 double		distance(t_vec3f *a, t_vec3f *b);
 
 /*--------EQUATION*/
@@ -56,9 +43,10 @@ void		cylinder_intersec(t_object *cylinder, t_ray *ray);
 /* --------------------------------- MATRIX --------------------------------- */
 
 t_vec3f		vec3f_rotate(t_vec3f *vec, double x, double y, double z);
-t_matrix4f	matrix_rotate(double x, double y, double z);
+t_matrix3f	matrix_rotate(double x, double y, double z);
 t_matrix3f	matrix_sum(t_matrix3f *a, t_matrix3f *b);
-t_vec3f	vec3f_mat3(t_vec3f *vec, t_matrix3f *matrix);
+t_matrix3f	matrix_transpose(t_matrix3f *m);
+t_vec3f		vec3f_matrix3f(t_vec3f *vec, t_matrix3f *matrix);
 void		display_matrix(t_matrix3f *m);
 
 /* ------------------------------ MULTIPLE OPE ------------------------------ */

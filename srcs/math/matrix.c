@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:09:12 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 13:38:48 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/19 15:16:22 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <libft.h>
 #include <math.h>
 
-t_vec3f	vec3f_matrix(t_vec3f *vec, t_matrix4f *matrix)
+t_vec3f	vec3f_matrix4f(t_vec3f *vec, t_matrix4f *matrix)
 {
 	t_vec3f	new_vec;
 
@@ -27,7 +27,8 @@ t_vec3f	vec3f_matrix(t_vec3f *vec, t_matrix4f *matrix)
 		+ vec->z * matrix->m2[2] + matrix->m3[2];
 	return (new_vec);
 }
-t_vec3f	vec3f_mat3(t_vec3f *vec, t_matrix3f *matrix)
+
+t_vec3f	vec3f_matrix3f(t_vec3f *vec, t_matrix3f *matrix)
 {
 	t_vec3f	new;
 
@@ -72,9 +73,19 @@ t_matrix3f	matrix_scale(t_matrix3f *a, double k)
 	return (b);
 }
 
-void	display_matrix(t_matrix3f *m)
+t_matrix3f	matrix_transpose(t_matrix3f *m)
 {
-	printf("| %f, %f, %f |\n", m->m0[0], m->m0[1], m->m0[2]);
-	printf("| %f, %f, %f |\n", m->m1[0], m->m1[1], m->m1[2]);
-	printf("| %f, %f, %f |\n", m->m2[0], m->m2[1], m->m2[2]);
+	t_matrix3f	matrix;
+
+	ft_memset(&matrix, 0, sizeof(t_matrix3f));
+	matrix.m0[0] = m->m0[0];
+	matrix.m0[1] = m->m1[0];
+	matrix.m0[2] = m->m2[0];
+	matrix.m1[0] = m->m0[1];
+	matrix.m1[1] = m->m1[1];
+	matrix.m1[2] = m->m2[1];
+	matrix.m2[0] = m->m0[2];
+	matrix.m2[1] = m->m1[2];
+	matrix.m2[2] = m->m2[2];
+	return (matrix);
 }

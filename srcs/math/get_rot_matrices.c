@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_rot_matrices.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:32:09 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 13:39:52 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/19 13:54:13 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	get_c(t_matrix3f *c, double theta, t_vec3f *axis)
 	c->m2[0] = -sin_t * axis->y;
 	c->m2[1] = sin_t * axis->x;
 }
+
 t_matrix3f	get_rotation_matrix(t_vec3f *axis, double theta)
 {
 	t_matrix3f	a;
@@ -89,20 +90,20 @@ t_matrix3f	rotation_matrix(t_vec3f	*cam_dir)
 	return (get_rotation_matrix(&axis, theta));
 }
 
-int	main(void)
-{
-	t_vec3f	dir;
-	t_matrix3f rot;
-	t_vec3f	new;
+// int	main(void)
+// {
+// 	t_vec3f	dir;
+// 	t_matrix3f rot;
+// 	t_vec3f	new;
 
-	dir.x = 5;
-	dir.y = 3;
-	dir.z = 7;
-	normalize_vec(&dir);
-	rot = rotation_matrix(&dir);
-	display_matrix(&rot);
-	new = vec3f_mat3(&dir, &rot);
-	display_vector(&new);
+// 	dir.x = 5;
+// 	dir.y = 3;
+// 	dir.z = 7;
+// 	normalize_vec(&dir);
+// 	rot = rotation_matrix(&dir);
+// 	display_matrix(&rot);
+// 	new = vec3f_matrix3f(&dir, &rot);
+// 	display_vector(&new);
 
 
-}
+// }

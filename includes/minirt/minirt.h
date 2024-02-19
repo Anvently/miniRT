@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 12:14:16 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 17:26:37 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int		img_update_chunk(t_data *data);
 
 void	init_camera(t_data *camera);
 void	img_update_camera(t_data *data);
+void	transform_objects(t_data *data, t_matrix3f *matrix);
 
 /* -------------------------------------------------------------------------- */
 /*                                   EVENTS                                   */

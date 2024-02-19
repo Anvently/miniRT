@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 11:23:00 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 17:04:00 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	main(int argc, char **argv)
 		return (t_scene_free(&data.scene), 1);
 	t_scene_print(&data.scene);
 	init_camera(&data);
+	transform_objects(&data, &data.scene.matrix);
 	mlx_loop(data.mlx);
 	handle_close(&data);
 	return (0);
