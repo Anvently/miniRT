@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 17:04:55 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 18:44:48 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_vec3f		vec3_diff(t_vec3f *t_u, t_vec3f *t_v);
 t_vec3f		vec3_scale(t_vec3f *vector, double scale);
 t_vec3f		vec3f_matrix4f(t_vec3f *vec, t_matrix4f *matrix);
 double		distance(t_vec3f *a, t_vec3f *b);
+t_vec3f		vec3f_get_dir(t_coord3f *a, t_coord3f *b);
 
 /*--------EQUATION*/
 int			quadra_solver(double a, double b, double c, double *t);

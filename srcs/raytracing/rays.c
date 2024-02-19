@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 12:43:08 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 18:48:38 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,38 @@ static void	check_inter(t_data *data, t_ray *ray)
 	}
 }
 
+void	check_lights(t_data *data, t_ray *ray)
+{
+	t_ray	ray_to_light;
+	t_list	*node;
+	t_light	*light;
+
+	ft_memset(&ray_to_light, 0, sizeof(t_ray));
+	ray_to_light.origin = ray->inter;
+	node = data->scene.lights;
+	while (node)
+	{
+		light = (t_light *)node->content;
+		ray_to_light.dir = vec3f_get_dir(&ray_to_light.origin,
+				&light->origin);
+		ray_to_light.theta = scalar_product(&ray_to_light.dir,
+				&ray_to_light.normal);
+		ray_to_light.t = INFINITY;
+		if (ray_to_light.theta > 0)
+			check_inter(data, &ray_to_light);
+		if (ray_to_light.t != INFINITY)
+			// ray->color = ;
+		node = node->next;
+	}
+}
+
 void	launch_ray(t_data *data, t_ray *ray)
 {
 	check_inter(data, ray);
 	if (ray->t == INFINITY)
 		ray->color = color_getcolor(0);
+	check_light_inter(data, ray);
+
 }
 
 t_ray	generate_ray(t_coord2f *pxl, t_data *data)
@@ -56,6 +83,7 @@ t_ray	generate_ray(t_coord2f *pxl, t_data *data)
 	ray.dir = vec3_sum(&ray.dir, &upxl);
 	ray.dir = vec3_sum(&ray.dir, &vpxl);
 	ray.t = INFINITY;
+	ray.t_min = 1.0;
 	normalize_vec(&ray.dir);
 	// if (((int) pxl->x == 0 && (int) pxl->y == data->img_size.y - 1) || ((int) pxl->x == 0 && (int) pxl->y == 0)
 	// 	|| ((int) pxl->x == data->img_size.x - 1 && (int) pxl->y == data->img_size.y - 1)
