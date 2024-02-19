@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotations.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:35:19 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/16 13:20:47 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 12:44:27 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,5 @@ t_vec3f	vec3f_rotate(t_vec3f *vec, double x, double y, double z)
 	matrix = matrix_rotate(x, y, z);
 	return (vec3f_matrix(vec, &matrix));
 }
+
+

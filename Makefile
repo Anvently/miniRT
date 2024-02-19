@@ -1,5 +1,6 @@
 NAME		=	minirt
 BONUS_NAME	=
+TEST		=	test
 
 INCLUDES	=	includes/
 SRCS_FOLDER	=	srcs/
@@ -19,8 +20,15 @@ SRCS_FILES	=	main.c error.c \
 				math/equation.c math/multiple.c math/matrix.c math/rotations.c \
 				raytracing/camera.c raytracing/rays.c
 
+SRCS_TEST = 	math/geometry_ope.c math/geometry_ope2.c \
+				math/plane_inter.c math/sphere_inter.c\
+				math/cylinder_inter.c math/cylinder_inter2.c \
+				math/equation.c math/multiple.c math/matrix.c math/rotations.c \
+				math/get_rot_matrices.c
+
 OBJS		=	$(addprefix $(OBJS_FOLDER),$(SRCS_FILES:.c=.o))
 SRCS		=	$(addprefix $(SRCS_FOLDER),$(SRCS_FILES))
+OBJS_TEST	= 	$(addprefix $(OBJS_FOLDER),$(SRCS_TEST:.c=.o))
 
 LIBFT		=	libft/libft.a
 LIBMLX		=	libmlx/libmlx.a
@@ -50,6 +58,11 @@ opti: $(SRCS) $(DEPS)
 $(NAME): $(DEPS) $(OBJS)
 	@echo "\n-----COMPILING $(NAME)-------\n"
 	$(CC) $(CFLAGS) $(OBJS) $(STATIC_LINK) -o $(NAME)
+	@echo "Executable has been successfully created."
+
+$(TEST): $(DEPS) $(OBJS_TEST)
+	@echo "\n-----COMPILING $(TEST)-------\n"
+	$(CC) $(CFLAGS) $(OBJS_TEST) $(STATIC_LINK) -o $(TEST)
 	@echo "Executable has been successfully created."
 
 bonus: $(BONUS_NAME)
@@ -92,7 +105,7 @@ clean:
 fclean: clean
 	@echo "\n-------------FORCE CLEAN--------------\n"
 	make fclean -C libft/
-	rm -rf $(NAME) $(BONUS_NAME)
+	rm -rf $(NAME) $(BONUS_NAME) $(TEST)
 	@echo "$(NAME) and object files have been removed."
 
 re: fclean all

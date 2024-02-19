@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:18:35 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/15 10:37:28 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/19 13:39:12 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ t_vec3f	get_inter_point(t_ray *ray, double t)
 
 void	display_vector(t_vec3f	*vec)
 {
-	ft_printf("x:%f || y:%f || z:%f\n", vec->x, vec->y, vec->z);
+	printf("x:%f || y:%f || z:%f\n", vec->x, vec->y, vec->z);
 }
