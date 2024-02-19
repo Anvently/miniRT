@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/16 18:50:25 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 12:11:56 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,18 @@ int	handle_close(t_data *data)
 
 int	handle_pan(t_data *data, int keycode)
 {
-	t_vec3f	dir;
-
-	dir = vector_product(&(t_vec3f){0.0, 0.0, 1.0},
-			&(t_vec3f){0.0, 1.0, 0.0});
 	if (keycode == XK_Up)
 		data->scene.camera.origin = vec3_sum(&data->scene.camera.origin,
-				&data->scene.camera.dir);
+				&data->scene.camera._cz);
 	else if (keycode == XK_Down)
 		data->scene.camera.origin = vec3_diff(&data->scene.camera.origin,
-				&data->scene.camera.dir);
+				&data->scene.camera._cz);
 	else if (keycode == XK_Right)
 		data->scene.camera.origin = vec3_diff(&data->scene.camera.origin,
-				&dir);
+				&data->scene.camera._cy);
 	else if (keycode == XK_Left)
 		data->scene.camera.origin = vec3_sum(&data->scene.camera.origin,
-				&dir);
+				&data->scene.camera._cy);
 	img_update_camera(data);
 	return (0);
 }

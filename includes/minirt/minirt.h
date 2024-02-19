@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/16 19:17:06 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/19 12:14:16 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define DFT_SIZE_Y 800
 # define PFPS 1
 # define DFT_NBR_THREADS 16
-# define DFT_IMG_CHUNK_SIZE 2
+# define DFT_IMG_CHUNK_SIZE 1
 
 typedef struct s_data {
 
@@ -71,8 +71,14 @@ int		render_threads(t_data *data);
 void	render_chunk(t_data *data, int i, t_color *antialiasing);
 void	img_update(t_data *data);
 int		img_put(t_data *data);
-void	img_update_camera(t_data *data);
 int		img_update_chunk(t_data *data);
+
+/* -------------------------------------------------------------------------- */
+/*                                   CAMERA                                   */
+/* -------------------------------------------------------------------------- */
+
+void	init_camera(t_data *camera);
+void	img_update_camera(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                   EVENTS                                   */
@@ -89,6 +95,7 @@ int		handle_pan(t_data *data, int keycode);
 int		handle_threads_nbr(int keycode, t_data *data);
 int		handle_chunk_size(int keycode, t_data *data);
 int		handle_rotation(t_data *data);
+int		handle_zoom(t_data *data, int keycode);
 
 /* -------------------------------------------------------------------------- */
 /*                                   COLORS                                   */
