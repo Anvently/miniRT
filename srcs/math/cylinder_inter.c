@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/15 14:12:20 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/19 18:06:08 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	get_tube_intersec(t_object *cyld, t_ray *ray, t_vec3f *v_a, t_vec3f *v_o)
 		temp = vector_product(&cyld->orientation, &temp);
 		normalize_vec(&temp);
 		ray->normal = temp;
+		ray->color = cyld->color;
 	}
 }
 
@@ -77,6 +78,7 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 	{
 		ray->t = t_cap;
 		ray->normal = vec3_scale(&cylinder->orientation, -1);
+		ray->color = cylinder->color;
 		normalize_vec(&ray->normal);
 	}
 	if (top_cap_intersec(cylinder, ray, &t_cap) && t_cap < ray->t && t_cap >= 1)
