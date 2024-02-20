@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:22:55 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 13:54:38 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:36:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <minirt/calculus.h>
 #include <minirt/raytracing.h>
 
-static void	compute_diffusion(t_data *data, t_ray *ray, t_light *light)
+static t_color3f	compute_diffusion(t_data *data, t_ray *ray, t_light *light)
 {
 	ray->dir = vec3f_get_dir(&ray->origin,
 			&light->origin);
@@ -27,6 +27,8 @@ static void	compute_diffusion(t_data *data, t_ray *ray, t_light *light)
 		ray->theta = 0.0;
 	if (ray->t != INFINITY)
 		ray->l_diffuse = color_ratio(&light->color, ray->theta);
+	color_filter(&ray->l_diffuse, &ray->color_obj);
+	return (ray->l_diffuse);
 }
 
 void	check_lights(t_data *data, t_ray *ray)
@@ -38,13 +40,13 @@ void	check_lights(t_data *data, t_ray *ray)
 	ft_memset(&ray_to_light, 0, sizeof(t_ray));
 	ray_to_light.origin = ray->inter;
 	ray_to_light.normal = ray->normal;
+	ray_to_light.color_obj = ray->color_obj;
 	node = data->scene.lights;
 	while (node)
 	{
 		light = (t_light *)node->content;
-		compute_diffusion(data, &ray_to_light, light);
-		ray->l_diffuse = color_product(&ray->color_obj,
-			&ray_to_light.l_diffuse);
+		ray->l_diffuse = compute_diffusion(data, &ray_to_light, light);
+
 		//color_filter(&ray->color, &ray_to_light.color);
 		node = node->next;
 	}

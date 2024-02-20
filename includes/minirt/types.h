@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 13:52:12 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:23:35 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,10 @@ typedef struct s_scene {
 /// @param color R,G,B in range [0-255] : 255, 255, 255
 /// @param orientation Orientation of the object (x, y, z) in the range [-1;1]
 /// For cylinders, correspond to its axis.
+/// @param k_ambiant ambiant light reflexion constant (0 <= ka <= 1)
+/// @param k_diffuse diffuse light reflexion constant (0 <= kd <= 1)
+/// @param k_specular specular light reflexion constant (0 <= ks <= 1)
+/// @param k_plastic portion of plastic reflexion on surface (0 <= p <= 1)
 typedef struct s_object {
 	char		type;
 	t_coord3f	origin;
@@ -159,6 +163,10 @@ typedef struct s_object {
 	double		height;
 	t_color3f	color;
 	t_vec3f		orientation;
+	double		k_ambiant;
+	double		k_diffuse;
+	double		k_specular;
+	double		k_plastic;
 }				t_object;
 
 void	print_t_double3(t_double3 *vec);
