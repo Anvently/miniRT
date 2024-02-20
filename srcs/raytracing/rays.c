@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 11:13:37 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:59:03 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #include <minirt/draw.h>
 #include <minirt/calculus.h>
 #include <minirt/types.h>
+#include <minirt/raytracing.h>
 #include <libft.h>
 
-static void	check_inter(t_data *data, t_ray *ray)
+void	check_inter(t_data *data, t_ray *ray)
 {
 	t_list		*node;
 	t_object	*obj;
@@ -35,40 +36,17 @@ static void	check_inter(t_data *data, t_ray *ray)
 	}
 }
 
-void	check_lights(t_data *data, t_ray *ray)
-{
-	t_ray	ray_to_light;
-	t_list	*node;
-	t_light	*light;
-
-	ft_memset(&ray_to_light, 0, sizeof(t_ray));
-	ray_to_light.origin = ray->inter;
-	node = data->scene.lights;
-	while (node)
-	{
-		light = (t_light *)node->content;
-		ray_to_light.dir = vec3f_get_dir(&ray_to_light.origin,
-				&light->origin);
-		ray_to_light.theta = scalar_product(&ray_to_light.dir,
-				&ray_to_light.normal);
-		ray_to_light.t = INFINITY;
-		if (ray_to_light.theta > 0)
-			check_inter(data, &ray_to_light);
-		// if (ray_to_light.t != INFINITY)
-		// 	// ray->color = ;
-		node = node->next;
-	}
-}
-
 void	launch_ray(t_data *data, t_ray *ray)
 {
 	check_inter(data, ray);
-	if (ray->t == INFINITY)
-		ray->color = (t_color3f){0.0, 0.0, 0.0};
-	else
-		color_filter(&ray->color, &data->scene.ambiant_light._ambiant);
-	// printf("r=%f, g=%f, b=%f\n", ray->color.r, ray->color.g, ray->color.b);
-	// check_lights(data, ray);
+	if (ray->t != INFINITY)
+		color_product(&ray->color_obj,
+			&data->scene.ambiant_light._ambiant);
+	check_lights(data, ray);
+	ray->l_final.r = ray->l_diffuse.r + ray->l_ambiant.r + ray->l_spec.r;
+	ray->l_final.g = ray->l_diffuse.g + ray->l_ambiant.g + ray->l_spec.g;
+	ray->l_final.b = ray->l_diffuse.b + ray->l_ambiant.b + ray->l_spec.b;
+	color_unsature(&ray->l_final);
 }
 
 t_ray	generate_ray(t_coord2f *pxl, t_data *data)
@@ -97,14 +75,3 @@ t_ray	generate_ray(t_coord2f *pxl, t_data *data)
 	return (ray);
 }
 
-t_color	get_ray_color(t_ray *ray)
-{
-	t_color	color;
-	double	a;
-
-	a = 0.5 * (ray->dir.y + 1.0);
-	color.r = (1.0 - a) * 208 + a * 127;
-	color.g = (1.0 - a) * 44 + a * 94;
-	color.b = (1.0 - a) * 44 + a * 94;
-	return (color);
-}

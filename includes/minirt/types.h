@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 11:01:34 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:52:12 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,11 @@ typedef struct s_ray {
 	double		t;
 	double		theta;
 	double		t_min;
-	t_color3f	color;
+	t_color3f	color_obj;
+	t_color3f	l_diffuse;
+	t_color3f	l_ambiant;
+	t_color3f	l_spec;
+	t_color3f	l_final;
 }				t_ray;
 
 typedef enum e_object_type

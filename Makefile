@@ -9,17 +9,18 @@ OBJS_FOLDER	=	.objs/
 SRCS_FILES	=	main.c error.c \
 				render/render.c render/fps.c render/image.c render/thread.c \
 				render/chunk.c \
-				draw/draw.c draw/util.c draw/line.c draw/color.c draw/color2.c \
-				draw/color3.c \
+				draw/draw.c draw/util.c draw/line.c draw/color_conversion.c \
+				draw/color_conversion2.c draw/color_operation.c draw/color_operation2.c \
 				events/events.c events/handlers.c events/handlers2.c \
 				parsing/parsing.c parsing/parse_line.c parsing/parse_objects.c \
 				parsing/parse_value.c parsing/parse_value2.c parsing/normalize.c \
 				struct/t_scene.c struct/print.c \
-				math/geometry_ope.c math/geometry_ope2.c \
-				math/plane_inter.c math/sphere_inter.c\
+				math/geometry_ope.c math/geometry_ope2.c math/cam_rotation.c \
+				math/plane_inter.c math/sphere_inter.c math/matrix2.c\
 				math/cylinder_inter.c math/cylinder_inter2.c math/get_rot_matrices.c \
 				math/equation.c math/multiple.c math/matrix.c math/rotations.c \
-				raytracing/camera.c raytracing/rays.c raytracing/transform.c
+				raytracing/camera.c raytracing/rays.c raytracing/transform.c \
+				raytracing/light.c
 
 SRCS_TEST = 	math/geometry_ope.c math/geometry_ope2.c \
 				math/plane_inter.c math/sphere_inter.c\

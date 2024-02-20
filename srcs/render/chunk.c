@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:44:43 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 11:16:02 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:59:28 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_color3f	get_color(t_data *data, t_coord2f *start)
 
 	ray = generate_ray(start, data);
 	launch_ray(data, &ray);
-	return (ray.color);
+	return (ray.l_final);
 }
 
 static void	render_low_res_chunk(t_data *data, int i)

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:43:56 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 16:17:33 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:02:17 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	init_camera(t_data *data)
 	data->scene.camera._cx = (t_vec3f){1.0, 0.0, 0.0};
 	data->scene.camera._cy = (t_vec3f){0.0, 1.0, 0.0};
 	data->scene.camera._cz = (t_vec3f){0.0, 0.0, 1.0};
-	data->scene.matrix = rotation_matrix(&data->scene.camera.dir);
+	data->scene.matrix = cam_rotation(&data->scene.camera.dir);
+	// data->scene.matrix = rotation_matrix(&data->scene.camera.dir);
 	img_update_camera(data);
 }
 

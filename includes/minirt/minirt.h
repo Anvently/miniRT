@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 10:49:35 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:45:38 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int			color_get_g(int color);
 int			color_get_b(int color);
 int			color_get_t(int color);
 
+t_color3f	color_add(t_color3f *color_a, t_color3f *color_b);
 t_color3f	color_average(t_color3f *colors, int size);
 void		color_unsature(t_color3f *color);
 t_color3f	color_ratio(t_color3f *color, double ratio);

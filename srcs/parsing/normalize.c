@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:20:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 11:10:08 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:50:04 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	normalize_objects(t_list *objects)
 		obj = (t_object *)node->content;
 		if (obj->type == CYLINDER || obj->type == SPHERE)
 			obj->radius /= 2;
-		else if (obj->type == CYLINDER)
+		if (obj->type == CYLINDER)
 		{
 			temp = vec3_scale(&obj->orientation, obj->height / 2);
 			obj->top = vec3_sum(&obj->origin, &temp);
