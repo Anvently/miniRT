@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:56:02 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/20 14:14:50 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/20 15:31:00 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	plane_intersec(t_object *plane, t_ray *ray)
 	{
 		ray->t = c;
 		ray->normal = plane->orientation;
-		ray->color_obj = plane->color;
+		ray->inter_obj = plane;
 		normalize_vec(&ray->normal);
 		if (scalar_product(&ray->dir, &plane->orientation) >= 0)
 			ray->normal = vec3_scale(&ray->normal, -1);

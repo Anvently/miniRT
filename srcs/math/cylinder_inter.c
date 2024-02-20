@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/20 13:50:32 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 15:16:16 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	get_tube_intersec(t_object *cyld, t_ray *ray, t_vec3f *v_a, t_vec3f *v_o)
 		normalize_vec(&temp);
 		ray->normal = temp;
 		if (ray->t_min > -1.f)
-			ray->color_obj = cyld->color;
+			ray->inter_obj = cyld;
 	}
 }
 
@@ -80,7 +80,7 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 		ray->t = t_cap;
 		ray->normal = vec3_scale(&cylinder->orientation, -1);
 		if (ray->t_min > 0.f)
-			ray->color_obj = cylinder->color;
+			ray->inter_obj = cylinder;
 		normalize_vec(&ray->normal);
 	}
 	if (top_cap_intersec(cylinder, ray, &t_cap) && t_cap < ray->t && t_cap > ray->t_min)
@@ -88,7 +88,7 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 		ray->t = t_cap;
 		ray->normal = cylinder->orientation;
 		if (ray->t_min > 0.f)
-			ray->color_obj = cylinder->color;
+			ray->inter_obj = cylinder;
 		normalize_vec(&ray->normal);
 	}
 	tube_intersec(cylinder, ray);

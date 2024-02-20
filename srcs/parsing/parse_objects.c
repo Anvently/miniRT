@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 11:02:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:39:42 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,29 @@ int	scene_parse_cylinder(t_object *object, int nbr, char **ptr, char *line)
 		return (error_parsing("cylinder height", nbr, line), 1);
 	if (scene_parse_color(ptr, &object->color))
 		return (error_parsing("cylinder color", nbr, line), 1);
+	return (0);
+}
+
+int	scene_parse_obj_properties(t_object *object, int nbr,
+		char *ptr, char *line)
+{
+	object->k_ambiant = 1.0;
+	object->k_diffuse = 1.0;
+	object->k_specular = 1.0;
+	object->k_plastic = 1.0;
+	while (ft_isspace(*ptr))
+		ptr++;
+	if (*ptr && scene_parse_ratio(&ptr, &object->k_ambiant))
+		return (error_parsing("object ambiant light reflexion",
+				nbr, line), 1);
+	if (*ptr && scene_parse_ratio(&ptr, &object->k_diffuse))
+		return (error_parsing("object diffuse light reflexion",
+				nbr, line), 1);
+	if (*ptr && scene_parse_ratio(&ptr, &object->k_specular))
+		return (error_parsing("object specular light reflexion",
+				nbr, line), 1);
+	if (*ptr && scene_parse_ratio(&ptr, &object->k_plastic))
+		return (error_parsing("object plastic reflexion reflexion",
+				nbr, line), 1);
 	return (0);
 }

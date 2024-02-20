@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:20:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 11:50:04 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 15:19:09 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ static void	normalize_objects(t_list *objects)
 			obj->top = vec3_sum(&obj->origin, &temp);
 			obj->origin = vec3_diff(&obj->origin, &temp);
 		}
+		obj->color_ambiant = color_ratio(&obj->color, obj->k_ambiant);
+		obj->color_diffuse = color_ratio(&obj->color, obj->k_diffuse);
+		obj->color_specular = color_ratio(&obj->color, obj->k_specular);
 		// obj->color = color_normalize(&obj->color);
 		node = node->next;
 	}

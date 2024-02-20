@@ -10,3 +10,17 @@
 				- check if no collision to light
 		- calculate color of pixel.
 
+
+PARSING
+
+- C [origin] [orientation] [fov]
+- A [ratio] [color]
+- L [origin] [ratio] [color]
+- SP [origin] [diameter] [color] [ka] [kd] [ks] [p]
+- PL [origin] [orientation] [color] [ka] [kd] [ks] [p]
+- CY [origin] [orientation] [diameter] [height] [color] [ka] [kd] [ks] [p]
+
+ka = ambiant light reflexion constant (0 <= ka <= 1)
+kd = diffuse light reflexion constant (0 <= kd <= 1)
+ks = specular light reflexion constant (0 <= ks <= 1)
+p = portion of plastic reflexion on surface (0 <= p <= 1)

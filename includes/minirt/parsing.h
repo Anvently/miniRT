@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 11:02:13 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:40:17 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		scene_parse_object(t_scene *scene, int nbr, char *line);
 int		scene_parse_sphere(t_object *object, int nbr, char **ptr, char *line);
 int		scene_parse_plan(t_object *object, int nbr, char **ptr, char *line);
 int		scene_parse_cylinder(t_object *object, int nbr, char **ptr, char *line);
+int		scene_parse_obj_properties(t_object *object, int nbr,
+			char *ptr, char *line);
 
 /* --------------------------------- VALUES --------------------------------- */
 
