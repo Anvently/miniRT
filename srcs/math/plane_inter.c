@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_inter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:56:02 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/20 15:16:25 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 15:31:00 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	plane_intersec(t_object *plane, t_ray *ray)
 		ray->normal = plane->orientation;
 		ray->inter_obj = plane;
 		normalize_vec(&ray->normal);
+		if (scalar_product(&ray->dir, &plane->orientation) >= 0)
+			ray->normal = vec3_scale(&ray->normal, -1);
 	}
 }
 
