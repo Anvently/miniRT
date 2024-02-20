@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:27:19 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 11:39:57 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:00:37 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 #include <minirt/parsing.h>
 #include <minirt/objects.h>
 
-int		scene_parse_origin(char **ptr, t_coord3f *origin);
-int		scene_parse_orientation(char **ptr, t_vec3f *orientation);
-int		scene_parse_color(char **ptr, t_color *color);
+int			scene_parse_origin(char **ptr, t_coord3f *origin);
+int			scene_parse_orientation(char **ptr, t_vec3f *orientation);
+int			scene_parse_color(char **ptr, t_color3f *color3f);
+static int	parse_color3int(char **ptr, t_color *color);
 
-int	scene_parse_color(char **ptr, t_color *color)
+static int	parse_color3int(char **ptr, t_color *color)
 {
 	char	*it;
 
@@ -45,6 +46,16 @@ int	scene_parse_color(char **ptr, t_color *color)
 	while (*it && !ft_isspace(*it))
 		it++;
 	*ptr = it;
+	return (0);
+}
+
+int	scene_parse_color(char **ptr, t_color3f *color3f)
+{
+	t_color	color;
+
+	if (parse_color3int(ptr, &color))
+		return (1);
+	*color3f = color_normalize(&color);
 	return (0);
 }
 

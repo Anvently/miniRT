@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 18:19:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 10:49:35 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,56 +66,64 @@ typedef struct s_data {
 /*                                  RENDERING                                 */
 /* -------------------------------------------------------------------------- */
 
-int		render(void	*data);
-int		render_threads(t_data *data);
-void	render_chunk(t_data *data, int i, t_color *antialiasing);
-void	img_update(t_data *data);
-int		img_put(t_data *data);
-int		img_update_chunk(t_data *data);
+int			render(void	*data);
+int			render_threads(t_data *data);
+void		render_chunk(t_data *data, int i, t_color3f *antialiasing);
+void		img_update(t_data *data);
+int			img_put(t_data *data);
+int			img_update_chunk(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                                   CAMERA                                   */
 /* -------------------------------------------------------------------------- */
 
-void	init_camera(t_data *camera);
-void	img_update_camera(t_data *data);
-void	transform_scene(t_data *data, t_matrix3f *matrix);
+void		init_camera(t_data *camera);
+void		img_update_camera(t_data *data);
+void		transform_scene(t_data *data, t_matrix3f *matrix);
 
 /* -------------------------------------------------------------------------- */
 /*                                   EVENTS                                   */
 /* -------------------------------------------------------------------------- */
 
-int		event_button_press(int keycode, int x, int y, t_data *data);
-int		event_button_release(int keycode, int x, int y, t_data *data);
-int		event_mouse_move(int x, int y, t_data *data);
-int		event_key_release(int keycode, t_data *data);
-int		handle_close(t_data *data);
-int		handle_resize(t_data *data);
-int		handle_resize_click(t_data *data);
-int		handle_pan(t_data *data, int keycode);
-int		handle_threads_nbr(int keycode, t_data *data);
-int		handle_chunk_size(int keycode, t_data *data);
-int		handle_rotation(t_data *data);
-int		handle_zoom(t_data *data, int keycode);
+int			event_button_press(int keycode, int x, int y, t_data *data);
+int			event_button_release(int keycode, int x, int y, t_data *data);
+int			event_mouse_move(int x, int y, t_data *data);
+int			event_key_release(int keycode, t_data *data);
+int			handle_close(t_data *data);
+int			handle_resize(t_data *data);
+int			handle_resize_click(t_data *data);
+int			handle_pan(t_data *data, int keycode);
+int			handle_threads_nbr(int keycode, t_data *data);
+int			handle_chunk_size(int keycode, t_data *data);
+int			handle_rotation(t_data *data);
+int			handle_zoom(t_data *data, int keycode);
 
 /* -------------------------------------------------------------------------- */
 /*                                   COLORS                                   */
 /* -------------------------------------------------------------------------- */
 
-int		color_getint(t_color *color);
-t_color	color_getcolor(int color);
-int		color_get_r(int color);
-int		color_get_g(int color);
-int		color_get_b(int color);
-int		color_get_t(int color);
-t_color	color_average(t_color *colors, int size);
+int			color_getint(t_color *color);
+int			color_3f_int(t_color3f *color);
+t_color		color_getcolor(int color);
+t_color3f	color_getcolor3f(int icolor);
+t_color3f	color_normalize(t_color *colori);
+int			color_get_r(int color);
+int			color_get_g(int color);
+int			color_get_b(int color);
+int			color_get_t(int color);
+
+t_color3f	color_average(t_color3f *colors, int size);
+void		color_unsature(t_color3f *color);
+t_color3f	color_ratio(t_color3f *color, double ratio);
+t_color3f	color_product(t_color3f *color_a, t_color3f *color_b);
+void		color_filter(t_color3f *color, t_color3f *filter);
 
 /* -------------------------------------------------------------------------- */
 /*                                   ERRORS                                   */
 /* -------------------------------------------------------------------------- */
 
-void	error(char *context);
+void		error(char *context);
 
-void	pfps(void);
+void		pfps(void);
 
 #endif

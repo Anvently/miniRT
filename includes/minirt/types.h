@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 18:48:31 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:01:34 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ typedef struct s_double3 {
 	double		z;
 }				t_double3;
 
+typedef struct s_color3f {
+	double	r;
+	double	g;
+	double	b;
+}				t_color3f;
+
 typedef t_int2		t_vec2i;
 typedef t_int3		t_vec3i;
 typedef t_double2	t_vec2f;
@@ -73,7 +79,7 @@ typedef struct s_ray {
 	double		t;
 	double		theta;
 	double		t_min;
-	t_color		color;
+	t_color3f	color;
 }				t_ray;
 
 typedef enum e_object_type
@@ -87,13 +93,15 @@ typedef enum e_object_type
 }			t_object_type;
 
 /// @brief
-/// @param color R,G,B in range [0-255] : 255, 255, 255
+/// @param color R,G,B in range [0-1] : 0, 0.5, 1.0
 /// @param ratio in the range [0.0;1.0]
 /// @param origin x,y,z coordinates of light position
+/// @param _ambiant computed color values for ambiant light
 typedef struct s_light {
-	t_color		color;
+	t_color3f	color;
 	double		ratio;
 	t_coord3f	origin;
+	t_color3f	_ambiant;
 }				t_light;
 
 /// @brief
@@ -145,7 +153,7 @@ typedef struct s_object {
 	t_coord3f	top;
 	double		radius;
 	double		height;
-	t_color		color;
+	t_color3f	color;
 	t_vec3f		orientation;
 }				t_object;
 

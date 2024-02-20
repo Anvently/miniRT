@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:02:35 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 18:21:41 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:17:43 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@ int	color_getint(t_color *color)
 	return (rgb);
 }
 
+int	color_3f_int(t_color3f *color)
+{
+	int	rgb;
+
+	rgb = (int)(color->r * 255.f);
+	rgb <<= 8;
+	rgb |= (int)(color->g * 255.f);
+	rgb <<= 8;
+	rgb |= (int)(color->b * 255.f);
+	return (rgb);
+}
+
 /// @brief Extract RGB colors from given int and put it in dest structure.
 /// @param color
 /// @param dest
@@ -41,24 +53,23 @@ t_color	color_getcolor(int icolor)
 	return (color);
 }
 
-t_color	color_average(t_color *colors, int size)
+t_color3f	color_getcolor3f(int icolor)
 {
-	t_color	color;
-	int		i;
+	t_color3f	color;
 
-	i = 0;
-	color.r = 0;
-	color.g = 0;
-	color.b = 0;
-	while (i < size)
-	{
-		color.r += colors[i].r;
-		color.g += colors[i].g;
-		color.b += colors[i].b;
-		i++;
-	}
-	color.r /= size;
-	color.g /= size;
-	color.b /= size;
+	color.r = (double) color_get_r(icolor) / 255.f;
+	color.g = (double) color_get_g(icolor) / 255.f;
+	color.b = (double) color_get_b(icolor) / 255.f;
+	return (color);
+}
+
+
+t_color3f	color_normalize(t_color *colori)
+{
+	t_color3f	color;
+
+	color.r = (double) colori->r / 255.f;
+	color.g = (double) colori->g / 255.f;
+	color.b = (double) colori->b / 255.f;
 	return (color);
 }

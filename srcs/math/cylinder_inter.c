@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_inter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 18:54:24 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/20 11:04:53 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 	{
 		ray->t = t_cap;
 		ray->normal = cylinder->orientation;
-		if (ray->min > 0)
+		if (ray->t_min > 0)
 			ray->color = cylinder->color;
 		normalize_vec(&ray->normal);
 	}

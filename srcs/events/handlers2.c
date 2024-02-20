@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 18:19:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:07:17 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,10 @@ int	handle_rotation(t_data *data)
 	data->scene.camera._cy = vec3f_matrix3f(&data->scene.camera._cy, &matrix_y);
 	data->scene.camera._cz = vec3f_matrix3f(&data->scene.camera._cz, &matrix_y);
 	transform_scene(data, &matrix_z);
-	printf("cx*cy = %f, cx*cz = %f, cy * cz = %f\n",
-		scalar_product(&data->scene.camera._cx, &data->scene.camera._cy),
-		scalar_product(&data->scene.camera._cx, &data->scene.camera._cz),
-		scalar_product(&data->scene.camera._cy, &data->scene.camera._cz));
+		// printf("cx*cy = %f, cx*cz = %f, cy * cz = %f\n",
+		// 	scalar_product(&data->scene.camera._cx, &data->scene.camera._cy),
+		// 	scalar_product(&data->scene.camera._cx, &data->scene.camera._cz),
+		// 	scalar_product(&data->scene.camera._cy, &data->scene.camera._cz));
 	img_update_camera(data);
 	return (0);
 }

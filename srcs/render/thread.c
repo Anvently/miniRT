@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:10:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 17:56:53 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 10:09:57 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 static void	*render_routine(void *data_ptr)
 {
 	t_data		*data;
-	t_color		*colors;
+	t_color3f	*colors;
 	int			thread_i;
 	int			i;
 	int			max;
@@ -32,7 +32,7 @@ static void	*render_routine(void *data_ptr)
 	if (data->img_chunk_size < 0)
 	{
 		colors = ft_calloc(data->img_chunk_size * data->img_chunk_size,
-				sizeof(t_color));
+				sizeof(t_color3f));
 		if (!colors)
 			return (NULL);
 	}

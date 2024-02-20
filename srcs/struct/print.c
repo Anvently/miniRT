@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 15:10:51 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:04:09 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	t_light_print(void *light_ptr)
 	light = (t_light *)light_ptr;
 	printf("Origin: %.3f, %.3f, %.3f\n",
 		light->origin.x, light->origin.y, light->origin.z);
-	printf("Color: %d, %d, %d\nRatio: %.3f\n", light->color.r, light->color.g,
+	printf("Color: %f, %f, %f\nRatio: %.3f\n", light->color.r, light->color.g,
 		light->color.b, light->ratio);
 }
 
@@ -48,7 +48,7 @@ void	t_object_print(void *object_ptr)
 		printf("Radius: %.3f\n", object->radius);
 	if (object->type == CYLINDER)
 		printf("Height: %.3f\n", object->height);
-	printf("Color: %d, %d, %d\n", object->color.r, object->color.g,
+	printf("Color: %f, %f, %f\n", object->color.r, object->color.g,
 		object->color.b);
 	if (object->type != SPHERE)
 		printf("Orientation: %.3f, %.3f, %.3f\n",
@@ -61,7 +61,7 @@ void	t_scene_print(t_scene *scene)
 	printf("------ Scene ------\nCamera\n");
 	t_camera_print(&scene->camera);
 	printf("Ambiant light\n");
-	printf("Color: %d, %d, %d\nRatio: %.3f\n", scene->ambiant_light.color.r,
+	printf("Color: %f, %f, %f\nRatio: %.3f\n", scene->ambiant_light.color.r,
 		scene->ambiant_light.color.g, scene->ambiant_light.color.b,
 		scene->ambiant_light.ratio);
 	printf("Lights\n");

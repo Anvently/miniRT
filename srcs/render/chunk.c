@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:44:43 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 18:19:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:16:02 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	chunk_draw(t_data *data, t_coord2f *start, int color)
 	}
 }
 
-static t_color	get_color(t_data *data, t_coord2f *start)
+static t_color3f	get_color(t_data *data, t_coord2f *start)
 {
 	t_ray		ray;
 
@@ -45,22 +45,22 @@ static t_color	get_color(t_data *data, t_coord2f *start)
 static void	render_low_res_chunk(t_data *data, int i)
 {
 	t_coord2f	start;
-	t_color		color;
+	t_color3f	color;
 
 	start.x = (i % data->img_chunk_cell_w) * data->img_chunk_size
 		+ data->img_chunk_size / 2;
 	start.y = (i / data->img_chunk_cell_w) * data->img_chunk_size
 		+ data->img_chunk_size / 2;
 	color = get_color(data, &start);
-	chunk_draw(data, &start, color_getint(&color));
+	chunk_draw(data, &start, color_3f_int(&color));
 }
 
 static void	render_antialiasing_chunk(t_data *data, int i,
-	t_color *antialisaing, int nbr_rays)
+	t_color3f *antialisaing, int nbr_rays)
 {
 	t_coord2	chunk_start;
 	t_coord2f	start;
-	t_color		color;
+	t_color3f	color;
 	int			j;
 	double		shift;
 
@@ -76,10 +76,10 @@ static void	render_antialiasing_chunk(t_data *data, int i,
 		j++;
 	}
 	color = color_average(antialisaing, nbr_rays);
-	draw_pxl(data, &chunk_start, color_getint(&color));
+	draw_pxl(data, &chunk_start, color_3f_int(&color));
 }
 
-void	render_chunk(t_data *data, int i, t_color *antialiasing)
+void	render_chunk(t_data *data, int i, t_color3f *antialiasing)
 {
 	int			nbr_rays;
 
