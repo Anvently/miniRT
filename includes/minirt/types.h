@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 15:15:44 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:34:44 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ typedef enum e_object_type
 	LIGHT,
 	SPHERE,
 	PLAN,
-	CYLINDER
+	CYLINDER,
+	DISK
 }			t_object_type;
 
 /// @brief

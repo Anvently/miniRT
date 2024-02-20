@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:04:22 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 14:31:06 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:36:19 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	scene_parse_object(t_scene *scene, int nbr, char *line)
 	if ((object->type == SPHERE && scene_parse_sphere(object, nbr, &ptr, line))
 		|| (object->type == CYLINDER
 			&& scene_parse_cylinder(object, nbr, &ptr, line))
-		|| (object->type == PLAN && scene_parse_plan(object, nbr, &ptr, line)))
+		|| (object->type == PLAN && scene_parse_plan(object, nbr, &ptr, line))
+		|| (object->type == DISK && scene_parse_disk(object, nbr, &ptr, line)))
 		return (1);
 	if (scene_parse_obj_properties(object, nbr, ptr, line))
 		return (1);

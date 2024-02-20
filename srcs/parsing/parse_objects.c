@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 14:39:42 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 16:36:13 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ int	scene_parse_cylinder(t_object *object, int nbr, char **ptr, char *line)
 		return (error_parsing("cylinder height", nbr, line), 1);
 	if (scene_parse_color(ptr, &object->color))
 		return (error_parsing("cylinder color", nbr, line), 1);
+	return (0);
+}
+
+int	scene_parse_disk(t_object *object, int nbr, char **ptr, char *line)
+{
+	if (scene_parse_origin(ptr, &object->origin))
+		return (error_parsing("disk origin", nbr, line), 1);
+	if (scene_parse_orientation(ptr, &object->orientation))
+		return (error_parsing("disk orientation", nbr, line), 1);
+	if (scene_parse_double(ptr, &object->radius))
+		return (error_parsing("disk radius", nbr, line), 1);
+	if (scene_parse_color(ptr, &object->color))
+		return (error_parsing("disk color", nbr, line), 1);
 	return (0);
 }
 

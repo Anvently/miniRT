@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 15:29:25 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 17:34:23 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	check_inter(t_data *data, t_ray *ray)
 	while (node)
 	{
 		obj = (t_object *)node->content;
+		// if (ray->inter_obj && ray->inter_obj == obj)
+		// 	return ;
 		if (obj->type == PLAN)
 			plane_intersec(obj, ray);
 		else if (obj->type == SPHERE)
@@ -40,7 +42,7 @@ t_color3f	get_ray_color(t_ray *ray)
 {
 	t_color		color;
 	t_color3f	color3f;
-	double	a;
+	double		a;
 
 	a = 0.5 * (ray->dir.y + 1.0);
 	color.r = (1.0 - a) * 208 + a * 127;
@@ -53,13 +55,15 @@ t_color3f	get_ray_color(t_ray *ray)
 void	launch_ray(t_data *data, t_ray *ray)
 {
 	check_inter(data, ray);
-	if (ray->t != INFINITY)
+	if (ray->inter_obj)
+	{
 		ray->l_ambiant = color_product(&ray->inter_obj->color,
 				&data->scene.ambiant_light._ambiant);
-	check_lights(data, ray);
-	ray->l_final.r = ray->l_diffuse.r + ray->l_ambiant.r + ray->l_spec.r;
-	ray->l_final.g = ray->l_diffuse.g + ray->l_ambiant.g + ray->l_spec.g;
-	ray->l_final.b = ray->l_diffuse.b + ray->l_ambiant.b + ray->l_spec.b;
+		check_lights(data, ray);
+		ray->l_final.r = ray->l_diffuse.r + ray->l_ambiant.r + ray->l_spec.r;
+		ray->l_final.g = ray->l_diffuse.g + ray->l_ambiant.g + ray->l_spec.g;
+		ray->l_final.b = ray->l_diffuse.b + ray->l_ambiant.b + ray->l_spec.b;
+	}
 	color_unsature(&ray->l_final);
 	// if (ray->t != INFINITY)
 	// 	ray->l_final = ray->color_obj;
