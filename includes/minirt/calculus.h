@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculus.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 18:44:48 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 10:58:28 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include <math.h>
 # include <minirt/types.h>
+
+#ifndef M_PI
+# define M_PI 3.141592653589793
+#endif
 
 /*-------GEOMETRY OPE-------*/
 double		scalar_product(t_vec3f *t_u, t_vec3f *t_v);
@@ -57,5 +61,7 @@ int			get_inf_multiple(int n, int comp);
 
 /*---------------GET_ROT_MATRIX-----------------------*/
 t_matrix3f	rotation_matrix(t_vec3f	*cam_dir);
+t_matrix3f	cam_rotation(t_vec3f *dir);
+t_matrix3f	get_rotation_matrix(t_vec3f *axis, double theta);
 
 #endif
