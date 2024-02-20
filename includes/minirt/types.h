@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 14:23:35 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 15:15:44 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,6 @@ typedef struct s_matrix3f {
 	double		m1[3];
 	double		m2[3];
 }				t_matrix3f;
-
-typedef struct s_ray {
-	t_coord3f	origin;
-	t_vec3f		dir;
-	t_coord3f	inter;
-	t_vec3f		normal;
-	double		t;
-	double		theta;
-	double		t_min;
-	t_color3f	color_obj;
-	t_color3f	l_diffuse;
-	t_color3f	l_ambiant;
-	t_color3f	l_spec;
-	t_color3f	l_final;
-}				t_ray;
 
 typedef enum e_object_type
 {
@@ -167,7 +152,25 @@ typedef struct s_object {
 	double		k_diffuse;
 	double		k_specular;
 	double		k_plastic;
+	t_color3f	color_diffuse;
+	t_color3f	color_ambiant;
+	t_color3f	color_specular;
 }				t_object;
+
+typedef struct s_ray {
+	t_coord3f	origin;
+	t_vec3f		dir;
+	t_coord3f	inter;
+	t_vec3f		normal;
+	double		t;
+	double		theta;
+	double		t_min;
+	t_object	*inter_obj;
+	t_color3f	l_diffuse;
+	t_color3f	l_ambiant;
+	t_color3f	l_spec;
+	t_color3f	l_final;
+}				t_ray;
 
 void	print_t_double3(t_double3 *vec);
 

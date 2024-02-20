@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:22:55 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 14:36:32 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 15:29:13 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,16 @@ static t_color3f	compute_diffusion(t_data *data, t_ray *ray, t_light *light)
 		check_inter(data, ray);
 	else if (ray->theta < 0)
 		ray->theta = 0.0;
-	if (ray->t != INFINITY)
-		ray->l_diffuse = color_ratio(&light->color, ray->theta);
-	color_filter(&ray->l_diffuse, &ray->color_obj);
+	if (ray->t == INFINITY)
+	{
+		ray->l_diffuse.r = light->color.r * ray->theta \
+			* ray->inter_obj->color_diffuse.r;
+		ray->l_diffuse.g = light->color.g * ray->theta \
+			* ray->inter_obj->color_diffuse.g;
+		ray->l_diffuse.b = light->color.b * ray->theta \
+			* ray->inter_obj->color_diffuse.b;
+	}
+	// color_filter(&ray->l_diffuse, &ray->inter_obj->color);
 	return (ray->l_diffuse);
 }
 
@@ -40,7 +47,7 @@ void	check_lights(t_data *data, t_ray *ray)
 	ft_memset(&ray_to_light, 0, sizeof(t_ray));
 	ray_to_light.origin = ray->inter;
 	ray_to_light.normal = ray->normal;
-	ray_to_light.color_obj = ray->color_obj;
+	ray_to_light.inter_obj = ray->inter_obj;
 	node = data->scene.lights;
 	while (node)
 	{

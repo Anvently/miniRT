@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:56:02 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/20 13:50:32 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 15:16:25 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	plane_intersec(t_object *plane, t_ray *ray)
 	{
 		ray->t = c;
 		ray->normal = plane->orientation;
-		ray->color_obj = plane->color;
+		ray->inter_obj = plane;
 		normalize_vec(&ray->normal);
 	}
 }
