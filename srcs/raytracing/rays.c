@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 18:48:38 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:13:37 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	check_lights(t_data *data, t_ray *ray)
 		ray_to_light.t = INFINITY;
 		if (ray_to_light.theta > 0)
 			check_inter(data, &ray_to_light);
-		if (ray_to_light.t != INFINITY)
-			// ray->color = ;
+		// if (ray_to_light.t != INFINITY)
+		// 	// ray->color = ;
 		node = node->next;
 	}
 }
@@ -64,9 +64,11 @@ void	launch_ray(t_data *data, t_ray *ray)
 {
 	check_inter(data, ray);
 	if (ray->t == INFINITY)
-		ray->color = color_getcolor(0);
-	check_light_inter(data, ray);
-
+		ray->color = (t_color3f){0.0, 0.0, 0.0};
+	else
+		color_filter(&ray->color, &data->scene.ambiant_light._ambiant);
+	// printf("r=%f, g=%f, b=%f\n", ray->color.r, ray->color.g, ray->color.b);
+	// check_lights(data, ray);
 }
 
 t_ray	generate_ray(t_coord2f *pxl, t_data *data)

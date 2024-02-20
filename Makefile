@@ -10,9 +10,10 @@ SRCS_FILES	=	main.c error.c \
 				render/render.c render/fps.c render/image.c render/thread.c \
 				render/chunk.c \
 				draw/draw.c draw/util.c draw/line.c draw/color.c draw/color2.c \
+				draw/color3.c \
 				events/events.c events/handlers.c events/handlers2.c \
 				parsing/parsing.c parsing/parse_line.c parsing/parse_objects.c \
-				parsing/parse_value.c parsing/parse_value2.c \
+				parsing/parse_value.c parsing/parse_value2.c parsing/normalize.c \
 				struct/t_scene.c struct/print.c \
 				math/geometry_ope.c math/geometry_ope2.c \
 				math/plane_inter.c math/sphere_inter.c\
