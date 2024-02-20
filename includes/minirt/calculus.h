@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/20 10:58:28 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/20 13:37:45 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_matrix3f	matrix_sum(t_matrix3f *a, t_matrix3f *b);
 t_matrix3f	matrix_transpose(t_matrix3f *m);
 t_vec3f		vec3f_matrix3f(t_vec3f *vec, t_matrix3f *matrix);
 void		display_matrix(t_matrix3f *m);
+t_matrix3f matrix_product(t_matrix3f *a, t_matrix3f *b);
 
 /* ------------------------------ MULTIPLE OPE ------------------------------ */
 
