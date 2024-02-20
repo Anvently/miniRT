@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_inter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:56:02 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 18:50:00 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/20 13:50:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	plane_intersec(t_object *plane, t_ray *ray)
 	{
 		ray->t = c;
 		ray->normal = plane->orientation;
-		ray->color = plane->color;
+		ray->color_obj = plane->color;
 		normalize_vec(&ray->normal);
 	}
 }

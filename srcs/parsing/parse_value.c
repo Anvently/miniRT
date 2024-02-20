@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:27:05 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/14 11:39:57 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:14:13 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	scene_parse_type(char **ptr, char *type)
 		*type = SPHERE;
 	else if (!ft_strncmp(it, "cy", 2))
 		*type = CYLINDER;
+	else
+		return (1);
 	while (*it && !ft_isspace(*it))
 		it++;
 	*ptr = it;

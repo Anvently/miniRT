@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_inter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:20:20 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 18:50:48 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/20 13:50:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	sphere_intersec(t_object *sphere, t_ray *ray)
 	{
 		ray->t = t;
 		if (ray->t_min == 1)
-			ray->color = sphere->color;
+			ray->color_obj = sphere->color;
 		sphere_normal(sphere, ray);
 	}
 

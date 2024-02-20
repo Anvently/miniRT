@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   color_conversion2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:02:35 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 11:17:43 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:44:08 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,5 @@ t_color3f	color_getcolor3f(int icolor)
 	color.r = (double) color_get_r(icolor) / 255.f;
 	color.g = (double) color_get_g(icolor) / 255.f;
 	color.b = (double) color_get_b(icolor) / 255.f;
-	return (color);
-}
-
-
-t_color3f	color_normalize(t_color *colori)
-{
-	t_color3f	color;
-
-	color.r = (double) colori->r / 255.f;
-	color.g = (double) colori->g / 255.f;
-	color.b = (double) colori->b / 255.f;
 	return (color);
 }
