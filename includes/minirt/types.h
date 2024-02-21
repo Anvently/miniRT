@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 14:56:40 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 16:08:49 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ typedef struct s_ray {
 	double		t;
 	double		theta;
 	double		t_min;
+	double		t_max;
 	t_object	*inter_obj;
 	t_color3f	l_diffuse;
 	t_color3f	l_ambiant;

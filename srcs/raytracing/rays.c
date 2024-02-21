@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 16:06:31 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 16:09:53 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ void	check_inter(t_data *data, t_ray *ray)
 	while (node)
 	{
 		obj = (t_object *)node->content;
-		if (ray->inter_obj && ray->inter_obj == obj)
-			return ;
+		//if (ray->inter_obj && ray->inter_obj == obj)
+		//	return ;
 		if (obj->type == PLAN)
 			plane_intersec(obj, ray);
 		else if (obj->type == SPHERE)
 			sphere_intersec(obj, ray);
 		else if (obj->type == CYLINDER)
 			cylinder_intersec(obj, ray);
+		else if (obj->type == CONE)
+			cone_intersec(obj, ray);
 		node = node->next;
 		if (ray->t_min < 1.0 && ray->t != INFINITY)
 			break ;
