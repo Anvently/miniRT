@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_inter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:20:20 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/20 15:16:36 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 10:20:10 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,17 @@ void	sphere_normal(t_object *sphere, t_ray *ray)
 
 void	sphere_intersec(t_object *sphere, t_ray *ray)
 {
-	double	a;
-	double	b;
-	double	c;
+	t_double3	coeff;
 	double	t;
 	t_vec3f	t_r;
 
 	if (sphere->type != SPHERE)
 		return ;
 	t_r = vec3_diff(&ray->origin, &sphere->origin);
-	a = scalar_product(&ray->dir, &ray->dir);
-	b = 2 * scalar_product(&t_r, &ray->dir);
-	c = scalar_product(&t_r, &t_r) - sphere->radius * sphere->radius;
-	if (quadra_solver(a, b, c, &t) && t > ray->t_min && t < ray->t)
+	coeff.x = scalar_product(&ray->dir, &ray->dir);
+	coeff.y = 2 * scalar_product(&t_r, &ray->dir);
+	coeff.z = scalar_product(&t_r, &t_r) - sphere->radius * sphere->radius;
+	if (quadra_solver(&coeff, &t, ray->t_min) && t > ray->t_min && t < ray->t)
 	{
 		ray->t = t;
 		if (ray->t_min == 1)

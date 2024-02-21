@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 09:17:07 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 10:45:25 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	check_inter(t_data *data, t_ray *ray)
 	while (node)
 	{
 		obj = (t_object *)node->content;
-		// if (ray->inter_obj && ray->inter_obj == obj)
-		// 	return ;
+		if (ray->inter_obj && ray->inter_obj == obj)
+			return ;
 		if (obj->type == PLAN)
 			plane_intersec(obj, ray);
 		else if (obj->type == SPHERE)

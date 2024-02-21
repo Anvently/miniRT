@@ -20,6 +20,7 @@ PARSING
 - PL [origin] [orientation] [color] [ka] [kd] [ks] [p]
 - CY [origin] [orientation] [diameter] [height] [color] [ka] [kd] [ks] [p]
 - DI [center] [orientation] [radius] [color] [ka] [kd] [ks] [p]
+- CO [center of base] [orientation] [radius] [height] [color] [ka] [kd] [ks] [p]
 
 ka = ambiant light reflexion constant (0 <= ka <= 1)
 kd = diffuse light reflexion constant (0 <= kd <= 1)

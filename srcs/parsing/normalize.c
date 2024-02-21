@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   normalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:20:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 16:39:19 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:01:16 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
 #include <minirt/calculus.h>
+
+static	void	normalize_cone(t_object *obj)
+{
+	t_vec3f	temp;
+
+	if (obj->type != CONE)
+		return ;
+	temp = vec3_scale(&obj->orientation, obj->height);
+	obj->top = vec3_sum(&obj->origin, &temp);
+}
 
 static void	normalize_objects(t_list *objects)
 {
@@ -32,6 +42,7 @@ static void	normalize_objects(t_list *objects)
 			obj->top = vec3_sum(&obj->origin, &temp);
 			obj->origin = vec3_diff(&obj->origin, &temp);
 		}
+		normalize_cone(obj);
 		obj->color_ambiant = color_ratio(&obj->color, obj->k_ambiant);
 		obj->color_diffuse = color_ratio(&obj->color, obj->k_diffuse);
 		obj->color_specular = color_ratio(&obj->color, obj->k_specular);

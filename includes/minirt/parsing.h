@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 16:36:29 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 09:58:57 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		scene_parse_object(t_scene *scene, int nbr, char *line);
 int		scene_parse_sphere(t_object *object, int nbr, char **ptr, char *line);
 int		scene_parse_plan(t_object *object, int nbr, char **ptr, char *line);
 int		scene_parse_cylinder(t_object *object, int nbr, char **ptr, char *line);
-int		scene_parse_disk(t_object *object, int nbr, char **ptr, char *line);
+int		scene_parse_cone(t_object *object, int nbr, char **ptr, char *line);
 int		scene_parse_obj_properties(t_object *object, int nbr,
 			char *ptr, char *line);
 
