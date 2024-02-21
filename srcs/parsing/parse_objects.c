@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 09:57:33 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 14:18:45 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	scene_parse_obj_properties(t_object *object, int nbr,
 	object->k_diffuse = 1.0;
 	object->k_specular = 1.0;
 	object->k_plastic = 1.0;
+	object->k_roughness = 1.0;
+	object->k_reflexion = 0.0;
 	while (ft_isspace(*ptr))
 		ptr++;
 	if (*ptr && scene_parse_ratio(&ptr, &object->k_ambiant))
@@ -87,7 +89,11 @@ int	scene_parse_obj_properties(t_object *object, int nbr,
 		return (error_parsing("object specular light reflexion",
 				nbr, line), 1);
 	if (*ptr && scene_parse_ratio(&ptr, &object->k_plastic))
-		return (error_parsing("object plastic reflexion reflexion",
-				nbr, line), 1);
+		return (error_parsing("object plastic reflexion", nbr, line), 1);
+	if (*ptr && (scene_parse_double(&ptr, &object->k_roughness)
+			|| object->k_roughness < 1.0))
+		return (error_parsing("object roughness", nbr, line), 1);
+	if (*ptr && scene_parse_ratio(&ptr, &object->k_reflexion))
+		return (error_parsing("object reflexion constant", nbr, line), 1);
 	return (0);
 }

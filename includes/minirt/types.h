@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 09:52:38 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 14:56:40 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,8 @@ typedef struct s_object {
 	double		k_diffuse;
 	double		k_specular;
 	double		k_plastic;
+	double		k_roughness;
+	double		k_reflexion;
 	t_color3f	color_diffuse;
 	t_color3f	color_ambiant;
 	t_color3f	color_specular;
@@ -164,16 +166,19 @@ typedef struct s_ray {
 	t_vec3f		dir;
 	t_coord3f	inter;
 	t_vec3f		normal;
+	t_vec3f		old_dir;
 	double		t;
 	double		theta;
 	double		t_min;
 	t_object	*inter_obj;
 	t_color3f	l_diffuse;
 	t_color3f	l_ambiant;
-	t_color3f	l_spec;
+	t_color3f	l_specular;
 	t_color3f	l_final;
+	int			nbr_bounce;
 }				t_ray;
 
 void	print_t_double3(t_double3 *vec);
+void	print_t_color3f(t_color3f *color);
 
 #endif

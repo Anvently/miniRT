@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 11:02:26 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 14:56:31 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ void	t_scene_print(t_scene *scene)
 void	print_t_double3(t_double3 *vec)
 {
 	printf("X=%f | Y = %f | Z = %f\n", vec->x, vec->y, vec->z);
+}
+
+void	print_t_color3f(t_color3f *color)
+{
+	printf("R=%f | G = %f | B = %f\n", color->r, color->g, color->b);
 }
 
 void	display_matrix(t_matrix3f *m)
