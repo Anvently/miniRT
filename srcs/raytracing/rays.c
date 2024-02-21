@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 11:16:20 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 14:04:18 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	check_inter(t_data *data, t_ray *ray)
 			sphere_intersec(obj, ray);
 		else if (obj->type == CYLINDER)
 			cylinder_intersec(obj, ray);
+		else if (obj->type == CONE)
+			cone_intersec(obj, ray);
 		node = node->next;
 		if (ray->t_min < 1.0 && ray->t != INFINITY)
 			break ;

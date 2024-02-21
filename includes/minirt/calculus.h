@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/21 10:40:59 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 14:01:29 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 
 #ifndef M_PI
 # define M_PI 3.141592653589793
+#endif
+
+#ifndef T_MIN
+# define T_MIN 0.00000001f
 #endif
 
 /*-------GEOMETRY OPE-------*/
@@ -44,6 +48,9 @@ void		sphere_intersec(t_object *sphere, t_ray *ray);
 int			top_cap_intersec(t_object *cyld, t_ray *ray, double *t);
 int			bot_cap_intersec(t_object *cyld, t_ray *ray, double *t);
 void		cylinder_intersec(t_object *cylinder, t_ray *ray);
+
+/*----------------CONE---------------------------------*/
+void	cone_intersec(t_object *cone, t_ray *ray);
 
 /* --------------------------------- MATRIX --------------------------------- */
 
