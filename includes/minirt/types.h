@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 17:15:06 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 18:21:28 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ typedef struct s_color3f {
 	double	b;
 }				t_color3f;
 
-typedef t_int2		t_vec2i;
-typedef t_int3		t_vec3i;
-typedef t_double2	t_vec2f;
-typedef t_double3	t_vec3f;
-typedef t_int2		t_coord2;
-typedef t_int3		t_coord3;
-typedef t_double2	t_coord2f;
-typedef t_double3	t_coord3f;
+typedef t_int2			t_vec2i;
+typedef t_int3			t_vec3i;
+typedef t_double2		t_vec2f;
+typedef t_double3		t_vec3f;
+typedef t_int2			t_coord2;
+typedef t_int3			t_coord3;
+typedef t_double2		t_coord2f;
+typedef t_double3		t_coord3f;
+typedef t_color3f		(*t_color_get)(void *, int, int);
 
 typedef struct s_matrix4f {
 	double		m1[4];
@@ -89,6 +90,20 @@ typedef enum e_ray_type
 	LIGHT_RAY,
 	REFLECT_RAY
 }			t_ray_type;
+
+typedef enum e_texture_type
+{
+	TEX_SOLID,
+	TEX_BMP,
+	TEX_DAM
+}			t_texture_type;
+
+typedef struct s_texture {
+	char		type;
+	char		*file_path;
+	t_color3f	color;
+	t_color_get	get_color;
+}				t_texture;
 
 /// @brief
 /// @param color R,G,B in range [0-1] : 0, 0.5, 1.0
@@ -166,6 +181,7 @@ typedef struct s_object {
 	t_color3f	color_diffuse;
 	t_color3f	color_ambiant;
 	t_color3f	color_specular;
+	t_texture	texture;
 }				t_object;
 
 typedef struct s_ray {
@@ -184,7 +200,7 @@ typedef struct s_ray {
 	t_color3f	l_specular;
 	t_color3f	l_final;
 	int			nbr_bounce;
-	int			type;
+	char		type;
 }				t_ray;
 
 void	print_t_double3(t_double3 *vec);

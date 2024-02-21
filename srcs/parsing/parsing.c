@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:34 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/13 16:43:12 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 18:16:44 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+
+char	*skip_space(char **ptr)
+{
+	while (ft_isspace(**ptr))
+		*ptr = *ptr + 1;
+	return (*ptr);
+}
 
 /// @brief Read file opened in fd and fill scene structure.
 /// @param scene

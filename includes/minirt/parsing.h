@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 09:58:57 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 18:23:38 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 int		scene_open(char *path, t_scene *scene);
 void	normalize_scene(t_scene *scene);
+char	*skip_space(char **ptr);
 
 int		scene_parse_line(t_scene *scene, char *line);
 int		scene_parse_ambiant(t_scene *scene, int nbr, char **ptr, char *line);
@@ -34,6 +35,7 @@ int		scene_parse_cylinder(t_object *object, int nbr, char **ptr, char *line);
 int		scene_parse_cone(t_object *object, int nbr, char **ptr, char *line);
 int		scene_parse_obj_properties(t_object *object, int nbr,
 			char *ptr, char *line);
+int		scene_parse_texture(char **ptr, t_object *object);
 
 /* --------------------------------- VALUES --------------------------------- */
 

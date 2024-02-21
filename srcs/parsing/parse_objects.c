@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 14:18:45 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 18:24:50 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,23 @@ int	scene_parse_cone(t_object *object, int nbr, char **ptr, char *line)
 int	scene_parse_obj_properties(t_object *object, int nbr,
 		char *ptr, char *line)
 {
-	object->k_ambiant = 1.0;
-	object->k_diffuse = 1.0;
-	object->k_specular = 1.0;
-	object->k_plastic = 1.0;
-	object->k_roughness = 1.0;
-	object->k_reflexion = 0.0;
-	while (ft_isspace(*ptr))
-		ptr++;
-	if (*ptr && scene_parse_ratio(&ptr, &object->k_ambiant))
+	if (*skip_space(&ptr) && scene_parse_texture(&ptr, object))
+		return (error_parsing("object texture", nbr, line), 1);
+	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_ambiant))
 		return (error_parsing("object ambiant light reflexion",
 				nbr, line), 1);
-	if (*ptr && scene_parse_ratio(&ptr, &object->k_diffuse))
+	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_diffuse))
 		return (error_parsing("object diffuse light reflexion",
 				nbr, line), 1);
-	if (*ptr && scene_parse_ratio(&ptr, &object->k_specular))
+	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_specular))
 		return (error_parsing("object specular light reflexion",
 				nbr, line), 1);
-	if (*ptr && scene_parse_ratio(&ptr, &object->k_plastic))
+	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_plastic))
 		return (error_parsing("object plastic reflexion", nbr, line), 1);
-	if (*ptr && (scene_parse_double(&ptr, &object->k_roughness)
+	if (*skip_space(&ptr) && (scene_parse_double(&ptr, &object->k_roughness)
 			|| object->k_roughness < 1.0))
 		return (error_parsing("object roughness", nbr, line), 1);
-	if (*ptr && scene_parse_ratio(&ptr, &object->k_reflexion))
+	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_reflexion))
 		return (error_parsing("object reflexion constant", nbr, line), 1);
 	return (0);
 }

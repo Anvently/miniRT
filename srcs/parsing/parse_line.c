@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:04:22 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 09:55:54 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 17:44:43 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,9 @@ int	scene_parse_object(t_scene *scene, int nbr, char *line)
 		return (error("parsing object"), 1);
 	object_node = ft_lstnew(object);
 	if (!object_node)
-	{
-		free(object);
-		return (error("parsing object"), 1);
-	}
+		return (free(object), error("parsing object"), 1);
 	ft_lstadd_back(&scene->objects, object_node);
+	t_object_init(object);
 	ptr = line;
 	scene_parse_type(&ptr, &object->type);
 	if ((object->type == SPHERE && scene_parse_sphere(object, nbr, &ptr, line))
