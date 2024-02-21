@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 09:38:47 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 10:08:01 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,11 @@ void	launch_ray(t_data *data, t_ray *ray)
 	if (ray->inter_obj)
 	{
 		ray->inter = get_inter_point(ray, ray->t);
-		ray->l_ambiant = color_product(&ray->inter_obj->color,
+		ray->l_final = color_product(&ray->inter_obj->color,
 				&data->scene.ambiant_light._ambiant);
+		//printf("r=%f, g=%f, b=%f\n", ray->l_final.r, ray->l_final.g, ray->l_final.b);
 		check_lights(data, ray);
-		ray->l_final.r = ray->l_diffuse.r + ray->l_ambiant.r + ray->l_spec.r;
-		ray->l_final.g = ray->l_diffuse.g + ray->l_ambiant.g + ray->l_spec.g;
-		ray->l_final.b = ray->l_diffuse.b + ray->l_ambiant.b + ray->l_spec.b;
 	}
-	color_unsature(&ray->l_final);
 	// if (ray->t != INFINITY)
 	// 	ray->l_final = ray->color_obj;
 

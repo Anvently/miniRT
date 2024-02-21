@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:22:55 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 17:37:56 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:00:26 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,49 @@
 #include <minirt/calculus.h>
 #include <minirt/raytracing.h>
 
-static t_color3f	compute_diffusion(t_data *data, t_ray *ray, t_light *light)
+static t_color3f	compute_specular(t_ray *light_ray, t_light *light)
+{
+	t_color3f	l_specular;
+
+	l_specular.r = light->color.r * light_ray->theta \
+		* light_ray->inter_obj->color_specular.r;
+	l_specular.g = light->color.g * light_ray->theta \
+		* light_ray->inter_obj->color_specular.g;
+	l_specular.b = light->color.b * light_ray->theta \
+		* light_ray->inter_obj->color_specular.b;
+	return (l_specular);
+}
+
+static t_color3f	compute_diffuse(t_ray *light_ray, t_light *light)
+{
+	t_color3f	l_diffuse;
+
+	l_diffuse.r = light->color.r * light_ray->theta \
+		* light_ray->inter_obj->color_diffuse.r;
+	l_diffuse.g = light->color.g * light_ray->theta \
+		* light_ray->inter_obj->color_diffuse.g;
+	l_diffuse.b = light->color.b * light_ray->theta \
+		* light_ray->inter_obj->color_diffuse.b;
+	return (l_diffuse);
+}
+
+static t_color3f	compute_lights(t_data *data, t_ray *ray, t_light *light)
 {
 	ray->dir = vec3f_get_dir(&ray->origin,
 			&light->origin);
 	ray->theta = scalar_product(&ray->dir,
 			&ray->normal);
-	// printf("type=%d, scal=%f\n", (int) ray->inter_obj->type, scalar_product(&ray->normal, &ray->inter_obj->orientation));
-	// print_t_double3(&ray->normal);
 	ray->t = INFINITY;
 	if (ray->theta >= 0)
 	{
 		check_inter(data, ray);
 		if (ray->t == INFINITY || ray->t == 0)
 		{
-			ray->l_diffuse.r = light->color.r * ray->theta \
-				* ray->inter_obj->color_diffuse.r;
-			ray->l_diffuse.g = light->color.g * ray->theta \
-				* ray->inter_obj->color_diffuse.g;
-			ray->l_diffuse.b = light->color.b * ray->theta \
-				* ray->inter_obj->color_diffuse.b;
+			color_add(&ray->l_final, compute_diffuse(ray, light));
+			color_add(&ray->l_final, compute_specular(ray, light));
 		}
 	}
-	// if (ray->t != INFINITY)
-	// 	printf("t=%f\n", ray->t);
-	// if (ray->theta >= 0)
-	// {
-
-	// }
-	// else if (ray->theta < 0)
-	// {
-	// 	// printf()
-	// 	ray->theta = 0.0;
-	// }
-	// color_filter(&ray->l_diffuse, &ray->inter_obj->color);
-	return (ray->l_diffuse);
+	return (ray->l_final);
 }
 
 void	check_lights(t_data *data, t_ray *ray)
@@ -66,8 +74,8 @@ void	check_lights(t_data *data, t_ray *ray)
 	while (node)
 	{
 		light = (t_light *)node->content;
-		ray->l_diffuse = compute_diffusion(data, &ray_to_light, light);
-		//color_filter(&ray->color, &ray_to_light.color);
+		color_add(&ray->l_final,
+			compute_lights(data, &ray_to_light, light));
 		node = node->next;
 	}
 }

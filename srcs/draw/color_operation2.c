@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_operation3.c                                 :+:      :+:    :+:   */
+/*   color_operation2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:40:33 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 13:44:15 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 10:03:23 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
 
-t_color3f	color_add(t_color3f *color_a, t_color3f *color_b)
+t_color3f	color_sum(t_color3f *color_a, t_color3f *color_b)
 {
 	t_color3f	color;
 
@@ -21,6 +21,14 @@ t_color3f	color_add(t_color3f *color_a, t_color3f *color_b)
 	color.b = color_a->b + color_b->b;
 	color_unsature(&color);
 	return (color);
+}
+
+void	color_add(t_color3f *color, t_color3f color_add)
+{
+	color->r += color_add.r;
+	color->g += color_add.g;
+	color->b += color_add.b;
+	color_unsature(color);
 }
 
 t_color3f	color_normalize(t_color *colori)

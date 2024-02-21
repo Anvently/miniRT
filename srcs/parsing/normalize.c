@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:20:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 16:39:19 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:01:23 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,26 @@ static void	normalize_objects(t_list *objects)
 		obj->color_ambiant = color_ratio(&obj->color, obj->k_ambiant);
 		obj->color_diffuse = color_ratio(&obj->color, obj->k_diffuse);
 		obj->color_specular = color_ratio(&obj->color, obj->k_specular);
-		// obj->color = color_normalize(&obj->color);
 		node = node->next;
 	}
 }
 
-void	normalize_lights(t_list *lights)
-{
-	t_list		*node;
-	t_light		*light;
+// void	normalize_lights(t_list *lights)
+// {
+// 	t_list		*node;
+// 	t_light		*light;
 
-	node = lights;
-	while (node)
-	{
-		light = (t_light *)node->content;
-		// light->color = color_normalize(&light->color);
-		node = node->next;
-	}
-}
+// 	node = lights;
+// 	while (node)
+// 	{
+// 		light = (t_light *)node->content;
+// 		node = node->next;
+// 	}
+// }
 
 void	normalize_scene(t_scene *scene)
 {
 	normalize_objects(scene->objects);
-	// normalize_lights(scene->lights);
-	// scene->ambiant_light.color = color_normalize(&scene->ambiant_light.color);
 	scene->ambiant_light._ambiant = color_ratio(&scene->ambiant_light.color,
 			scene->ambiant_light.ratio);
 }

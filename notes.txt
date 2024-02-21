@@ -25,3 +25,5 @@ ka = ambiant light reflexion constant (0 <= ka <= 1)
 kd = diffuse light reflexion constant (0 <= kd <= 1)
 ks = specular light reflexion constant (0 <= ks <= 1)
 p = portion of plastic reflexion on surface (0 <= p <= 1)
+
+https://www.math3d.org/rnFtwewET
