@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_inter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/20 17:35:22 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 10:42:13 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,14 @@ int	check_sol_tube(t_object *cyld, t_vec3f *sol)
 
 void	get_tube_intersec(t_object *cyld, t_ray *ray, t_vec3f *v_a, t_vec3f *v_o)
 {
-	double	a;
-	double	b;
-	double	c;
+	t_double3	coefficients;
 	double	t;
 	t_vec3f	temp;
 
-	a = scalar_product(v_a, v_a);
-	b = 2 * scalar_product(v_a, v_o);
-	c = scalar_product(v_o, v_o) - cyld->radius * cyld->radius;
-	if (quadra_solver(a, b, c, &t) && t > ray->t_min && t < ray->t)
+	coefficients.x = scalar_product(v_a, v_a);
+	coefficients.y = 2 * scalar_product(v_a, v_o);
+	coefficients.z = scalar_product(v_o, v_o) - cyld->radius * cyld->radius;
+	if (quadra_solver(&coefficients, &t, ray->t_min) && t > ray->t_min && t < ray->t)
 	{
 		temp = get_inter_point(ray, t);
 		if (!check_sol_tube(cyld, &temp))

@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/20 13:37:45 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 10:40:59 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ double		distance(t_vec3f *a, t_vec3f *b);
 t_vec3f		vec3f_get_dir(t_coord3f *a, t_coord3f *b);
 
 /*--------EQUATION*/
-int			quadra_solver(double a, double b, double c, double *t);
+int			quadra_solver(t_double3 *coeff, double *t, double t_min);
 int			linear_solver(double a, double b, double *t);
 t_vec3f		get_inter_point(t_ray *ray, double t);
 void		display_vector(t_vec3f	*vec);

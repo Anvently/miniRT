@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 11:04:09 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:02:26 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ void	t_object_print(void *object_ptr)
 	printf("Type: %s\n", (char *[3]){"sp", "pl", "cy"}[object->type - SPHERE]);
 	printf("Origin: %.3f, %.3f, %.3f\n",
 		object->origin.x, object->origin.y, object->origin.z);
-	if (object->type == SPHERE || object->type == CYLINDER)
+	if (object->type == SPHERE || object->type == CYLINDER \
+	|| object->type == CONE)
 		printf("Radius: %.3f\n", object->radius);
-	if (object->type == CYLINDER)
+	if (object->type == CYLINDER || object->type == CONE)
 		printf("Height: %.3f\n", object->height);
 	printf("Color: %f, %f, %f\n", object->color.r, object->color.g,
 		object->color.b);

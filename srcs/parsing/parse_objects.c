@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 16:36:13 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 09:57:33 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,16 @@ int	scene_parse_cylinder(t_object *object, int nbr, char **ptr, char *line)
 	return (0);
 }
 
-int	scene_parse_disk(t_object *object, int nbr, char **ptr, char *line)
+int	scene_parse_cone(t_object *object, int nbr, char **ptr, char *line)
 {
 	if (scene_parse_origin(ptr, &object->origin))
-		return (error_parsing("disk origin", nbr, line), 1);
+		return (error_parsing("cone origin", nbr, line), 1);
 	if (scene_parse_orientation(ptr, &object->orientation))
-		return (error_parsing("disk orientation", nbr, line), 1);
+		return (error_parsing("cone orientation", nbr, line), 1);
 	if (scene_parse_double(ptr, &object->radius))
-		return (error_parsing("disk radius", nbr, line), 1);
+		return (error_parsing("cone radius", nbr, line), 1);
+	if (scene_parse_double(ptr, &object->height))
+		return (error_parsing("cone height", nbr, line), 1);
 	if (scene_parse_color(ptr, &object->color))
 		return (error_parsing("disk color", nbr, line), 1);
 	return (0);

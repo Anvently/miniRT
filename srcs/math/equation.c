@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   equation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:18:35 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/20 14:45:41 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 10:08:23 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,29 @@ int	linear_solver(double a, double b, double *t)
 /// @param c the constant term
 /// @param t a pointer to store the smallest positive solution if it exists
 /// @return 0 if there's no solution or both are negative, 1 otherwise
-int	quadra_solver(double a, double b, double c, double *t)
+int	quadra_solver(t_double3 *coeff, double *t, double t_min)
 {
 	double	delta;
 	double	half_b;
 	double	sol1;
 	double	sol2;
 
-	if (a == 0)
-		return (linear_solver(b, c, t));
-	half_b = 0.5f * b / a;
-	c = c / a;
-	delta = half_b * half_b - c;
+	if (coeff->x == 0)
+		return (linear_solver(coeff->y, coeff->z, t));
+	half_b = 0.5f * coeff->y / coeff->x;
+	coeff->z = coeff->z / coeff->x;
+	delta = half_b * half_b - coeff->z;
 	if (delta < 0)
 		return (0);
 	sol1 = - half_b + sqrt(delta);
 	sol2 = - 2 * half_b - sol1;
-	if ( c >= 0 && sol1 >= 0 && sol2 >= 1)
+	if ( coeff->z >= 0 && sol1 >= 0 && sol2 >= t_min)
 		*t = sol2;
-	else if (c >= 0 && sol1 >= 0 && sol2 < 1)
+	else if (coeff->z >= 0 && sol1 >= 0 && sol2 < t_min)
 		*t = sol1;
-	else if (c >= 0 && sol1 < 0)
+	else if (coeff->z >= 0 && sol1 < 0)
 		return (0);
-	else if (c < 0 && sol1 > 0)
+	else if (coeff->z < 0 && sol1 > 0)
 		*t = sol1;
 	return (1);
 }
