@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 16:08:49 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 17:15:06 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,13 @@ typedef enum e_object_type
 	DISK,
 	CONE
 }			t_object_type;
+
+typedef enum e_ray_type
+{
+	CAMERA_RAY,
+	LIGHT_RAY,
+	REFLECT_RAY
+}			t_ray_type;
 
 /// @brief
 /// @param color R,G,B in range [0-1] : 0, 0.5, 1.0
@@ -177,6 +184,7 @@ typedef struct s_ray {
 	t_color3f	l_specular;
 	t_color3f	l_final;
 	int			nbr_bounce;
+	int			type;
 }				t_ray;
 
 void	print_t_double3(t_double3 *vec);

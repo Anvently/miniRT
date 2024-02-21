@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 16:09:53 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 17:33:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_color3f	get_reflect_color(t_data *data, t_ray *previous_ray)
 	t_ray	reflect;
 
 	ft_memset(&reflect, 0, sizeof(t_ray));
+	reflect.type = REFLECT_RAY;
 	// printf("previous ray dir\n");
 	// print_t_double3(&previous_ray->dir);
 	// printf("previous ray normal\n");
@@ -64,7 +65,7 @@ t_color3f	get_reflect_color(t_data *data, t_ray *previous_ray)
 	// printf("reflect ray dir\n");
 	// print_t_double3(&reflect.dir);
 	reflect.nbr_bounce = previous_ray->nbr_bounce + 1;
-	reflect.t_min = 0.01;
+	reflect.t_min = 0.000001;
 	reflect.t = INFINITY;
 	launch_ray(data, &reflect);
 	return (reflect.l_final);
@@ -84,9 +85,9 @@ void	launch_ray(t_data *data, t_ray *ray)
 		if (ray->inter_obj->k_reflexion > 0.0 && ray->nbr_bounce < 3)
 		{
 			l_reflect = get_reflect_color(data, ray);
-			l_reflect = color_ratio(&l_reflect, ray->inter_obj->k_reflexion);
-			ray->l_final = color_ratio(&ray->l_final,
-					1.f - ray->inter_obj->k_reflexion);
+			// l_reflect = color_ratio(&l_reflect, ray->inter_obj->k_reflexion);
+			// ray->l_final = color_ratio(&ray->l_final,
+			// 		1.f - ray->inter_obj->k_reflexion);
 			color_add(&ray->l_final, l_reflect);
 		}
 		color_unsature(&ray->l_final);
@@ -108,6 +109,7 @@ t_ray	generate_ray(t_coord2f *pxl, t_data *data)
 	ray.dir = vec3_sum(&ray.dir, &vpxl);
 	ray.t = INFINITY;
 	ray.t_min = 1.0;
+	ray.type = CAMERA_RAY;
 	normalize_vec(&ray.dir);
 	// if (((int) pxl->x == 0 && (int) pxl->y == data->img_size.y - 1) || ((int) pxl->x == 0 && (int) pxl->y == 0)
 	// 	|| ((int) pxl->x == data->img_size.x - 1 && (int) pxl->y == data->img_size.y - 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_inter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:20:20 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/21 11:09:42 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 17:17:53 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	sphere_normal(t_object *sphere, t_ray *ray)
 void	sphere_intersec(t_object *sphere, t_ray *ray)
 {
 	t_double3	coeff;
-	double	t;
-	t_vec3f	t_r;
+	double		t;
+	t_vec3f		t_r;
 
 	if (sphere->type != SPHERE)
 		return ;
@@ -41,7 +41,7 @@ void	sphere_intersec(t_object *sphere, t_ray *ray)
 	if (quadra_solver(&coeff, &t, ray->t_min) && t > ray->t_min && t < ray->t)
 	{
 		ray->t = t;
-		if (ray->t_min == 1)
+		if (ray->type != LIGHT_RAY)
 			ray->inter_obj = sphere;
 		sphere_normal(sphere, ray);
 	}

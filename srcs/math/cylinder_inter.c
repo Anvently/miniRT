@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_inter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/21 13:38:11 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 17:19:22 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	get_tube_intersec(t_object *cyld, t_ray *ray, t_vec3f *v_a, t_vec3f *v_o)
 		ray->normal = temp;
 		if (scalar_product(&ray->normal, &ray->dir) >= 0)
 			ray->normal = vec3_scale(&ray->normal, -1);
-		if (ray->t_min > -1.f)
+		if (ray->type != LIGHT_RAY)
 			ray->inter_obj = cyld;
 	}
 }
@@ -79,7 +79,7 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 	{
 		ray->t = t_cap;
 		ray->normal = vec3_scale(&cylinder->orientation, -1);
-		if (ray->t_min > 0.f)
+		if (ray->type != LIGHT_RAY)
 			ray->inter_obj = cylinder;
 		normalize_vec(&ray->normal);
 	}
@@ -87,7 +87,7 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 	{
 		ray->t = t_cap;
 		ray->normal = cylinder->orientation;
-		if (ray->t_min > 0.f)
+		if (ray->type != LIGHT_RAY)
 			ray->inter_obj = cylinder;
 		normalize_vec(&ray->normal);
 	}

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:22:55 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 16:09:41 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 17:20:39 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	check_lights(t_data *data, t_ray *ray)
 	ray_to_light.inter_obj = ray->inter_obj;
 	ray_to_light.t_min = 0.0000000001;
 	ray_to_light.old_dir = ray->dir;
+	ray_to_light.type = LIGHT_RAY;
 	node = data->scene.lights;
 	while (node)
 	{
