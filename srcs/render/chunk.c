@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:44:43 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 17:42:14 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 09:29:17 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@ static t_color3f	get_color(t_data *data, t_coord2f *start)
 {
 	t_ray		ray;
 
-	if (start->x == 373 && start->y == 400)
-	{
-		printf("PING\n");
-	}
 	ray = generate_ray(start, data);
 	launch_ray(data, &ray);
 	return (ray.l_final);

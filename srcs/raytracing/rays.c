@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 09:37:59 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 09:38:47 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	launch_ray(t_data *data, t_ray *ray)
 	check_inter(data, ray);
 	if (ray->inter_obj)
 	{
+		ray->inter = get_inter_point(ray, ray->t);
 		ray->l_ambiant = color_product(&ray->inter_obj->color,
 				&data->scene.ambiant_light._ambiant);
 		check_lights(data, ray);
