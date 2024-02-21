@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 17:34:23 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 09:37:59 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	check_inter(t_data *data, t_ray *ray)
 		else if (obj->type == CYLINDER)
 			cylinder_intersec(obj, ray);
 		node = node->next;
+		if (ray->t_min < 1.0 && ray->t != INFINITY)
+			break ;
 	}
 }
 
