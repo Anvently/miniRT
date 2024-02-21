@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 09:52:38 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 11:27:47 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ typedef struct s_ray {
 	double		t;
 	double		theta;
 	double		t_min;
+	double		t_max;
 	t_object	*inter_obj;
 	t_color3f	l_diffuse;
 	t_color3f	l_ambiant;

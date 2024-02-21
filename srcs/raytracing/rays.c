@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 11:04:50 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:16:20 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	check_inter(t_data *data, t_ray *ray)
 	while (node)
 	{
 		obj = (t_object *)node->content;
-		if (ray->inter_obj && ray->inter_obj == obj)
-			return ;
+		//if (ray->inter_obj && ray->inter_obj == obj)
+		//	return ;
 		if (obj->type == PLAN)
 			plane_intersec(obj, ray);
 		else if (obj->type == SPHERE)

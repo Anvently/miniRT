@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:20:20 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/21 10:20:10 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/21 11:09:42 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	sphere_normal(t_object *sphere, t_ray *ray)
 	ray->normal.x /= sphere->radius;
 	ray->normal.y /= sphere->radius;
 	ray->normal.z /= sphere->radius;
+	if (scalar_product(&ray->dir, &ray->normal) >= 0)
+		ray->normal = vec3_scale(&ray->normal, -1);
 }
 
 void	sphere_intersec(t_object *sphere, t_ray *ray)
