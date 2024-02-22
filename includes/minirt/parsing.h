@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 11:46:24 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 13:59:14 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		scene_parse_fov(char **ptr, int *fov);
 int		scene_parse_ratio(char **ptr, double *ratio);
 int		scene_parse_double(char **ptr, double *value);
 int		scene_parse_color(char **ptr, t_color3f *color3f);
+int		scene_parse_path(char **ptr, char **dest);
 
 /* -------------------------------------------------------------------------- */
 /*                                   ERRORS                                   */

@@ -14,16 +14,16 @@ SRCS_FILES	=	main.c error.c \
 				events/events.c events/handlers.c events/handlers2.c \
 				parsing/parsing.c parsing/parse_line.c parsing/parse_objects.c \
 				parsing/parse_value.c parsing/parse_value2.c parsing/normalize.c \
-				parsing/parse_objects2.c \
-				struct/t_scene.c struct/print.c struct/t_object.c \
+				parsing/parse_texture.c parsing/parse_texture2.c \
+				struct/t_scene.c struct/print.c struct/t_object.c struct/t_texture.c \
 				math/geometry_ope.c math/geometry_ope2.c math/cam_rotation.c \
 				math/plane_inter.c math/sphere_inter.c math/matrix2.c\
 				math/cylinder_inter.c math/cylinder_inter2.c math/get_rot_matrices.c \
 				math/cone_inter.c \
 				math/equation.c math/multiple.c math/matrix.c math/rotations.c \
 				raytracing/camera.c raytracing/rays.c raytracing/transform.c \
-				raytracing/light.c \
-				texture/img_texture.c
+				raytracing/light.c raytracing/light2.c \
+				texture/img_texture.c texture/color_get.c texture/color_get2.c
 
 SRCS_TEST = 	math/geometry_ope.c math/geometry_ope2.c \
 				math/plane_inter.c math/sphere_inter.c\

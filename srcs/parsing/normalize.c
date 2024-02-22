@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:20:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 14:31:39 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:45:03 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,6 @@ static	void	normalize_cone(t_object *obj)
 		return ;
 	temp = vec3_scale(&obj->orientation, obj->height);
 	obj->top = vec3_sum(&obj->origin, &temp);
-}
-
-static void	compute_color_constant(t_object *obj)
-{
-	obj->color_ambiant = color_ratio(&obj->color, obj->k_ambiant);
-	obj->color_diffuse = color_ratio(&obj->color, obj->k_diffuse);
-	obj->color_specular = color_ratio(&obj->color, (1.f - obj->k_plastic));
-	color_add(&obj->color_specular,
-		(t_color3f){obj->k_plastic, obj->k_plastic, obj->k_plastic});
-	obj->color_specular = color_ratio(&obj->color_specular, obj->k_specular);
-	// color_unsature(&obj->color_specular);
 }
 
 static void	normalize_objects(t_list *objects)
@@ -54,7 +43,6 @@ static void	normalize_objects(t_list *objects)
 			obj->origin = vec3_diff(&obj->origin, &temp);
 		}
 		normalize_cone(obj);
-		compute_color_constant(obj);
 		node = node->next;
 	}
 }

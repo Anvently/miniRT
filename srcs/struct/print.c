@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 14:56:31 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:18:28 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,28 @@ void	t_light_print(void *light_ptr)
 		light->color.b, light->ratio);
 }
 
+void	t_texture_print(t_texture *texture)
+{
+	printf("Texture type: %s\n",
+		(char *[3]){"S", "D", "I"}[(int)texture->type]);
+	if (texture->type == TEX_IMG)
+		printf("Image path: %s\n", texture->file_path);
+	if (texture->type != TEX_IMG)
+		printf("Color1: %f, %f, %f\n", texture->color1.r, texture->color1.g,
+			texture->color1.b);
+	if (texture->type == TEX_DAM)
+	{
+		printf("Color2: %f, %f, %f\n", texture->color2.r, texture->color2.g,
+			texture->color2.b);
+		printf("Resolution: %d\n", texture->resolution);
+	}
+}
+
+void	t_object_properties_print(t_object *obj)
+{
+	(void)obj;
+}
+
 void	t_object_print(void *object_ptr)
 {
 	t_object	*object;
@@ -49,12 +71,12 @@ void	t_object_print(void *object_ptr)
 		printf("Radius: %.3f\n", object->radius);
 	if (object->type == CYLINDER || object->type == CONE)
 		printf("Height: %.3f\n", object->height);
-	printf("Color: %f, %f, %f\n", object->color.r, object->color.g,
-		object->color.b);
+	t_texture_print(&object->texture);
 	if (object->type != SPHERE)
 		printf("Orientation: %.3f, %.3f, %.3f\n",
 			object->orientation.x, object->orientation.y,
 			object->orientation.z);
+	printf("\n");
 }
 
 void	t_scene_print(t_scene *scene)
@@ -67,7 +89,7 @@ void	t_scene_print(t_scene *scene)
 		scene->ambiant_light.ratio);
 	printf("Lights\n");
 	ft_lstprint(scene->lights, &t_light_print);
-	printf("Objects\n");
+	printf("Objects\n\n");
 	ft_lstprint(scene->objects, &t_object_print);
 	printf("\n");
 }

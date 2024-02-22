@@ -6,11 +6,13 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:01:15 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 11:59:20 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:01:47 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
+#include <minirt/parsing.h>
+#include <minirt/objects.h>
 #include <libft.h>
 
 /// @brief Check if texture given in ```path``` is already opened, and returned
@@ -64,24 +66,28 @@ static int	texture_img_open(t_data *data, t_texture *texture)
 t_texture	*texture_img_get(t_data *data, char *path)
 {
 	t_texture	*texture;
-	t_texture	*texture_node;
+	t_list		*texture_node;
 
-	texture = find_img_texture(data, path);
+	texture = texture_img_find(data, path);
 	if (texture)
+	{
+		free(path);
 		return (texture);
+	}
 	texture = calloc(1, sizeof(t_texture));
 	if (!texture)
-		return (error("initializing texture"), 1);
+		return (error("initializing texture"), NULL);
 	texture_node = ft_lstnew(texture);
 	if (!texture_node)
 	{
 		free(texture);
-		return (error("initializing texture"), 1);
+		return (error("initializing texture"), NULL);
 	}
 	ft_lstadd_back(&data->textures_img, texture_node);
 	texture->file_path = path;
-	if (open_img_texture(data, texture))
-		return (error("initializing texture"), 1);
+	texture->data = data;
+	if (texture_img_open(data, texture))
+		return (error("initializing texture"), NULL);
 	return (texture);
 }
 

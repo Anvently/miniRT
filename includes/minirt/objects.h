@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:15:19 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 12:09:00 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 13:55:35 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_color3f	texture_get_cone_img(void *obj, t_double3 *coord);
 
 void		*t_scene_free(t_scene *scene);
 void		t_object_init(t_object *obj);
+void		t_texture_free(void *texture_ptr);
 
 /* ---------------------------------- PRINT --------------------------------- */
 
