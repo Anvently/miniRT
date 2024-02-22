@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 10:32:58 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/22 12:09:36 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,23 @@ typedef enum e_ray_type
 typedef enum e_texture_type
 {
 	TEX_SOLID,
-	TEX_BMP,
-	TEX_DAM
+	TEX_DAM,
+	TEX_IMG
 }			t_texture_type;
 
 typedef struct s_texture {
 	char		type;
 	char		*file_path;
-	t_color3f	color;
+	void		*img;
+	void		*img_addr;
+	int			len_line;
+	int			bbp;
+	int			endian;
+	int			width;
+	int			height;
+	t_color3f	color1;
+	t_color3f	color2;
+	int			resolution;
 	t_color_get	get_color;
 }				t_texture;
 

@@ -16,10 +16,15 @@ PARSING
 - C [origin] [orientation] [fov]
 - A [ratio] [color]
 - L [origin] [ratio] [color]
-- SP [origin] [diameter] [color] [kr] [ka] [kd] [ks] [p] [r]
-- PL [origin] [orientation] [color] [kr] [ka] [kd] [ks] [p] [r]
-- CY [origin] [orientation] [diameter] [height] [color] [kr] [ka] [kd] [ks] [p] [r]
-- CO [center of base] [orientation] [radius] [height] [color] [kr] [ka] [kd] [ks] [p] [r]
+- SP [origin] [diameter] [texture] [ka] [kd] [ks] [kr]  [p] [r]
+- PL [origin] [orientation] [texture] [ka] [kd] [ks] [kr]  [p] [r]
+- CY [origin] [orientation] [diameter] [height] [texture] [ka] [kd] [ks] [kr]  [p] [r]
+- CO [center of base] [orientation] [radius] [height] [texture] [ka] [kd] [ks] [kr] [p] [r]
+
+texture :
+Solid color : [S:color]
+Dame : [D:color1:color2:resolution], resolution = nbr of vertical cells/unit
+Image : [I:path], can must be within "" if it contains spaces.
 
 kr = reflexion constant (0 <= kr <= 1)
 ka = ambiant light reflexion constant (0 <= ka <= 1)

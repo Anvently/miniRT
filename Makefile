@@ -22,7 +22,8 @@ SRCS_FILES	=	main.c error.c \
 				math/cone_inter.c \
 				math/equation.c math/multiple.c math/matrix.c math/rotations.c \
 				raytracing/camera.c raytracing/rays.c raytracing/transform.c \
-				raytracing/light.c
+				raytracing/light.c \
+				texture/img_texture.c
 
 SRCS_TEST = 	math/geometry_ope.c math/geometry_ope2.c \
 				math/plane_inter.c math/sphere_inter.c\
