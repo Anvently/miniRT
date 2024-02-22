@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/22 11:41:45 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/22 12:09:01 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ t_matrix3f	cam_rotation(t_vec3f *dir);
 t_matrix3f	get_rotation_matrix(t_vec3f *axis, double theta);
 
 /*---------------MAPPING------------------------------*/
-void	get_local_base(t_object *obj);
+void		get_local_base(t_object *obj);
+t_double2	revolution_map(t_object *obj, t_vec3f *p);
+t_double2	plane_map(t_object *plane, t_vec3f *p);
+t_double2	sphere_map(t_object *sph, t_vec3f *p);
 
 #endif

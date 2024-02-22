@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:20:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 14:31:39 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:12:57 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	normalize_objects(t_list *objects)
 	{
 		obj = (t_object *)node->content;
 		normalize_vec(&obj->orientation);
+		get_local_base(obj);
 		if (obj->type == CYLINDER || obj->type == SPHERE)
 			obj->radius /= 2;
 		if (obj->type == CYLINDER)
