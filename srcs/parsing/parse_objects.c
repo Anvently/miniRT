@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 18:24:50 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 11:23:49 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	scene_parse_sphere(t_object *object, int nbr, char **ptr, char *line)
 		return (error_parsing("sphere origin", nbr, line), 1);
 	if (scene_parse_double(ptr, &object->radius))
 		return (error_parsing("sphere diameter", nbr, line), 1);
-	if (scene_parse_color(ptr, &object->color))
-		return (error_parsing("sphere color", nbr, line), 1);
 	return (0);
 }
 
@@ -33,8 +31,6 @@ int	scene_parse_plan(t_object *object, int nbr, char **ptr, char *line)
 		return (error_parsing("plan origin", nbr, line), 1);
 	if (scene_parse_orientation(ptr, &object->orientation))
 		return (error_parsing("plan orientation", nbr, line), 1);
-	if (scene_parse_color(ptr, &object->color))
-		return (error_parsing("plan color", nbr, line), 1);
 	return (0);
 }
 
@@ -48,8 +44,6 @@ int	scene_parse_cylinder(t_object *object, int nbr, char **ptr, char *line)
 		return (error_parsing("cylinder diameter", nbr, line), 1);
 	if (scene_parse_double(ptr, &object->height))
 		return (error_parsing("cylinder height", nbr, line), 1);
-	if (scene_parse_color(ptr, &object->color))
-		return (error_parsing("cylinder color", nbr, line), 1);
 	return (0);
 }
 
@@ -63,16 +57,14 @@ int	scene_parse_cone(t_object *object, int nbr, char **ptr, char *line)
 		return (error_parsing("cone radius", nbr, line), 1);
 	if (scene_parse_double(ptr, &object->height))
 		return (error_parsing("cone height", nbr, line), 1);
-	if (scene_parse_color(ptr, &object->color))
-		return (error_parsing("disk color", nbr, line), 1);
 	return (0);
 }
 
 int	scene_parse_obj_properties(t_object *object, int nbr,
 		char *ptr, char *line)
 {
-	if (*skip_space(&ptr) && scene_parse_texture(&ptr, object))
-		return (error_parsing("object texture", nbr, line), 1);
+	if (*skip_space(&ptr) && scene_parse_texture(&ptr, object, nbr, line))
+		return (1);
 	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_ambiant))
 		return (error_parsing("object ambiant light reflexion",
 				nbr, line), 1);

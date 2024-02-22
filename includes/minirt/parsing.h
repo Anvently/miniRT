@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 18:23:38 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 11:46:24 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,17 @@ int		scene_parse_cylinder(t_object *object, int nbr, char **ptr, char *line);
 int		scene_parse_cone(t_object *object, int nbr, char **ptr, char *line);
 int		scene_parse_obj_properties(t_object *object, int nbr,
 			char *ptr, char *line);
-int		scene_parse_texture(char **ptr, t_object *object);
+
+/* -------------------------------- TEXTURES -------------------------------- */
+
+int		scene_parse_texture(char **ptr, t_object *object, int nbr, char *line);
+int		scene_parse_texture_type(char **ptr, t_object *object);
+int		scene_parse_texture_solid(char **ptr, t_object *object,
+			int nbr, char *line);
+int		scene_parse_texture_dame(char **ptr, t_object *object,
+			int nbr, char *line);
+int		scene_parse_texture_img(char **ptr, t_object *object,
+			int nbr, char *line);
 
 /* --------------------------------- VALUES --------------------------------- */
 
