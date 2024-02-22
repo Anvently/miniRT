@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 11:23:49 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:39:11 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ int	scene_parse_obj_properties(t_object *object, int nbr,
 	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_specular))
 		return (error_parsing("object specular light reflexion",
 				nbr, line), 1);
+	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_reflexion))
+		return (error_parsing("object reflexion constant", nbr, line), 1);
 	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_plastic))
 		return (error_parsing("object plastic reflexion", nbr, line), 1);
 	if (*skip_space(&ptr) && (scene_parse_double(&ptr, &object->k_roughness)
 			|| object->k_roughness < 1.0))
 		return (error_parsing("object roughness", nbr, line), 1);
-	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_reflexion))
-		return (error_parsing("object reflexion constant", nbr, line), 1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:50:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 10:58:39 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:42:21 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	transform_objects(t_data *data, t_matrix3f *matrix)
 		obj->orientation = vec3f_matrix3f(&obj->orientation, matrix);
 		obj->origin = vec3f_matrix3f(&obj->origin, matrix);
 		obj->top = vec3f_matrix3f(&obj->top, matrix);
+		obj->loc_x = vec3f_matrix3f(&obj->loc_x, matrix);
+		obj->loc_y = vec3f_matrix3f(&obj->loc_y, matrix);
 		node = node->next;
 	}
 }
