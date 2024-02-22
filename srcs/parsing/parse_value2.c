@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:27:19 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 11:00:37 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 13:41:38 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,30 @@ int	scene_parse_origin(char **ptr, t_coord3f *origin)
 	while (*it && !ft_isspace(*it))
 		it++;
 	*ptr = it;
+	return (0);
+}
+
+int	scene_parse_path(char **ptr, char **dest)
+{
+	bool	quote;
+	char	*start;
+
+	quote = false;
+	if (**ptr == '"')
+	{
+		quote = true;
+		*ptr = *ptr + 1;
+	}
+	start = *ptr;
+	while (**ptr && ((quote == false && ft_isspace(**ptr) == false)
+			|| (quote == true && **ptr != '"')))
+		*ptr = *ptr + 1;
+	if (*ptr == start)
+		return (1);
+	*dest = ft_substr(start, 0, *ptr - start);
+	if (!*dest)
+		return (error("allocating texture path"), -1);
+	if (**ptr == '"')
+		*ptr = *ptr + 1;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 11:59:04 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 13:48:30 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,29 @@ static void	handle_dame_texture(t_texture *texture, char obj_type)
 
 int	scene_parse_texture_img(char **ptr, t_object *object, int nbr, char *line)
 {
-	char	*path;
+	char		*path;
+	t_texture	*texture;
 
-	if (scene_parse_path(ptr, &path))
+	if (scene_parse_path(ptr, &path) > 0)
 		return (error_parsing("texture image path", nbr, line), 1);
-	object->texture = tex
+	if (path == NULL)
+		return (1);
+	texture = texture_img_get(object->data, path);
+	if (!texture)
+	{
+		free(path);
+		return (1);
+	}
+	object->texture = *texture;
+	if (object->type == SPHERE)
+		texture->get_color = &texture_get_sphere_dame;
+	else if (object->type == PLAN)
+		texture->get_color = &texture_get_plan_dame;
+	else if (object->type == CYLINDER)
+		texture->get_color = &texture_get_cylinder_dame;
+	else if (object->type == CONE)
+		texture->get_color = &texture_get_cone_dame;
+	return (0);
 }
 
 int	scene_parse_texture_dame(char **ptr, t_object *object, int nbr, char *line)

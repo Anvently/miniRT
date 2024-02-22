@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 12:09:36 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/22 14:47:29 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef t_int2			t_coord2;
 typedef t_int3			t_coord3;
 typedef t_double2		t_coord2f;
 typedef t_double3		t_coord3f;
-typedef t_color3f		(*t_color_get)(void *, int, int);
+typedef t_color3f		(*t_color_get)(void *, t_double3 *);
 
 typedef struct s_matrix4f {
 	double		m1[4];
@@ -99,19 +99,20 @@ typedef enum e_texture_type
 }			t_texture_type;
 
 typedef struct s_texture {
-	char		type;
-	char		*file_path;
-	void		*img;
-	void		*img_addr;
-	int			len_line;
-	int			bbp;
-	int			endian;
-	int			width;
-	int			height;
-	t_color3f	color1;
-	t_color3f	color2;
-	int			resolution;
-	t_color_get	get_color;
+	char				type;
+	char				*file_path;
+	void				*img;
+	void				*img_addr;
+	int					len_line;
+	int					bbp;
+	int					endian;
+	int					width;
+	int					height;
+	t_color3f			color1;
+	t_color3f			color2;
+	int					resolution;
+	t_color_get			get_color;
+	struct s_data		*data;
 }				t_texture;
 
 /// @brief
@@ -154,11 +155,12 @@ typedef struct s_camera {
 /// @param objects list of objects
 /// @param lights list of light sources
 typedef struct s_scene {
-	t_camera	camera;
-	t_matrix3f	matrix;
-	t_light		ambiant_light;
-	t_list		*objects;
-	t_list		*lights;
+	t_camera			camera;
+	t_matrix3f			matrix;
+	t_light				ambiant_light;
+	t_list				*objects;
+	t_list				*lights;
+	struct s_data		*data;
 }				t_scene;
 
 /// @brief
@@ -174,25 +176,26 @@ typedef struct s_scene {
 /// @param k_specular specular light reflexion constant (0 <= ks <= 1)
 /// @param k_plastic portion of plastic reflexion on surface (0 <= p <= 1)
 typedef struct s_object {
-	char		type;
-	t_coord3f	origin;
-	t_coord3f	top;
-	double		radius;
-	double		height;
-	t_color3f	color;
-	t_vec3f		orientation;
-	t_vec3f		loc_x;
-	t_vec3f		loc_y;
-	double		k_ambiant;
-	double		k_diffuse;
-	double		k_specular;
-	double		k_plastic;
-	double		k_roughness;
-	double		k_reflexion;
-	t_color3f	color_diffuse;
-	t_color3f	color_ambiant;
-	t_color3f	color_specular;
-	t_texture	texture;
+	char				type;
+	t_coord3f			origin;
+	t_coord3f			top;
+	double				radius;
+	double				height;
+	t_color3f			color;
+	t_vec3f				orientation;
+	t_vec3f				loc_x;
+	t_vec3f				loc_y;
+	double				k_ambiant;
+	double				k_diffuse;
+	double				k_specular;
+	double				k_plastic;
+	double				k_roughness;
+	double				k_reflexion;
+	t_color3f			color_diffuse;
+	t_color3f			color_ambiant;
+	t_color3f			color_specular;
+	t_texture			texture;
+	struct s_data		*data;
 }				t_object;
 
 typedef struct s_ray {
@@ -206,6 +209,7 @@ typedef struct s_ray {
 	double		t_min;
 	double		t_max;
 	t_object	*inter_obj;
+	t_color3f	l_surface;
 	t_color3f	l_diffuse;
 	t_color3f	l_ambiant;
 	t_color3f	l_specular;

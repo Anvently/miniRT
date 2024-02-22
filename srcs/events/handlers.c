@@ -6,12 +6,13 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 12:11:56 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 13:52:12 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
 #include <minirt/calculus.h>
+#include <minirt/objects.h>
 #include <X11/keysym.h>
 #include <X11/Xlib.h>
 #include <pthread.h>
@@ -37,6 +38,7 @@ int	handle_close(t_data *data)
 	data->win = NULL;
 	ft_lstclear(&data->scene.lights, &free);
 	ft_lstclear(&data->scene.objects, &free);
+	ft_lstclear(&data->textures_img, &t_texture_free);
 	exit(0);
 }
 

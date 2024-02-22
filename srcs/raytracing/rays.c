@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 17:33:32 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:44:38 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,17 @@ t_color3f	get_reflect_color(t_data *data, t_ray *previous_ray)
 
 	ft_memset(&reflect, 0, sizeof(t_ray));
 	reflect.type = REFLECT_RAY;
-	// printf("previous ray dir\n");
-	// print_t_double3(&previous_ray->dir);
-	// printf("previous ray normal\n");
-	// print_t_double3(&previous_ray->normal);
-	previous_ray->theta = scalar_product(&previous_ray->dir, &previous_ray->normal);
+	previous_ray->theta = scalar_product(&previous_ray->dir,
+			&previous_ray->normal);
 	previous_ray->theta *= -1.f;
 	reflect.dir.x = previous_ray->dir.x + 2.f * (previous_ray->theta)
-			* previous_ray->normal.x;
+		* previous_ray->normal.x;
 	reflect.dir.y = previous_ray->dir.y + 2.f * (previous_ray->theta)
-			* previous_ray->normal.y;
+		* previous_ray->normal.y;
 	reflect.dir.z = previous_ray->dir.z + 2.f * (previous_ray->theta)
-			* previous_ray->normal.z;
+		* previous_ray->normal.z;
 	reflect.origin = previous_ray->inter;
 	normalize_vec(&reflect.dir);
-	// printf("reflect ray dir\n");
-	// print_t_double3(&reflect.dir);
 	reflect.nbr_bounce = previous_ray->nbr_bounce + 1;
 	reflect.t_min = 0.000001;
 	reflect.t = INFINITY;
@@ -79,8 +74,8 @@ void	launch_ray(t_data *data, t_ray *ray)
 	if (ray->inter_obj)
 	{
 		ray->inter = get_inter_point(ray, ray->t);
-		ray->l_final = color_product(&ray->inter_obj->color,
-				&data->scene.ambiant_light._ambiant);
+		ray->l_surface = (*ray->inter_obj->texture.get_color) \
+			(ray->inter_obj, &ray->inter);
 		check_lights(data, ray);
 		if (ray->inter_obj->k_reflexion > 0.0 && ray->nbr_bounce < 3)
 		{
