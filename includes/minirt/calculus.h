@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/22 12:09:01 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/22 14:10:47 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,10 @@ void		get_local_base(t_object *obj);
 t_double2	revolution_map(t_object *obj, t_vec3f *p);
 t_double2	plane_map(t_object *plane, t_vec3f *p);
 t_double2	sphere_map(t_object *sph, t_vec3f *p);
+
+/*--------------TO MOVE ELSEWHERE (DEBUG)----------------*/
+int	get_pixel_dame_coord(t_double2 *uv, double square_size);
+t_color3f	texture_get_plan_dame(void *obj, t_double3 *coord);
+void	print_t_color3f(t_color3f *color);
 
 #endif

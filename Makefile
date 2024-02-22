@@ -33,7 +33,8 @@ SRCS_TEST = 	math/geometry_ope.c math/geometry_ope2.c \
 				math/equation.c math/multiple.c math/matrix.c math/rotations.c \
 				math/get_rot_matrices.c math/cam_rotation.c math/matrix2.c \
 				struct/print.c \
-				mapping/local_base.c mapping/mapping.c
+				mapping/local_base.c mapping/mapping.c \
+				texture/utils_texture.c texture/color_get.c
 
 OBJS		=	$(addprefix $(OBJS_FOLDER),$(SRCS_FILES:.c=.o))
 SRCS		=	$(addprefix $(SRCS_FOLDER),$(SRCS_FILES))
