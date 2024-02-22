@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:10:46 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/20 13:59:05 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/22 10:54:08 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,8 @@ t_matrix3f	cam_rotation(t_vec3f *dir)
 	t_vec3f		new_dir;
 
 	m_x = get_x_axis_rot(dir);
-	printf("\nfirst rota:\n");
-	display_matrix(&m_x);
 	new_dir = vec3f_matrix3f(dir, &m_x);
 	m_y = get_y_axis_rot(&new_dir);
-	printf("\nsecond rota:\n");
-	display_matrix(&m_y);
 	new_dir = vec3f_matrix3f(&new_dir, &m_y);
 	m = matrix_product(&m_y, &m_x);
 	return (m);

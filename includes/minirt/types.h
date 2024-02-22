@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 14:21:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:47:29 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,8 @@ typedef struct s_object {
 	double				height;
 	t_color3f			color;
 	t_vec3f				orientation;
+	t_vec3f				loc_x;
+	t_vec3f				loc_y;
 	double				k_ambiant;
 	double				k_diffuse;
 	double				k_specular;

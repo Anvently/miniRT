@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:20:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 14:45:03 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:47:42 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	normalize_objects(t_list *objects)
 	{
 		obj = (t_object *)node->content;
 		normalize_vec(&obj->orientation);
+		get_local_base(obj);
 		if (obj->type == CYLINDER || obj->type == SPHERE)
 			obj->radius /= 2;
 		if (obj->type == CYLINDER)
