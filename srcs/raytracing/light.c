@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:22:55 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 14:36:51 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:02:53 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	check_lights(t_data *data, t_ray *ray)
 	t_list		*node;
 	t_light		*light;
 
-	compute_ambiant(ray, &data->scene.ambiant_light.color);
+	compute_ambiant(ray, &data->scene.ambiant_light._ambiant);
 	ft_memset(&ray_to_light, 0, sizeof(t_ray));
+	ray_to_light.l_surface = ray->l_surface;
 	ray_to_light.origin = ray->inter;
 	ray_to_light.normal = ray->normal;
 	ray_to_light.inter_obj = ray->inter_obj;

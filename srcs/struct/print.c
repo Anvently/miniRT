@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 14:18:28 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:45:33 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,12 @@ void	t_texture_print(t_texture *texture)
 
 void	t_object_properties_print(t_object *obj)
 {
-	(void)obj;
+	printf("Ambiant light constant = %f\n", obj->k_ambiant);
+	printf("Diffuse light constant = %f\n", obj->k_diffuse);
+	printf("Specular light constant = %f\n", obj->k_specular);
+	printf("Reflexion constant = %f\n", obj->k_reflexion);
+	printf("Portion of plastic reflexion = %f\n", obj->k_plastic);
+	printf("Roughness constant = %f\n", obj->k_roughness);
 }
 
 void	t_object_print(void *object_ptr)
@@ -76,6 +81,7 @@ void	t_object_print(void *object_ptr)
 		printf("Orientation: %.3f, %.3f, %.3f\n",
 			object->orientation.x, object->orientation.y,
 			object->orientation.z);
+	t_object_properties_print(object);
 	printf("\n");
 }
 

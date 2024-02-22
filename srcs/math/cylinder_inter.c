@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/21 17:19:22 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:37:12 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	get_tube_intersec(t_object *cyld, t_ray *ray, t_vec3f *v_a, t_vec3f *v_o)
 	double	t;
 	t_vec3f	temp;
 
+	t = 0.0;
 	coefficients.x = scalar_product(v_a, v_a);
 	coefficients.y = 2 * scalar_product(v_a, v_o);
 	coefficients.z = scalar_product(v_o, v_o) - cyld->radius * cyld->radius;
@@ -75,6 +76,7 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 {
 	double	t_cap;
 
+	t_cap = 0.0;
 	if (bot_cap_intersec(cylinder, ray, &t_cap) && t_cap < ray->t && t_cap > ray->t_min)
 	{
 		ray->t = t_cap;

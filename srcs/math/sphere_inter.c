@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:20:20 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/21 17:17:53 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:36:16 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	sphere_intersec(t_object *sphere, t_ray *ray)
 	double		t;
 	t_vec3f		t_r;
 
+	t = 0.0;
 	if (sphere->type != SPHERE)
 		return ;
 	t_r = vec3_diff(&ray->origin, &sphere->origin);

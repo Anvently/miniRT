@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 15:14:02 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:10:19 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 int	handle_close(t_data *data)
 {
+	ft_lstclear(&data->textures_img, &t_texture_free);
 	if (data->img)
 		mlx_destroy_image(data->mlx, data->img);
 	if (data->win)
@@ -38,7 +39,6 @@ int	handle_close(t_data *data)
 	data->win = NULL;
 	ft_lstclear(&data->scene.lights, &free);
 	ft_lstclear(&data->scene.objects, &free);
-	ft_lstclear(&data->textures_img, &t_texture_free);
 	exit(0);
 }
 

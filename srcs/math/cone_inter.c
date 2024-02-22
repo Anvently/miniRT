@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:41:22 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/21 17:19:34 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:36:52 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	get_body_intersec(t_object *cone, t_ray *ray, t_double3 *coeff)
 	double	t;
 	t_vec3f	temp;
 
+	t = 0.0;
 	if (quadra_solver(coeff, &t, ray->t_min) && t < ray->t && t > ray->t_min)
 	{
 		temp = get_inter_point(ray, t);
@@ -103,6 +104,7 @@ void	cone_intersec(t_object *cone, t_ray *ray)
 {
 	double	t_cap;
 
+	t_cap = 0.0;
 	if (base_intersect(cone, ray, &t_cap) && t_cap > ray->t_min && t_cap < ray->t)
 	{
 		ray->t = t_cap;

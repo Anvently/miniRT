@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 15:05:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:56:29 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@
 
 static int	display_init(t_data *data)
 {
-	data->mlx = mlx_init();
-	if (!data->mlx)
-		handle_close(data);
 	img_update(data);
 	img_update_chunk(data);
 	data->win = mlx_new_window(data->mlx, data->win_size.x,
@@ -36,6 +33,9 @@ static int	display_init(t_data *data)
 static void	data_init(t_data *data)
 {
 	ft_memset(data, 0, sizeof(t_data));
+	data->mlx = mlx_init();
+	if (!data->mlx)
+		handle_close(data);
 	data->win_size.x = DFT_SIZE_X;
 	data->win_size.y = DFT_SIZE_Y;
 	data->img_chunk_size = DFT_IMG_CHUNK_SIZE;

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:01:15 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 15:28:34 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:09:13 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,11 @@ static t_texture	*texture_img_find(t_data *data, char *path)
 /// or if image could not be opened.
 static int	texture_img_open(t_data *data, t_texture *texture)
 {
-	printf("path=%s\n", texture->file_path);
 	texture->img = mlx_xpm_file_to_image(data->mlx, texture->file_path,
 			&texture->width, &texture->height);
-	printf("ping\n");
 	if (!texture->img)
 		return (error_file("opening texture file", texture->file_path), 1);
-	texture->img_addr = mlx_get_data_addr(texture->img_addr, &texture->bbp,
+	texture->img_addr = mlx_get_data_addr(texture->img, &texture->bbp,
 			&texture->len_line, &texture->endian);
 	if (!texture->img_addr)
 		return (error_file("opening texture file", texture->file_path), 1);

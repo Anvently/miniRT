@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 15:19:06 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 16:08:07 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ int	scene_parse_texture_img(char **ptr, t_object *object, int nbr, char *line)
 		return (1);
 	object->texture = *texture;
 	if (object->type == SPHERE)
-		texture->get_color = &texture_get_sphere_dame;
+		object->texture.get_color = &texture_get_sphere_img;
 	else if (object->type == PLAN)
-		texture->get_color = &texture_get_plan_dame;
+		object->texture.get_color = &texture_get_plan_img;
 	else if (object->type == CYLINDER)
-		texture->get_color = &texture_get_cylinder_dame;
+		object->texture.get_color = &texture_get_cylinder_img;
 	else if (object->type == CONE)
-		texture->get_color = &texture_get_cone_dame;
+		object->texture.get_color = &texture_get_cone_img;
 	return (0);
 }
 

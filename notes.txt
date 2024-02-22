@@ -26,10 +26,10 @@ Solid color : [S:color]
 Dame : [D:color1:color2:resolution], resolution = nbr of vertical cells/unit
 Image : [I:path], can must be within "" if it contains spaces.
 
-kr = reflexion constant (0 <= kr <= 1)
 ka = ambiant light reflexion constant (0 <= ka <= 1)
 kd = diffuse light reflexion constant (0 <= kd <= 1)
 ks = specular light reflexion constant (0 <= ks <= 1)
+kr = reflexion constant (0 <= kr <= 1)
 p = portion of plastic reflexion on surface (0 <= p <= 1)
 r = roughness of material constant (1 <= r <= INFINITY)
 
