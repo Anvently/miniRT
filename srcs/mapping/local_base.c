@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:35:00 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/22 14:36:32 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/22 15:26:12 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ static t_matrix3f	get_z_axis_rot(t_vec3f *dir)
 	uz.x = 0;
 	uz.y = 0;
 	uz.z = 1;
-	theta = -atan2(dir->y, dir->x);
+	if (dir->y == 0 && dir->x == 0)
+		theta = 0;
+	else
+		theta = -atan2(dir->y, dir->x);
 	return (get_rotation_matrix(&uz, theta));
 }
 
@@ -35,12 +38,7 @@ t_matrix3f	get_z_align_rot(t_vec3f *dir)
 	uy.x = 0;
 	uy.y = -1;
 	uy.z = 0;
-	if (dir->x == 0 && dir->z >= 0)
-		theta = 0;
-	else if (dir->x == 0 && dir->z < 0)
-		theta = M_PI;
-	else
-		theta = atan2(dir->x, dir->z);
+	theta = atan2(dir->x, dir->z);
 	return (get_rotation_matrix(&uy, theta));
 }
 
@@ -55,10 +53,8 @@ void	get_local_base(t_object *obj)
 		return ;
 	m_z = get_z_axis_rot(&obj->orientation);
 	new_dir = vec3f_matrix3f(&obj->orientation, &m_z);
-	display_vector(&new_dir);
 	m_y = get_z_align_rot(&new_dir);
 	new_dir = vec3f_matrix3f(&new_dir, &m_y);
-	display_vector(&new_dir);
 	m = matrix_product(&m_y, &m_z);
 	m = matrix_transpose(&m);
 	new_dir.x = 1;
@@ -71,15 +67,4 @@ void	get_local_base(t_object *obj)
 	obj->loc_y = vec3f_matrix3f(&new_dir, &m);
 }
 
-int	main(void)
-{
-	t_object	obj;
 
-	ft_memset(&obj, 0, sizeof(t_object));
-	obj.type = PLAN;
-	obj.orientation.y = 1;
-	get_local_base(&obj);
-	printf("\nLOCAL BASE\n");
-	display_vector(&obj.loc_x);
-	display_vector(&obj.loc_y);
-}

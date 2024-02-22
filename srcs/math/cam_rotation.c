@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:10:46 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/22 10:54:08 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/22 15:01:31 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ t_matrix3f	cam_rotation(t_vec3f *dir)
 	m = matrix_product(&m_y, &m_x);
 	return (m);
 }
+
 
