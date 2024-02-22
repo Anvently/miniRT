@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   local_base.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:35:00 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/22 14:36:32 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/22 14:52:38 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ void	get_local_base(t_object *obj)
 	obj->loc_y = vec3f_matrix3f(&new_dir, &m);
 }
 
-int	main(void)
-{
-	t_object	obj;
+// int	main(void)
+// {
+// 	t_object	obj;
 
-	ft_memset(&obj, 0, sizeof(t_object));
-	obj.type = PLAN;
-	obj.orientation.y = 1;
-	get_local_base(&obj);
-	printf("\nLOCAL BASE\n");
-	display_vector(&obj.loc_x);
-	display_vector(&obj.loc_y);
-}
+// 	ft_memset(&obj, 0, sizeof(t_object));
+// 	obj.type = PLAN;
+// 	obj.orientation.y = 1;
+// 	get_local_base(&obj);
+// 	printf("\nLOCAL BASE\n");
+// 	display_vector(&obj.loc_x);
+// 	display_vector(&obj.loc_y);
+// }

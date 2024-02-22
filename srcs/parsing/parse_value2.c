@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:27:19 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 13:41:38 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:59:08 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,21 @@ static int	parse_color3int(char **ptr, t_color *color)
 		it++;
 	if (ft_strtoi(it, &color->r) || color->r < 0 || color->r > 255)
 		return (1);
-	while (*it && *it != ',' && !ft_isspace(*it))
+	while (ft_isdigit(*it))
 		it++;
 	if (*it++ != ',')
 		return (1);
 	if (ft_isspace(*it) || ft_strtoi(it, &color->g)
 		|| color->g < 0 || color->g > 255)
 		return (1);
-	while (*it && *it != ',' && !ft_isspace(*it))
+	while (ft_isdigit(*it))
 		it++;
 	if (*it++ != ',')
 		return (1);
 	if (ft_isspace(*it) || ft_strtoi(it, &color->b)
 		|| color->b < 0 || color->b > 255)
 		return (1);
-	while (*it && !ft_isspace(*it))
+	while (ft_isdigit(*it))
 		it++;
 	*ptr = it;
 	return (0);

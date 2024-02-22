@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 13:48:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:19:06 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ static void	handle_dame_texture(t_texture *texture, char obj_type)
 		texture->get_color = &texture_get_cone_dame;
 }
 
+static bool	check_texture_format(char *path)
+{
+	if (!ft_strncmp_rev(path, ".xpm", 4))
+		return (true);
+	return (false);
+}
+
 int	scene_parse_texture_img(char **ptr, t_object *object, int nbr, char *line)
 {
 	char		*path;
@@ -42,12 +49,12 @@ int	scene_parse_texture_img(char **ptr, t_object *object, int nbr, char *line)
 		return (error_parsing("texture image path", nbr, line), 1);
 	if (path == NULL)
 		return (1);
+	if (check_texture_format(path) == false)
+		return (free(path),
+			error_parsing("incorrect texture format", nbr, line), 1);
 	texture = texture_img_get(object->data, path);
 	if (!texture)
-	{
-		free(path);
 		return (1);
-	}
 	object->texture = *texture;
 	if (object->type == SPHERE)
 		texture->get_color = &texture_get_sphere_dame;
@@ -64,9 +71,13 @@ int	scene_parse_texture_dame(char **ptr, t_object *object, int nbr, char *line)
 {
 	if (scene_parse_color(ptr, &object->texture.color1))
 		return (error_parsing("texture color1", nbr, line), 1);
+	if (**ptr != ':')
+		return (error_parsing("texture color2", nbr, line), 1);
 	*ptr = *ptr + 1;
 	if (scene_parse_color(ptr, &object->texture.color2))
 		return (error_parsing("texture color2", nbr, line), 1);
+	if (**ptr != ':')
+		return (error_parsing("texture resolution", nbr, line), 1);
 	*ptr = *ptr + 1;
 	if (ft_isdigit(**ptr) == false)
 		return (error_parsing("texture resolution", nbr, line), 1);
@@ -83,22 +94,5 @@ int	scene_parse_texture_solid(char **ptr, t_object *object, int nbr, char *line)
 	if (scene_parse_color(ptr, &object->texture.color1))
 		return (error_parsing("object color", nbr, line), 1);
 	object->texture.get_color = &texture_get_solid_color;
-	return (0);
-}
-
-int	scene_parse_texture_type(char **ptr, t_object *object)
-{
-	skip_space(ptr);
-	if (!**ptr)
-		return (1);
-	if (!ft_strncmp("S:", *ptr, 2))
-		object->texture.type = TEX_SOLID;
-	else if (!ft_strncmp("D:", *ptr, 2))
-		object->texture.type = TEX_DAM;
-	else if (!ft_strncmp("I:", *ptr, 2))
-		object->texture.type = TEX_IMG;
-	else
-		return (1);
-	*ptr = *ptr + 2;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 14:07:00 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:16:14 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,23 @@
 #include <minirt/parsing.h>
 #include <minirt/objects.h>
 #include <minirt/calculus.h>
+
+int	scene_parse_texture_type(char **ptr, t_object *object)
+{
+	skip_space(ptr);
+	if (!**ptr)
+		return (1);
+	if (!ft_strncmp("S:", *ptr, 2))
+		object->texture.type = TEX_SOLID;
+	else if (!ft_strncmp("D:", *ptr, 2))
+		object->texture.type = TEX_DAM;
+	else if (!ft_strncmp("I:", *ptr, 2))
+		object->texture.type = TEX_IMG;
+	else
+		return (1);
+	*ptr = *ptr + 2;
+	return (0);
+}
 
 /// @brief
 /// @param ptr

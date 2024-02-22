@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 13:43:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 13:59:32 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:11:18 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	t_texture_free(void *texture_ptr)
 	free(texture->file_path);
 	if (texture->img)
 		mlx_destroy_image(texture->data->mlx, texture->img);
+	free(texture);
 }

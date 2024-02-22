@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:01:15 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 14:01:47 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:26:17 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static t_texture	*texture_img_find(t_data *data, char *path)
 /// or if image could not be opened.
 static int	texture_img_open(t_data *data, t_texture *texture)
 {
+	printf("path=%s\n", texture->file_path);
 	texture->img = mlx_xpm_file_to_image(data->mlx, texture->file_path,
 			&texture->width, &texture->height);
 	if (!texture->img)
@@ -76,18 +77,18 @@ t_texture	*texture_img_get(t_data *data, char *path)
 	}
 	texture = calloc(1, sizeof(t_texture));
 	if (!texture)
-		return (error("initializing texture"), NULL);
+		return (free(path), error("initializing texture"), NULL);
 	texture_node = ft_lstnew(texture);
 	if (!texture_node)
 	{
 		free(texture);
-		return (error("initializing texture"), NULL);
+		return (free(path), error("initializing texture"), NULL);
 	}
 	ft_lstadd_back(&data->textures_img, texture_node);
 	texture->file_path = path;
 	texture->data = data;
 	if (texture_img_open(data, texture))
-		return (error("initializing texture"), NULL);
+		return (NULL);
 	return (texture);
 }
 
