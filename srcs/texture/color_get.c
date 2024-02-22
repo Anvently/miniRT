@@ -6,18 +6,14 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:36:51 by npirard           #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/02/22 14:02:16 by npirard          ###   ########.fr       */
-=======
-/*   Updated: 2024/02/22 14:24:14 by lmahe            ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/02/22 15:36:05 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <minirt/minirt.h>
 #include <minirt/calculus.h>
 
-<<<<<<< Updated upstream
 t_color3f	texture_get_solid_color(void *obj, t_double3 *coord)
 {
 	(void)coord;
@@ -47,7 +43,6 @@ t_color3f	texture_get_cone_dame(void *obj, t_double3 *coord)
 	(void)coord;
 	return (((t_object *)obj)->texture.color1);
 }
-=======
 // t_color3f	texture_get_solid_color(void *obj, t_double3 *coord)
 // {
 // 	return (((t_object *)obj)->texture.color1);
@@ -84,4 +79,3 @@ t_color3f	texture_get_plan_dame(void *obj, t_double3 *coord)
 // {
 // 	return (((t_object *)obj)->texture.color1);
 // }
->>>>>>> Stashed changes
