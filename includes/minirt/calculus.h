@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculus.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/21 17:15:23 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 11:41:45 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int			quadra_solver(t_double3 *coeff, double *t, double t_min);
 int			linear_solver(double a, double b, double *t);
 t_vec3f		get_inter_point(t_ray *ray, double t);
 void		display_vector(t_vec3f	*vec);
+double		sign(double x);
 /*-----PLANE----------*/
 void		plane_intersec(t_object *plane, t_ray *ray);
 /*-------SPHERE----------------*/
@@ -71,5 +72,8 @@ int			get_inf_multiple(int n, int comp);
 t_matrix3f	rotation_matrix(t_vec3f	*cam_dir);
 t_matrix3f	cam_rotation(t_vec3f *dir);
 t_matrix3f	get_rotation_matrix(t_vec3f *axis, double theta);
+
+/*---------------MAPPING------------------------------*/
+void	get_local_base(t_object *obj);
 
 #endif

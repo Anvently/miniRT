@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 18:21:28 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/22 10:32:58 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,8 @@ typedef struct s_object {
 	double		height;
 	t_color3f	color;
 	t_vec3f		orientation;
+	t_vec3f		loc_x;
+	t_vec3f		loc_y;
 	double		k_ambiant;
 	double		k_diffuse;
 	double		k_specular;
