@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 15:39:11 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 15:20:18 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ int	scene_parse_obj_properties(t_object *object, int nbr,
 				nbr, line), 1);
 	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_reflexion))
 		return (error_parsing("object reflexion constant", nbr, line), 1);
+	if (*skip_space(&ptr) && (scene_parse_double(&ptr, &object->i_refraction)
+			|| object->i_refraction < 0.f))
+		return (error_parsing("object refractive indice", nbr, line), 1);
 	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_plastic))
 		return (error_parsing("object plastic reflexion", nbr, line), 1);
 	if (*skip_space(&ptr) && (scene_parse_double(&ptr, &object->k_roughness)

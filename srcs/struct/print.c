@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 16:45:33 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 15:11:55 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	t_object_properties_print(t_object *obj)
 	printf("Diffuse light constant = %f\n", obj->k_diffuse);
 	printf("Specular light constant = %f\n", obj->k_specular);
 	printf("Reflexion constant = %f\n", obj->k_reflexion);
+	printf("Refractive index = %f\n", obj->i_refraction);
 	printf("Portion of plastic reflexion = %f\n", obj->k_plastic);
 	printf("Roughness constant = %f\n", obj->k_roughness);
 }

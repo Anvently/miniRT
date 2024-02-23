@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapping.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:31:16 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/23 14:17:04 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/23 14:54:28 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_double2	sphere_map(t_object *sph, t_vec3f *p)
 	t_double2	coord;
 
 	angle = fmod(sph->angle, 2 * M_PI);
+	if (angle < 0.f)
+		angle = 2 * M_PI + angle;
 	phi = atan2(p->y - sph->origin.y, p->x - sph->origin.x);
 	phi -= angle;
 	phi = fmod(phi, 2 * M_PI);

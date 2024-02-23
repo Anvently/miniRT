@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:04:22 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 10:02:32 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 15:51:44 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,44 @@ int	scene_parse_light(t_scene *scene, int nbr, char **ptr, char *line)
 	if (scene_parse_color(ptr, &light->color))
 		return (error_parsing("light color", nbr, line), 1);
 	return (0);
+}
+
+bool	parse_cmp(char *ref, char **ptr)
+{
+	size_t	len_ref;
+
+	len_ref = ft_strlen(ref);
+	if (!ft_strncmp(ref, *ptr, len_ref))
+	{
+		*ptr = *ptr + len_ref;
+		return (true);
+	}
+	return (false);
+}
+
+int	scene_parse_obj_entry(t_object *obj, char **ptr, int nbr, char *line)
+{
+	while (**ptr)
+	{
+		if (*skip_space(ptr) == '\0')
+			break ;
+		if (parse_cmp("origin:", ptr) && scene_parse_origin(ptr, &obj->origin))
+			return (error_parsing("object origin", nbr, line), 1);
+		else if (parse_cmp("orientation:", ptr)
+			&& scene_parse_orientation(ptr, &obj->orientation))
+			return (error_parsing("object orientation", nbr, line), 1);
+		else if (parse_cmp("diameter:", ptr)
+			&& (scene_parse_double(ptr, &obj->radius) || obj->radius < 0.f))
+			return (error_parsing("object diameter", nbr, line), 1);
+		else if (parse_cmp("height:", ptr)
+			&& (scene_parse_double(ptr, &obj->height) || obj->height < 0.f))
+			return (error_parsing("object height", nbr, line), 1);
+		else if (parse_cmp("texture:", ptr)
+			&& scene_parse_texture(ptr, obj, nbr, line))
+			return (1);
+		else if (scene_parse_obj_properties(obj, nbr, ptr, line))
+			return (1);
+	}
 }
 
 int	scene_parse_object(t_scene *scene, int nbr, char *line)
