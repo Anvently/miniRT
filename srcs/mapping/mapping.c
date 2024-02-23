@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapping.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:31:16 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/23 10:26:59 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/23 11:00:37 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_double2	sphere_map(t_object *sph, t_vec3f *p)
 	phi = atan2(p->y - sph->origin.y, p->x - sph->origin.x);
 	theta = acos((p->z - sph->origin.z) / sph->radius);
 
-	coord.x = 0.5  - phi / (2 * M_PI);
+	coord.x = 0.5 - phi / (2 * M_PI);
 	coord.y = 1 - theta / M_PI;
 	return (coord);
 }
