@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 13:49:41 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/23 09:37:11 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/23 10:24:20 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include <minirt/calculus.h>
 #include <math.h>
 
-int	get_pixel_dame_coord(t_double2 *uv, double square_size)
+int	get_pixel_dame(t_double2 *uv, double square_size)
 {
 	double	temp;
-	int		pixel;
+	int		pixel = 0;
 
 	pixel = (1 - sign(uv->x)) * 0.5 + (1 - sign(uv->y)) * 0.5;
 	temp = square_size;
