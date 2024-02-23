@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 14:47:29 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 10:56:19 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ typedef struct s_object {
 	t_vec3f				orientation;
 	t_vec3f				loc_x;
 	t_vec3f				loc_y;
+	t_vec3f				loc_z;
 	double				k_ambiant;
 	double				k_diffuse;
 	double				k_specular;

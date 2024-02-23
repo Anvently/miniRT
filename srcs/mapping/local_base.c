@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:35:00 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/22 15:28:39 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/23 10:56:32 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ t_matrix3f	get_z_align_rot(t_vec3f *dir)
 	return (get_rotation_matrix(&uy, theta));
 }
 
+void	get_sphere_base(t_object *obj)
+{
+	obj->loc_x.x = 1;
+	obj->loc_y.y = 1;
+	obj->loc_z.z = 1;
+}
+
 void	get_local_base(t_object *obj)
 {
 	t_matrix3f	m_z;
@@ -50,7 +57,7 @@ void	get_local_base(t_object *obj)
 	t_vec3f		new_dir;
 
 	if (obj->type == SPHERE)
-		return ;
+		get_sphere_base(obj);
 	m_z = get_z_axis_rot(&obj->orientation);
 	new_dir = vec3f_matrix3f(&obj->orientation, &m_z);
 	m_y = get_z_align_rot(&new_dir);
