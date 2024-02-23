@@ -1,0 +1,12 @@
+- la refraction semble ok
+- grosse modifs sur le parsing :
+	- chaque valeur doit etre precedee d'un mot cle qui la decrit
+		ex : pl orientation:-1,1,0.5 texture:S:10,10,255 ka:1.0 sr:2
+	- l'ordre dans lequel sont donnes les parametres n'a pas d'importance
+	- aucun parametre n'est obligatoire
+		- les objets sont initialises avec des valeurs par defaut
+	- ajout d'un parametre id pour identifier les objets
+		- si id n'est pas donne ou id==0, id est genere aleatoirement (avec srand)
+
+Quelques problemes :
+	- l'interieur des cones a l'air de recevoir la lumiere diffuse

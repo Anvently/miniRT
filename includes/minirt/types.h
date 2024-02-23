@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 13:44:54 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:51:57 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ typedef enum e_object_type
 	SPHERE,
 	PLAN,
 	CYLINDER,
-	DISK,
 	CONE
 }			t_object_type;
 
@@ -177,6 +176,7 @@ typedef struct s_scene {
 /// @param k_specular specular light reflexion constant (0 <= ks <= 1)
 /// @param k_plastic portion of plastic reflexion on surface (0 <= p <= 1)
 typedef struct s_object {
+	int					id;
 	char				type;
 	t_coord3f			origin;
 	t_coord3f			top;

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 15:16:14 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:30:06 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ int	scene_parse_texture_type(char **ptr, t_object *object)
 	skip_space(ptr);
 	if (!**ptr)
 		return (1);
-	if (!ft_strncmp("S:", *ptr, 2))
+	if (parse_cmp("S:", ptr))
 		object->texture.type = TEX_SOLID;
-	else if (!ft_strncmp("D:", *ptr, 2))
+	else if (parse_cmp("D:", ptr))
 		object->texture.type = TEX_DAM;
-	else if (!ft_strncmp("I:", *ptr, 2))
+	else if (parse_cmp("I:", ptr))
 		object->texture.type = TEX_IMG;
 	else
 		return (1);
-	*ptr = *ptr + 2;
 	return (0);
 }
 
@@ -42,7 +41,7 @@ int	scene_parse_texture_type(char **ptr, t_object *object)
 int	scene_parse_texture(char **ptr, t_object *object, int nbr, char *line)
 {
 	if (scene_parse_texture_type(ptr, object))
-		return (error_parsing("object texture type", nbr, line), 1);
+		return (error_parsing("object texture type", nbr, line, NULL), 1);
 	if ((object->texture.type == TEX_SOLID
 			&& scene_parse_texture_solid(ptr, object, nbr, line))
 		|| (object->texture.type == TEX_DAM

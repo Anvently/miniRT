@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 16:08:07 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:30:31 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int	scene_parse_texture_img(char **ptr, t_object *object, int nbr, char *line)
 	t_texture	*texture;
 
 	if (scene_parse_path(ptr, &path) > 0)
-		return (error_parsing("texture image path", nbr, line), 1);
+		return (error_parsing("texture image path", nbr, line, NULL), 1);
 	if (path == NULL)
 		return (1);
 	if (check_texture_format(path) == false)
 		return (free(path),
-			error_parsing("incorrect texture format", nbr, line), 1);
+			error_parsing("incorrect texture format", nbr, line, NULL), 1);
 	texture = texture_img_get(object->data, path);
 	if (!texture)
 		return (1);
@@ -70,19 +70,19 @@ int	scene_parse_texture_img(char **ptr, t_object *object, int nbr, char *line)
 int	scene_parse_texture_dame(char **ptr, t_object *object, int nbr, char *line)
 {
 	if (scene_parse_color(ptr, &object->texture.color1))
-		return (error_parsing("texture color1", nbr, line), 1);
+		return (error_parsing("texture color1", nbr, line, NULL), 1);
 	if (**ptr != ':')
-		return (error_parsing("texture color2", nbr, line), 1);
+		return (error_parsing("texture color2", nbr, line, NULL), 1);
 	*ptr = *ptr + 1;
 	if (scene_parse_color(ptr, &object->texture.color2))
-		return (error_parsing("texture color2", nbr, line), 1);
+		return (error_parsing("texture color2", nbr, line, NULL), 1);
 	if (**ptr != ':')
-		return (error_parsing("texture resolution", nbr, line), 1);
+		return (error_parsing("texture resolution", nbr, line, NULL), 1);
 	*ptr = *ptr + 1;
 	if (ft_isdigit(**ptr) == false)
-		return (error_parsing("texture resolution", nbr, line), 1);
+		return (error_parsing("texture resolution", nbr, line, NULL), 1);
 	if (ft_strtoi(*ptr, &object->texture.resolution))
-		return (error_parsing("texture resolution", nbr, line), 1);
+		return (error_parsing("texture resolution", nbr, line, NULL), 1);
 	while (ft_isspace(**ptr) == false && **ptr)
 		*ptr = *ptr + 1;
 	handle_dame_texture(&object->texture, object->type);
@@ -92,7 +92,7 @@ int	scene_parse_texture_dame(char **ptr, t_object *object, int nbr, char *line)
 int	scene_parse_texture_solid(char **ptr, t_object *object, int nbr, char *line)
 {
 	if (scene_parse_color(ptr, &object->texture.color1))
-		return (error_parsing("object color", nbr, line), 1);
+		return (error_parsing("object color", nbr, line, NULL), 1);
 	object->texture.get_color = &texture_get_solid_color;
 	return (0);
 }

@@ -1,0 +1,708 @@
+diff --git a/.gitignore b/.gitignore
+index e68b6e3..fa2f58d 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -7,3 +7,4 @@ libmlx/*.a
+ .vscode/
+ /main.c
+ /a.out
++*.xpm
+\ No newline at end of file
+diff --git a/includes/minirt/minirt.h b/includes/minirt/minirt.h
+index 34050b2..85feeb2 100644
+--- a/includes/minirt/minirt.h
++++ b/includes/minirt/minirt.h
+@@ -6,7 +6,7 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/23 13:37:23 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 16:42:27 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+diff --git a/includes/minirt/parsing.h b/includes/minirt/parsing.h
+index d4a4c2a..e3dd952 100644
+--- a/includes/minirt/parsing.h
++++ b/includes/minirt/parsing.h
+@@ -6,7 +6,7 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/22 13:59:14 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 16:48:11 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -20,6 +20,7 @@
+ int		scene_open(char *path, t_scene *scene);
+ void	normalize_scene(t_scene *scene);
+ char	*skip_space(char **ptr);
++bool	parse_cmp(char *ref, char **ptr);
+ 
+ int		scene_parse_line(t_scene *scene, char *line);
+ int		scene_parse_ambiant(t_scene *scene, int nbr, char **ptr, char *line);
+@@ -29,13 +30,11 @@ int		scene_parse_camera(t_scene *scene, int nbr, char **ptr, char *line);
+ /* --------------------------------- OBJECTS -------------------------------- */
+ 
+ int		scene_parse_object(t_scene *scene, int nbr, char *line);
+-int		scene_parse_sphere(t_object *object, int nbr, char **ptr, char *line);
+-int		scene_parse_plan(t_object *object, int nbr, char **ptr, char *line);
+-int		scene_parse_cylinder(t_object *object, int nbr, char **ptr, char *line);
+-int		scene_parse_cone(t_object *object, int nbr, char **ptr, char *line);
++int		scene_parse_obj_entries(t_object *obj, char **ptr, int nbr, char *line);
+ int		scene_parse_obj_properties(t_object *object, int nbr,
+-			char *ptr, char *line);
+-
++			char **ptr, char *line);
++int		scene_parse_obj_properties2(t_object *object, int nbr,
++			char **ptr, char *line);
+ /* -------------------------------- TEXTURES -------------------------------- */
+ 
+ int		scene_parse_texture(char **ptr, t_object *object, int nbr, char *line);
+@@ -55,6 +54,7 @@ int		scene_parse_orientation(char **ptr, t_vec3f *orientation);
+ int		scene_parse_fov(char **ptr, int *fov);
+ int		scene_parse_ratio(char **ptr, double *ratio);
+ int		scene_parse_double(char **ptr, double *value);
++int		scene_parse_int(char **ptr, int *value);
+ int		scene_parse_color(char **ptr, t_color3f *color3f);
+ int		scene_parse_path(char **ptr, char **dest);
+ 
+@@ -63,6 +63,6 @@ int		scene_parse_path(char **ptr, char **dest);
+ /* -------------------------------------------------------------------------- */
+ 
+ void	error_file(char *context, char *path);
+-void	error_parsing(char *context, int nbr, char *line);
++void	error_parsing(char *context, int nbr, char *line, char *pos);
+ 
+ #endif
+diff --git a/includes/minirt/types.h b/includes/minirt/types.h
+index 637dd08..daf5610 100644
+--- a/includes/minirt/types.h
++++ b/includes/minirt/types.h
+@@ -6,7 +6,7 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/23 13:44:54 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 16:51:57 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -80,7 +80,6 @@ typedef enum e_object_type
+ 	SPHERE,
+ 	PLAN,
+ 	CYLINDER,
+-	DISK,
+ 	CONE
+ }			t_object_type;
+ 
+@@ -177,6 +176,7 @@ typedef struct s_scene {
+ /// @param k_specular specular light reflexion constant (0 <= ks <= 1)
+ /// @param k_plastic portion of plastic reflexion on surface (0 <= p <= 1)
+ typedef struct s_object {
++	int					id;
+ 	char				type;
+ 	t_coord3f			origin;
+ 	t_coord3f			top;
+diff --git a/scene.rt b/scene.rt
+index 9b6a1f2..bb10a99 100644
+--- a/scene.rt
++++ b/scene.rt
+@@ -1,13 +1,12 @@
+ A 0.5 255,255,255
+ C -2,-2,-2 1.0,1.0,1.0 70
+-
+-
+ L -2,-2,-2 1.0 255,255,255
+ 
+-sp 3.5,0,0 1 S:50,50,50 0.5 0.1 0.2 0.5 1.1 1.0 1
+-sp 1.5,0,0 1 D:0,0,0:255,255,255:20 1.0 1.0 0.2 0.0 1.0 0.5 2
+-//cy 5,0,0 1,-0.5,0 1 5 I:earth.xpm 1.0 1.0 0.2 0 1.0 0.5 2
+-sp 1.5,0.5,0 1 I:earth.xpm 1.0 1.0 0.5 0.0 1.0 1.0 1
+-co 5,0,0 1,-0.5,0 1 5 I:earth.xpm 1.0 1.0 0.2 0 1.0 0.5 2
++sp origin:3.5,0,0 diameter:1 texture:S:50,50,50 ka:0.5 kd:0.1 ks:0.2 rf:0.5 ri:1.1 sp:1.0 sr:1
++sp origin:1.5,0,0 diameter:1 texture:D:0,0,0:255,255,255:20 ka:1.0 kd:1.0 ks:0.2 rf:0.0 ri:1.0 sp:0.5 sr:2
++//cy origin:5,0,0 orientation:1,-0.5,0 diameter:1 height:5 texture:I:earth.xpm ka:1.0 kd:1.0 ks:0.2 rf:0 ri:1.0 sp:0.5 sr:2
++sp origin:1.5,0.5,0 diameter:1 texture:I:earth.xpm ka:1.0 kd:1.0 ks:0.5 rf:0.0 ri:1.0 sp:1.0 sr:1
++co origin:5,0,0 orientation:0,0,0 diameter:1 height:5 texture:I:earth.xpm ka:1.0 kd:1.0 ks:0.2 rf:0 ri:1.0 sp:0.5 sr:2 id:10
++sp
+ 
+-pl -4,0,0 -0.7,0.2,0 D:0,0,0:255,255,255:2 0.5 0.0 0.2 0.6 1.2 0.5 2
++pl origin:-4,0,0 orientation:-0.7,0.2,0 texture:D:0,0,0:255,255,255:2 ka:0.5 kd:0.0 ks:0.2 rf:0.6 ri:1.2 sp:0.5 sr:2
+diff --git a/srcs/error.c b/srcs/error.c
+index 347a382..2008a91 100644
+--- a/srcs/error.c
++++ b/srcs/error.c
+@@ -6,7 +6,7 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/12 16:36:00 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/13 16:33:42 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 16:37:19 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -41,7 +41,15 @@ void	error_file(char *context, char *path)
+ 	ft_putstr_fd("\n", 2);
+ }
+ 
+-void	error_parsing(char *context, int nbr, char *line)
++static void	ft_putword(char *str)
++{
++	write(2, "`", 1);
++	while (*str && ft_isspace(*str) == false)
++		write(2, str++, 1);
++	write(2, "'\n", 2);
++}
++
++void	error_parsing(char *context, int nbr, char *line, char *pos)
+ {
+ 	ft_putstr_fd("error parsing ", 2);
+ 	if (context)
+@@ -50,8 +58,13 @@ void	error_parsing(char *context, int nbr, char *line)
+ 	{
+ 		ft_putstr_fd(" at line ", 2);
+ 		ft_putnbr_fd(nbr, 2);
++		if (pos)
++			ft_putstr_fd(" near", 2);
+ 		ft_putstr_fd(" : ", 2);
+-		ft_putstr_fd(line, 2);
++		if (!pos)
++			ft_putstr_fd(line, 2);
++		else
++			ft_putword(pos);
+ 	}
+ 	else
+ 		ft_putstr_fd("\n", 2);
+diff --git a/srcs/main.c b/srcs/main.c
+index f73ec42..55d0547 100644
+--- a/srcs/main.c
++++ b/srcs/main.c
+@@ -6,7 +6,7 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/23 13:37:47 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 17:13:15 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+diff --git a/srcs/parsing/parse_line.c b/srcs/parsing/parse_line.c
+index 3b65c73..72b52a6 100644
+--- a/srcs/parsing/parse_line.c
++++ b/srcs/parsing/parse_line.c
+@@ -6,7 +6,7 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/12 17:04:22 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/23 15:51:44 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 16:29:56 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -18,20 +18,20 @@
+ int	scene_parse_camera(t_scene *scene, int nbr, char **ptr, char *line)
+ {
+ 	if (scene_parse_origin(ptr, &scene->camera.origin))
+-		return (error_parsing("camera origin", nbr, line), 1);
++		return (error_parsing("camera origin", nbr, line, NULL), 1);
+ 	if (scene_parse_orientation(ptr, &scene->camera.dir))
+-		return (error_parsing("camera orientation", nbr, line), 1);
++		return (error_parsing("camera orientation", nbr, line, NULL), 1);
+ 	if (scene_parse_fov(ptr, &scene->camera.fov))
+-		return (error_parsing("camera fov", nbr, line), 1);
++		return (error_parsing("camera fov", nbr, line, NULL), 1);
+ 	return (0);
+ }
+ 
+ int	scene_parse_ambiant(t_scene *scene, int nbr, char **ptr, char *line)
+ {
+ 	if (scene_parse_ratio(ptr, &scene->ambiant_light.ratio))
+-		return (error_parsing("ambiant light ratio", nbr, line), 1);
++		return (error_parsing("ambiant light ratio", nbr, line, NULL), 1);
+ 	if (scene_parse_color(ptr, &scene->ambiant_light.color))
+-		return (error_parsing("ambiant light color", nbr, line), 1);
++		return (error_parsing("ambiant light color", nbr, line, NULL), 1);
+ 	return (0);
+ }
+ 
+@@ -51,11 +51,11 @@ int	scene_parse_light(t_scene *scene, int nbr, char **ptr, char *line)
+ 	}
+ 	ft_lstadd_back(&scene->lights, light_node);
+ 	if (scene_parse_origin(ptr, &light->origin))
+-		return (error_parsing("light origin", nbr, line), 1);
++		return (error_parsing("light origin", nbr, line, NULL), 1);
+ 	if (scene_parse_ratio(ptr, &light->ratio))
+-		return (error_parsing("light ratio", nbr, line), 1);
++		return (error_parsing("light ratio", nbr, line, NULL), 1);
+ 	if (scene_parse_color(ptr, &light->color))
+-		return (error_parsing("light color", nbr, line), 1);
++		return (error_parsing("light color", nbr, line, NULL), 1);
+ 	return (0);
+ }
+ 
+@@ -72,59 +72,6 @@ bool	parse_cmp(char *ref, char **ptr)
+ 	return (false);
+ }
+ 
+-int	scene_parse_obj_entry(t_object *obj, char **ptr, int nbr, char *line)
+-{
+-	while (**ptr)
+-	{
+-		if (*skip_space(ptr) == '\0')
+-			break ;
+-		if (parse_cmp("origin:", ptr) && scene_parse_origin(ptr, &obj->origin))
+-			return (error_parsing("object origin", nbr, line), 1);
+-		else if (parse_cmp("orientation:", ptr)
+-			&& scene_parse_orientation(ptr, &obj->orientation))
+-			return (error_parsing("object orientation", nbr, line), 1);
+-		else if (parse_cmp("diameter:", ptr)
+-			&& (scene_parse_double(ptr, &obj->radius) || obj->radius < 0.f))
+-			return (error_parsing("object diameter", nbr, line), 1);
+-		else if (parse_cmp("height:", ptr)
+-			&& (scene_parse_double(ptr, &obj->height) || obj->height < 0.f))
+-			return (error_parsing("object height", nbr, line), 1);
+-		else if (parse_cmp("texture:", ptr)
+-			&& scene_parse_texture(ptr, obj, nbr, line))
+-			return (1);
+-		else if (scene_parse_obj_properties(obj, nbr, ptr, line))
+-			return (1);
+-	}
+-}
+-
+-int	scene_parse_object(t_scene *scene, int nbr, char *line)
+-{
+-	t_list		*object_node;
+-	t_object	*object;
+-	char		*ptr;
+-
+-	object = ft_calloc(1, sizeof(t_object));
+-	if (!object)
+-		return (error("parsing object"), 1);
+-	object_node = ft_lstnew(object);
+-	if (!object_node)
+-		return (free(object), error("parsing object"), 1);
+-	ft_lstadd_back(&scene->objects, object_node);
+-	t_object_init(object);
+-	ptr = line;
+-	object->data = scene->data;
+-	scene_parse_type(&ptr, &object->type);
+-	if ((object->type == SPHERE && scene_parse_sphere(object, nbr, &ptr, line))
+-		|| (object->type == CYLINDER
+-			&& scene_parse_cylinder(object, nbr, &ptr, line))
+-		|| (object->type == PLAN && scene_parse_plan(object, nbr, &ptr, line))
+-		|| (object->type == CONE && scene_parse_cone(object, nbr, &ptr, line)))
+-		return (1);
+-	if (scene_parse_obj_properties(object, nbr, ptr, line))
+-		return (1);
+-	return (0);
+-}
+-
+ int	scene_parse_line(t_scene *scene, char *line)
+ {
+ 	char		*ptr;
+@@ -133,14 +80,12 @@ int	scene_parse_line(t_scene *scene, char *line)
+ 
+ 	nbr++;
+ 	ptr = line;
+-	while (ft_isspace(*ptr))
+-		ptr++;
+-	if (!*ptr)
++	if (*skip_space(&ptr) == '\0')
+ 		return (0);
+-	if (!ft_strncmp(ptr, "//", 2))
++	if (parse_cmp("//", &ptr))
+ 		return (0);
+ 	if (scene_parse_type(&ptr, &type))
+-		return (error_parsing("object type", nbr, line), 1);
++		return (error_parsing("object type", nbr, line, NULL), 1);
+ 	if (type == CAMERA && scene_parse_camera(scene, nbr, &ptr, line))
+ 		return (1);
+ 	else if (type == AMBIANT && scene_parse_ambiant(scene, nbr, &ptr, line))
+diff --git a/srcs/parsing/parse_objects.c b/srcs/parsing/parse_objects.c
+index 46441dd..c37e1ea 100644
+--- a/srcs/parsing/parse_objects.c
++++ b/srcs/parsing/parse_objects.c
+@@ -6,7 +6,7 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/23 15:20:18 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 17:04:33 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -16,73 +16,95 @@
+ #include <minirt/objects.h>
+ #include <minirt/calculus.h>
+ 
+-int	scene_parse_sphere(t_object *object, int nbr, char **ptr, char *line)
++int	scene_parse_object(t_scene *scene, int nbr, char *line)
+ {
+-	if (scene_parse_origin(ptr, &object->origin))
+-		return (error_parsing("sphere origin", nbr, line), 1);
+-	if (scene_parse_double(ptr, &object->radius))
+-		return (error_parsing("sphere diameter", nbr, line), 1);
+-	return (0);
+-}
++	t_list		*object_node;
++	t_object	*object;
++	char		*ptr;
+ 
+-int	scene_parse_plan(t_object *object, int nbr, char **ptr, char *line)
+-{
+-	if (scene_parse_origin(ptr, &object->origin))
+-		return (error_parsing("plan origin", nbr, line), 1);
+-	if (scene_parse_orientation(ptr, &object->orientation))
+-		return (error_parsing("plan orientation", nbr, line), 1);
+-	return (0);
+-}
+-
+-int	scene_parse_cylinder(t_object *object, int nbr, char **ptr, char *line)
+-{
+-	if (scene_parse_origin(ptr, &object->origin))
+-		return (error_parsing("cylinder origin", nbr, line), 1);
+-	if (scene_parse_orientation(ptr, &object->orientation))
+-		return (error_parsing("cylinder orientation", nbr, line), 1);
+-	if (scene_parse_double(ptr, &object->radius))
+-		return (error_parsing("cylinder diameter", nbr, line), 1);
+-	if (scene_parse_double(ptr, &object->height))
+-		return (error_parsing("cylinder height", nbr, line), 1);
++	object = ft_calloc(1, sizeof(t_object));
++	if (!object)
++		return (error("parsing object"), 1);
++	object_node = ft_lstnew(object);
++	if (!object_node)
++		return (free(object), error("parsing object"), 1);
++	ft_lstadd_back(&scene->objects, object_node);
++	t_object_init(object);
++	ptr = line;
++	object->data = scene->data;
++	scene_parse_type(&ptr, &object->type);
++	if (scene_parse_obj_entries(object, &ptr, nbr, line))
++		return (1);
+ 	return (0);
+ }
+ 
+-int	scene_parse_cone(t_object *object, int nbr, char **ptr, char *line)
++int	scene_parse_obj_entries(t_object *obj, char **ptr, int nbr, char *line)
+ {
+-	if (scene_parse_origin(ptr, &object->origin))
+-		return (error_parsing("cone origin", nbr, line), 1);
+-	if (scene_parse_orientation(ptr, &object->orientation))
+-		return (error_parsing("cone orientation", nbr, line), 1);
+-	if (scene_parse_double(ptr, &object->radius))
+-		return (error_parsing("cone radius", nbr, line), 1);
+-	if (scene_parse_double(ptr, &object->height))
+-		return (error_parsing("cone height", nbr, line), 1);
++	while (**ptr)
++	{
++		if (*skip_space(ptr) == '\0')
++			break ;
++		if (parse_cmp("id:", ptr) && scene_parse_int(ptr, &obj->id))
++			return (error_parsing("object id", nbr, line, NULL), 1);
++		else if (parse_cmp("origin:", ptr)
++			&& scene_parse_origin(ptr, &obj->origin))
++			return (error_parsing("object origin", nbr, line, NULL), 1);
++		else if (parse_cmp("orientation:", ptr)
++			&& scene_parse_orientation(ptr, &obj->orientation))
++			return (error_parsing("object orientation", nbr, line, NULL), 1);
++		else if (parse_cmp("diameter:", ptr)
++			&& (scene_parse_double(ptr, &obj->radius) || obj->radius < 0.f))
++			return (error_parsing("object diameter", nbr, line, NULL), 1);
++		else if (parse_cmp("height:", ptr)
++			&& (scene_parse_double(ptr, &obj->height) || obj->height < 0.f))
++			return (error_parsing("object height", nbr, line, NULL), 1);
++		else if (parse_cmp("texture:", ptr)
++			&& scene_parse_texture(ptr, obj, nbr, line))
++			return (1);
++		else if (scene_parse_obj_properties(obj, nbr, ptr, line))
++			return (1);
++	}
+ 	return (0);
+ }
+ 
+ int	scene_parse_obj_properties(t_object *object, int nbr,
+-		char *ptr, char *line)
++		char **ptr, char *line)
+ {
+-	if (*skip_space(&ptr) && scene_parse_texture(&ptr, object, nbr, line))
+-		return (1);
+-	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_ambiant))
++	if (parse_cmp("ka:", ptr)
++		&& scene_parse_ratio(ptr, &object->k_ambiant))
+ 		return (error_parsing("object ambiant light reflexion",
+-				nbr, line), 1);
+-	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_diffuse))
++				nbr, line, NULL), 1);
++	else if (parse_cmp("kd:", ptr)
++		&& scene_parse_ratio(ptr, &object->k_diffuse))
+ 		return (error_parsing("object diffuse light reflexion",
+-				nbr, line), 1);
+-	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_specular))
++				nbr, line, NULL), 1);
++	else if (parse_cmp("ks:", ptr)
++		&& scene_parse_ratio(ptr, &object->k_specular))
+ 		return (error_parsing("object specular light reflexion",
+-				nbr, line), 1);
+-	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_reflexion))
+-		return (error_parsing("object reflexion constant", nbr, line), 1);
+-	if (*skip_space(&ptr) && (scene_parse_double(&ptr, &object->i_refraction)
++				nbr, line, NULL), 1);
++	else if (scene_parse_obj_properties2(object, nbr, ptr, line))
++		return (1);
++	return (0);
++}
++
++int	scene_parse_obj_properties2(t_object *object, int nbr,
++		char **ptr, char *line)
++{
++	if (parse_cmp("rf:", ptr)
++		&& scene_parse_ratio(ptr, &object->k_reflexion))
++		return (error_parsing("object reflexion constant", nbr, line, NULL), 1);
++	else if (parse_cmp("ri:", ptr)
++		&& (scene_parse_double(ptr, &object->i_refraction)
+ 			|| object->i_refraction < 0.f))
+-		return (error_parsing("object refractive indice", nbr, line), 1);
+-	if (*skip_space(&ptr) && scene_parse_ratio(&ptr, &object->k_plastic))
+-		return (error_parsing("object plastic reflexion", nbr, line), 1);
+-	if (*skip_space(&ptr) && (scene_parse_double(&ptr, &object->k_roughness)
++		return (error_parsing("object refractive indice", nbr, line, NULL), 1);
++	else if (parse_cmp("sp:", ptr)
++		&& scene_parse_ratio(ptr, &object->k_plastic))
++		return (error_parsing("object plastic reflexion", nbr, line, NULL), 1);
++	else if (parse_cmp("sr:", ptr)
++		&& (scene_parse_double(ptr, &object->k_roughness)
+ 			|| object->k_roughness < 1.0))
+-		return (error_parsing("object roughness", nbr, line), 1);
++		return (error_parsing("object roughness", nbr, line, NULL), 1);
++	else if (**ptr && ft_isspace(**ptr) == false)
++		return (error_parsing("unknown property", nbr, line, *ptr), 1);
+ 	return (0);
+ }
+diff --git a/srcs/parsing/parse_texture.c b/srcs/parsing/parse_texture.c
+index 0b11b93..2761f17 100644
+--- a/srcs/parsing/parse_texture.c
++++ b/srcs/parsing/parse_texture.c
+@@ -6,7 +6,7 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/22 15:16:14 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 16:30:06 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -21,15 +21,14 @@ int	scene_parse_texture_type(char **ptr, t_object *object)
+ 	skip_space(ptr);
+ 	if (!**ptr)
+ 		return (1);
+-	if (!ft_strncmp("S:", *ptr, 2))
++	if (parse_cmp("S:", ptr))
+ 		object->texture.type = TEX_SOLID;
+-	else if (!ft_strncmp("D:", *ptr, 2))
++	else if (parse_cmp("D:", ptr))
+ 		object->texture.type = TEX_DAM;
+-	else if (!ft_strncmp("I:", *ptr, 2))
++	else if (parse_cmp("I:", ptr))
+ 		object->texture.type = TEX_IMG;
+ 	else
+ 		return (1);
+-	*ptr = *ptr + 2;
+ 	return (0);
+ }
+ 
+@@ -42,7 +41,7 @@ int	scene_parse_texture_type(char **ptr, t_object *object)
+ int	scene_parse_texture(char **ptr, t_object *object, int nbr, char *line)
+ {
+ 	if (scene_parse_texture_type(ptr, object))
+-		return (error_parsing("object texture type", nbr, line), 1);
++		return (error_parsing("object texture type", nbr, line, NULL), 1);
+ 	if ((object->texture.type == TEX_SOLID
+ 			&& scene_parse_texture_solid(ptr, object, nbr, line))
+ 		|| (object->texture.type == TEX_DAM
+diff --git a/srcs/parsing/parse_texture2.c b/srcs/parsing/parse_texture2.c
+index bab2749..5b5b183 100644
+--- a/srcs/parsing/parse_texture2.c
++++ b/srcs/parsing/parse_texture2.c
+@@ -6,7 +6,7 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/22 16:08:07 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 16:30:31 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -46,12 +46,12 @@ int	scene_parse_texture_img(char **ptr, t_object *object, int nbr, char *line)
+ 	t_texture	*texture;
+ 
+ 	if (scene_parse_path(ptr, &path) > 0)
+-		return (error_parsing("texture image path", nbr, line), 1);
++		return (error_parsing("texture image path", nbr, line, NULL), 1);
+ 	if (path == NULL)
+ 		return (1);
+ 	if (check_texture_format(path) == false)
+ 		return (free(path),
+-			error_parsing("incorrect texture format", nbr, line), 1);
++			error_parsing("incorrect texture format", nbr, line, NULL), 1);
+ 	texture = texture_img_get(object->data, path);
+ 	if (!texture)
+ 		return (1);
+@@ -70,19 +70,19 @@ int	scene_parse_texture_img(char **ptr, t_object *object, int nbr, char *line)
+ int	scene_parse_texture_dame(char **ptr, t_object *object, int nbr, char *line)
+ {
+ 	if (scene_parse_color(ptr, &object->texture.color1))
+-		return (error_parsing("texture color1", nbr, line), 1);
++		return (error_parsing("texture color1", nbr, line, NULL), 1);
+ 	if (**ptr != ':')
+-		return (error_parsing("texture color2", nbr, line), 1);
++		return (error_parsing("texture color2", nbr, line, NULL), 1);
+ 	*ptr = *ptr + 1;
+ 	if (scene_parse_color(ptr, &object->texture.color2))
+-		return (error_parsing("texture color2", nbr, line), 1);
++		return (error_parsing("texture color2", nbr, line, NULL), 1);
+ 	if (**ptr != ':')
+-		return (error_parsing("texture resolution", nbr, line), 1);
++		return (error_parsing("texture resolution", nbr, line, NULL), 1);
+ 	*ptr = *ptr + 1;
+ 	if (ft_isdigit(**ptr) == false)
+-		return (error_parsing("texture resolution", nbr, line), 1);
++		return (error_parsing("texture resolution", nbr, line, NULL), 1);
+ 	if (ft_strtoi(*ptr, &object->texture.resolution))
+-		return (error_parsing("texture resolution", nbr, line), 1);
++		return (error_parsing("texture resolution", nbr, line, NULL), 1);
+ 	while (ft_isspace(**ptr) == false && **ptr)
+ 		*ptr = *ptr + 1;
+ 	handle_dame_texture(&object->texture, object->type);
+@@ -92,7 +92,7 @@ int	scene_parse_texture_dame(char **ptr, t_object *object, int nbr, char *line)
+ int	scene_parse_texture_solid(char **ptr, t_object *object, int nbr, char *line)
+ {
+ 	if (scene_parse_color(ptr, &object->texture.color1))
+-		return (error_parsing("object color", nbr, line), 1);
++		return (error_parsing("object color", nbr, line, NULL), 1);
+ 	object->texture.get_color = &texture_get_solid_color;
+ 	return (0);
+ }
+diff --git a/srcs/parsing/parse_value.c b/srcs/parsing/parse_value.c
+index cd96c0f..2a4eba9 100644
+--- a/srcs/parsing/parse_value.c
++++ b/srcs/parsing/parse_value.c
+@@ -3,10 +3,10 @@
+ /*                                                        :::      ::::::::   */
+ /*   parse_value.c                                      :+:      :+:    :+:   */
+ /*                                                    +:+ +:+         +:+     */
+-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
++/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/12 18:27:05 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/21 09:53:44 by lmahe            ###   ########.fr       */
++/*   Updated: 2024/02/23 16:47:55 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -77,3 +77,12 @@ int	scene_parse_double(char **ptr, double *value)
+ 		return (1);
+ 	return (0);
+ }
++
++int	scene_parse_int(char **ptr, int *value)
++{
++	if (ft_strtoi(*ptr, value))
++		return (1);
++	while (**ptr && !ft_isspace(**ptr))
++		*ptr = *ptr + 1;
++	return (0);
++}
+diff --git a/srcs/parsing/parse_value2.c b/srcs/parsing/parse_value2.c
+index 2432d7c..19fef18 100644
+--- a/srcs/parsing/parse_value2.c
++++ b/srcs/parsing/parse_value2.c
+@@ -6,7 +6,7 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/12 18:27:19 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/22 14:59:08 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 16:46:19 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -19,6 +19,7 @@ int			scene_parse_origin(char **ptr, t_coord3f *origin);
+ int			scene_parse_orientation(char **ptr, t_vec3f *orientation);
+ int			scene_parse_color(char **ptr, t_color3f *color3f);
+ static int	parse_color3int(char **ptr, t_color *color);
++int			scene_parse_path(char **ptr, char **dest);
+ 
+ static int	parse_color3int(char **ptr, t_color *color)
+ {
+diff --git a/srcs/struct/print.c b/srcs/struct/print.c
+index 18e1ed9..6dbad14 100644
+--- a/srcs/struct/print.c
++++ b/srcs/struct/print.c
+@@ -6,7 +6,7 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/23 15:11:55 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 16:49:40 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+@@ -69,7 +69,9 @@ void	t_object_print(void *object_ptr)
+ 	t_object	*object;
+ 
+ 	object = (t_object *)object_ptr;
+-	printf("Type: %s\n", (char *[3]){"sp", "pl", "cy"}[object->type - SPHERE]);
++	printf("Id: %d\n", object->id);
++	printf("Type: %s\n", (char *[4]){"sp", "pl", "cy", "co"} \
++		[object->type - SPHERE]);
+ 	printf("Origin: %.3f, %.3f, %.3f\n",
+ 		object->origin.x, object->origin.y, object->origin.z);
+ 	if (object->type == SPHERE || object->type == CYLINDER \
+diff --git a/srcs/struct/t_object.c b/srcs/struct/t_object.c
+index f90417a..7bbcb93 100644
+--- a/srcs/struct/t_object.c
++++ b/srcs/struct/t_object.c
+@@ -6,19 +6,38 @@
+ /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+ /*                                                +#+#+#+#+#+   +#+           */
+ /*   Created: 2024/02/21 17:42:15 by npirard           #+#    #+#             */
+-/*   Updated: 2024/02/21 17:44:56 by npirard          ###   ########.fr       */
++/*   Updated: 2024/02/23 17:11:57 by npirard          ###   ########.fr       */
+ /*                                                                            */
+ /* ************************************************************************** */
+ 
+ #include <minirt/minirt.h>
++#include <minirt/objects.h>
+ #include <libft.h>
+ 
++static int	get_random_id(void)
++{
++	int	id;
++
++	srand(time(NULL));
++	id = rand();
++	return (id);
++}
++
+ void	t_object_init(t_object *obj)
+ {
+-	obj->k_ambiant = 1.0;
++	obj->k_ambiant = 0.2;
+ 	obj->k_diffuse = 1.0;
+-	obj->k_specular = 1.0;
++	obj->k_specular = 0.2;
+ 	obj->k_plastic = 1.0;
+ 	obj->k_roughness = 1.0;
+ 	obj->k_reflexion = 0.0;
++	obj->i_refraction = 1.0;
++	obj->texture.type = TEX_SOLID;
++	obj->texture.color1 = (t_color3f){1.f, 1.f, 1.f};
++	obj->texture.get_color = &texture_get_solid_color;
++	obj->orientation = (t_vec3f){0, 1, 0};
++	obj->origin = (t_vec3f){2, 0, 0};
++	obj->height = 1.f;
++	obj->radius = 1.f;
++	obj->id = get_random_id();
+ }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_value.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:27:05 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 09:53:44 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/23 16:47:55 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,14 @@ int	scene_parse_double(char **ptr, double *value)
 {
 	if (ft_strtod(*ptr, value, ptr))
 		return (1);
+	return (0);
+}
+
+int	scene_parse_int(char **ptr, int *value)
+{
+	if (ft_strtoi(*ptr, value))
+		return (1);
+	while (**ptr && !ft_isspace(**ptr))
+		*ptr = *ptr + 1;
 	return (0);
 }

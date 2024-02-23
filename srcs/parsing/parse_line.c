@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:04:22 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 15:51:44 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:29:56 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@
 int	scene_parse_camera(t_scene *scene, int nbr, char **ptr, char *line)
 {
 	if (scene_parse_origin(ptr, &scene->camera.origin))
-		return (error_parsing("camera origin", nbr, line), 1);
+		return (error_parsing("camera origin", nbr, line, NULL), 1);
 	if (scene_parse_orientation(ptr, &scene->camera.dir))
-		return (error_parsing("camera orientation", nbr, line), 1);
+		return (error_parsing("camera orientation", nbr, line, NULL), 1);
 	if (scene_parse_fov(ptr, &scene->camera.fov))
-		return (error_parsing("camera fov", nbr, line), 1);
+		return (error_parsing("camera fov", nbr, line, NULL), 1);
 	return (0);
 }
 
 int	scene_parse_ambiant(t_scene *scene, int nbr, char **ptr, char *line)
 {
 	if (scene_parse_ratio(ptr, &scene->ambiant_light.ratio))
-		return (error_parsing("ambiant light ratio", nbr, line), 1);
+		return (error_parsing("ambiant light ratio", nbr, line, NULL), 1);
 	if (scene_parse_color(ptr, &scene->ambiant_light.color))
-		return (error_parsing("ambiant light color", nbr, line), 1);
+		return (error_parsing("ambiant light color", nbr, line, NULL), 1);
 	return (0);
 }
 
@@ -51,11 +51,11 @@ int	scene_parse_light(t_scene *scene, int nbr, char **ptr, char *line)
 	}
 	ft_lstadd_back(&scene->lights, light_node);
 	if (scene_parse_origin(ptr, &light->origin))
-		return (error_parsing("light origin", nbr, line), 1);
+		return (error_parsing("light origin", nbr, line, NULL), 1);
 	if (scene_parse_ratio(ptr, &light->ratio))
-		return (error_parsing("light ratio", nbr, line), 1);
+		return (error_parsing("light ratio", nbr, line, NULL), 1);
 	if (scene_parse_color(ptr, &light->color))
-		return (error_parsing("light color", nbr, line), 1);
+		return (error_parsing("light color", nbr, line, NULL), 1);
 	return (0);
 }
 
@@ -72,59 +72,6 @@ bool	parse_cmp(char *ref, char **ptr)
 	return (false);
 }
 
-int	scene_parse_obj_entry(t_object *obj, char **ptr, int nbr, char *line)
-{
-	while (**ptr)
-	{
-		if (*skip_space(ptr) == '\0')
-			break ;
-		if (parse_cmp("origin:", ptr) && scene_parse_origin(ptr, &obj->origin))
-			return (error_parsing("object origin", nbr, line), 1);
-		else if (parse_cmp("orientation:", ptr)
-			&& scene_parse_orientation(ptr, &obj->orientation))
-			return (error_parsing("object orientation", nbr, line), 1);
-		else if (parse_cmp("diameter:", ptr)
-			&& (scene_parse_double(ptr, &obj->radius) || obj->radius < 0.f))
-			return (error_parsing("object diameter", nbr, line), 1);
-		else if (parse_cmp("height:", ptr)
-			&& (scene_parse_double(ptr, &obj->height) || obj->height < 0.f))
-			return (error_parsing("object height", nbr, line), 1);
-		else if (parse_cmp("texture:", ptr)
-			&& scene_parse_texture(ptr, obj, nbr, line))
-			return (1);
-		else if (scene_parse_obj_properties(obj, nbr, ptr, line))
-			return (1);
-	}
-}
-
-int	scene_parse_object(t_scene *scene, int nbr, char *line)
-{
-	t_list		*object_node;
-	t_object	*object;
-	char		*ptr;
-
-	object = ft_calloc(1, sizeof(t_object));
-	if (!object)
-		return (error("parsing object"), 1);
-	object_node = ft_lstnew(object);
-	if (!object_node)
-		return (free(object), error("parsing object"), 1);
-	ft_lstadd_back(&scene->objects, object_node);
-	t_object_init(object);
-	ptr = line;
-	object->data = scene->data;
-	scene_parse_type(&ptr, &object->type);
-	if ((object->type == SPHERE && scene_parse_sphere(object, nbr, &ptr, line))
-		|| (object->type == CYLINDER
-			&& scene_parse_cylinder(object, nbr, &ptr, line))
-		|| (object->type == PLAN && scene_parse_plan(object, nbr, &ptr, line))
-		|| (object->type == CONE && scene_parse_cone(object, nbr, &ptr, line)))
-		return (1);
-	if (scene_parse_obj_properties(object, nbr, ptr, line))
-		return (1);
-	return (0);
-}
-
 int	scene_parse_line(t_scene *scene, char *line)
 {
 	char		*ptr;
@@ -133,14 +80,12 @@ int	scene_parse_line(t_scene *scene, char *line)
 
 	nbr++;
 	ptr = line;
-	while (ft_isspace(*ptr))
-		ptr++;
-	if (!*ptr)
+	if (*skip_space(&ptr) == '\0')
 		return (0);
-	if (!ft_strncmp(ptr, "//", 2))
+	if (parse_cmp("//", &ptr))
 		return (0);
 	if (scene_parse_type(&ptr, &type))
-		return (error_parsing("object type", nbr, line), 1);
+		return (error_parsing("object type", nbr, line, NULL), 1);
 	if (type == CAMERA && scene_parse_camera(scene, nbr, &ptr, line))
 		return (1);
 	else if (type == AMBIANT && scene_parse_ambiant(scene, nbr, &ptr, line))

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 15:11:55 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:49:40 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ void	t_object_print(void *object_ptr)
 	t_object	*object;
 
 	object = (t_object *)object_ptr;
-	printf("Type: %s\n", (char *[3]){"sp", "pl", "cy"}[object->type - SPHERE]);
+	printf("Id: %d\n", object->id);
+	printf("Type: %s\n", (char *[4]){"sp", "pl", "cy", "co"} \
+		[object->type - SPHERE]);
 	printf("Origin: %.3f, %.3f, %.3f\n",
 		object->origin.x, object->origin.y, object->origin.z);
 	if (object->type == SPHERE || object->type == CYLINDER \

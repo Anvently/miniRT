@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 13:59:14 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:48:11 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 int		scene_open(char *path, t_scene *scene);
 void	normalize_scene(t_scene *scene);
 char	*skip_space(char **ptr);
+bool	parse_cmp(char *ref, char **ptr);
 
 int		scene_parse_line(t_scene *scene, char *line);
 int		scene_parse_ambiant(t_scene *scene, int nbr, char **ptr, char *line);
@@ -29,13 +30,11 @@ int		scene_parse_camera(t_scene *scene, int nbr, char **ptr, char *line);
 /* --------------------------------- OBJECTS -------------------------------- */
 
 int		scene_parse_object(t_scene *scene, int nbr, char *line);
-int		scene_parse_sphere(t_object *object, int nbr, char **ptr, char *line);
-int		scene_parse_plan(t_object *object, int nbr, char **ptr, char *line);
-int		scene_parse_cylinder(t_object *object, int nbr, char **ptr, char *line);
-int		scene_parse_cone(t_object *object, int nbr, char **ptr, char *line);
+int		scene_parse_obj_entries(t_object *obj, char **ptr, int nbr, char *line);
 int		scene_parse_obj_properties(t_object *object, int nbr,
-			char *ptr, char *line);
-
+			char **ptr, char *line);
+int		scene_parse_obj_properties2(t_object *object, int nbr,
+			char **ptr, char *line);
 /* -------------------------------- TEXTURES -------------------------------- */
 
 int		scene_parse_texture(char **ptr, t_object *object, int nbr, char *line);
@@ -55,6 +54,7 @@ int		scene_parse_orientation(char **ptr, t_vec3f *orientation);
 int		scene_parse_fov(char **ptr, int *fov);
 int		scene_parse_ratio(char **ptr, double *ratio);
 int		scene_parse_double(char **ptr, double *value);
+int		scene_parse_int(char **ptr, int *value);
 int		scene_parse_color(char **ptr, t_color3f *color3f);
 int		scene_parse_path(char **ptr, char **dest);
 
@@ -63,6 +63,6 @@ int		scene_parse_path(char **ptr, char **dest);
 /* -------------------------------------------------------------------------- */
 
 void	error_file(char *context, char *path);
-void	error_parsing(char *context, int nbr, char *line);
+void	error_parsing(char *context, int nbr, char *line, char *pos);
 
 #endif
