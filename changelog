@@ -1,3 +1,6 @@
+- make et ./minirt solar_system ;D
+
+Changements:
 - petit fix sur les rotaions de sphere avec damier pour gerer les angles negatifs
 		(a verifier)
 - la refraction semble ok
@@ -14,3 +17,8 @@
 
 Quelques problemes :
 	- l'interieur des cones a l'air de recevoir la lumiere diffuse
+	- sur la scene du systeme solaire, lorsqu'on place la camera au dessus du systeme sur l'axe z,
+			elle ne regarde pas au bon endroit
+	- si on met un soleil transparent, on voit la terre de l'autre cote, il faudrait mettre en place
+			des objets qui diffuse de la lumiere (les considerer comme des sources de lumieres) pour
+			simuler un vrai soleil
