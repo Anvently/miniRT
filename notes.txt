@@ -41,6 +41,7 @@ target
 	- 0: every objects
 type
 	- R: rotation
+	- Rs: self rotation for sphere
 	- T: translation
 	- S: scale
 orientation

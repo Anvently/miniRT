@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 17:52:50 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:34:47 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	scene_parse_move_type(char **ptr, t_move *move)
 	skip_space(ptr);
 	if (!**ptr)
 		return (1);
-	if (parse_cmp("R", ptr))
+	if (parse_cmp("Rs", ptr))
+		move->type = MV_Rs;
+	else if (parse_cmp("R", ptr))
 		move->type = MV_R;
 	else if (parse_cmp("T", ptr))
 		move->type = MV_T;

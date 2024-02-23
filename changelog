@@ -1,3 +1,5 @@
+- petit fix sur les rotaions de sphere avec damier pour gerer les angles negatifs
+		(a verifier)
 - la refraction semble ok
 - grosse modifs sur le parsing :
 	- chaque valeur doit etre precedee d'un mot cle qui la decrit
@@ -7,9 +9,8 @@
 		- les objets sont initialises avec des valeurs par defaut
 	- ajout d'un parametre id pour identifier les objets
 		- si id n'est pas donne ou id==0, id est genere aleatoirement (avec srand)
-- petit fix sur les rotaions de sphere avec damier pour gerer les angles negatifs
-		(a verifier)
-
+- ajout des t_move et du parsing qui va avec
+	- voir notes.txt pour le fonctionnement
 
 Quelques problemes :
 	- l'interieur des cones a l'air de recevoir la lumiere diffuse

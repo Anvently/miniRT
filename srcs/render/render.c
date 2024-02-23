@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:28:36 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/15 17:07:16 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:17:13 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 /// @return
 int	render(void	*data_ptr)
 {
-	t_data	*data;
+	t_data			*data;
+	double			render_time;
 
 	data = (t_data *)data_ptr;
 	//printf("screen_w=%f,screen_h=%f\n", data->scene.camera._u.x * (double) data->img_size.x,
@@ -28,7 +29,7 @@ int	render(void	*data_ptr)
 		handle_close(data);
 	if (img_put(data))
 		handle_close(data);
-	if (PFPS)
-		pfps();
+	render_time = pfps();
+	scene_move(&data->scene, render_time);
 	return (0);
 }

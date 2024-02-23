@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:09:12 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 15:16:22 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:31:39 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_vec3f	vec3f_matrix3f(t_vec3f *vec, t_matrix3f *matrix)
 {
 	t_vec3f	new;
 
+	if (!matrix)
+		return (*vec);
 	new.x = vec->x * matrix->m0[0] + vec->y * matrix->m0[1] \
 		+ vec->z * matrix->m0[2];
 	new.y = vec->x * matrix->m1[0] + vec->y * matrix->m1[1] \

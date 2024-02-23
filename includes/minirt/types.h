@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 17:36:27 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:28:06 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef enum e_texture_type
 typedef enum e_move_type
 {
 	MV_R,
+	MV_Rs,
 	MV_T,
 	MV_S
 }			t_move_type;

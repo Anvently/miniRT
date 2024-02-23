@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 17:52:03 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:33:36 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	t_move_print(void *move_ptr)
 	move = (t_move *)move_ptr;
 	printf("type=%d\n", (int)move->type);
 	printf("Type: %s\n", \
-		(char *[3]){"rotation", "translation", "scale"} \
+		(char *[4]){"rotation", "self rotation", "translation", "scale"} \
 		[(int)move->type]);
 	printf("Target: %d\n", move->target);
 	printf("Value: %.3f, %.3f, %.3f\n",

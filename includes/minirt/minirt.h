@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 16:42:27 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:23:29 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_data {
 /* -------------------------------------------------------------------------- */
 
 int			render(void	*data);
+double		pfps(void);
 int			render_threads(t_data *data);
 void		render_chunk(t_data *data, int i, t_color3f *antialiasing);
 void		img_update(t_data *data);
@@ -80,7 +81,14 @@ int			img_update_chunk(t_data *data);
 void		init_camera(t_data *camera);
 void		img_update_camera(t_data *data);
 void		transform_scene(t_data *data, t_matrix3f *matrix, double angle);
-void		transform_angle(t_data *data, double angle);
+void		transform_objects(t_data *data, t_matrix3f *matrix,
+				double angle, int target);
+
+/* -------------------------------------------------------------------------- */
+/*                                    MOVES                                   */
+/* -------------------------------------------------------------------------- */
+
+void		scene_move(t_scene *scene, double render_time);
 
 /* -------------------------------------------------------------------------- */
 /*                                   EVENTS                                   */
@@ -126,7 +134,5 @@ void		color_filter(t_color3f *color, t_color3f *filter);
 /* -------------------------------------------------------------------------- */
 
 void		error(char *context);
-
-void		pfps(void);
 
 #endif

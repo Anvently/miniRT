@@ -8,7 +8,7 @@ OBJS_FOLDER	=	.objs/
 
 SRCS_FILES	=	main.c error.c \
 				render/render.c render/fps.c render/image.c render/thread.c \
-				render/chunk.c \
+				render/chunk.c render/move.c \
 				draw/draw.c draw/util.c draw/line.c draw/color_conversion.c \
 				draw/color_conversion2.c draw/color_operation.c draw/color_operation2.c \
 				events/events.c events/handlers.c events/handlers2.c \

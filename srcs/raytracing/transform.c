@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:50:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 14:40:44 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:31:51 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <minirt/calculus.h>
 #include <libft.h>
 
-static void	transform_objects(t_data *data, t_matrix3f *matrix, double angle)
+void	transform_objects(t_data *data, t_matrix3f *matrix,
+			double angle, int target)
 {
 	t_list		*node;
 	t_object	*obj;
@@ -23,13 +24,19 @@ static void	transform_objects(t_data *data, t_matrix3f *matrix, double angle)
 	while (node)
 	{
 		obj = (t_object *)node->content;
-		obj->orientation = vec3f_matrix3f(&obj->orientation, matrix);
-		obj->origin = vec3f_matrix3f(&obj->origin, matrix);
-		obj->top = vec3f_matrix3f(&obj->top, matrix);
-		obj->loc_x = vec3f_matrix3f(&obj->loc_x, matrix);
-		obj->loc_y = vec3f_matrix3f(&obj->loc_y, matrix);
-		obj->loc_z = vec3f_matrix3f(&obj->loc_z, matrix);
-		obj->angle += angle;
+		if (target == 0 || target == obj->id)
+		{
+			if (matrix)
+			{
+				obj->orientation = vec3f_matrix3f(&obj->orientation, matrix);
+				obj->origin = vec3f_matrix3f(&obj->origin, matrix);
+				obj->top = vec3f_matrix3f(&obj->top, matrix);
+				obj->loc_x = vec3f_matrix3f(&obj->loc_x, matrix);
+				obj->loc_y = vec3f_matrix3f(&obj->loc_y, matrix);
+				obj->loc_z = vec3f_matrix3f(&obj->loc_z, matrix);
+			}
+			obj->angle += angle;
+		}
 		node = node->next;
 	}
 }
@@ -65,6 +72,6 @@ static void	transform_lights(t_data *data, t_matrix3f *matrix)
 
 void	transform_scene(t_data *data, t_matrix3f *matrix, double angle)
 {
-	transform_objects(data, matrix, angle);
+	transform_objects(data, matrix, angle, 0);
 	transform_lights(data, matrix);
 }
