@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 11:20:15 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:29:11 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ typedef struct s_object {
 	t_color3f			color_ambiant;
 	t_color3f			color_specular;
 	t_texture			texture;
+	double				angle;
 	struct s_data		*data;
 }				t_object;
 

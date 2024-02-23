@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 12:01:20 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:02:08 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_color3f	get_reflect_color(t_data *data, t_ray *previous_ray)
 void	launch_ray(t_data *data, t_ray *ray)
 {
 	t_color3f	l_reflect;
-	t_color3f	l_refract;
+	// t_color3f	l_refract;
 
 	check_inter(data, ray);
 	if (ray->inter_obj)

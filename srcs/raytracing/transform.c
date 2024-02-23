@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:50:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 10:57:08 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/23 12:34:06 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,22 @@ static void	transform_objects(t_data *data, t_matrix3f *matrix)
 		obj->loc_x = vec3f_matrix3f(&obj->loc_x, matrix);
 		obj->loc_y = vec3f_matrix3f(&obj->loc_y, matrix);
 		obj->loc_z = vec3f_matrix3f(&obj->loc_z, matrix);
+		node = node->next;
+	}
+}
+
+void	transform_angle(t_data *data, double angle)
+{
+	t_list		*node;
+	t_object	*obj;
+
+	node = data->scene.objects;
+	while (node)
+	{
+		obj = (t_object *)node->content;
+		obj->angle += angle;
+		if (obj->type == SPHERE && obj->texture.type == TEX_IMG)
+			printf("angle = %f\n",obj->angle);
 		node = node->next;
 	}
 }

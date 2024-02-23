@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:31:16 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/23 11:04:20 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:01:54 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ t_double2	sphere_map(t_object *sph, t_vec3f *p)
 {
 	double		theta;
 	double		phi;
-	t_vec3f		local_p;
+	//t_vec3f		local_p;
 	t_double2	coord;
 
-	local_p.x = scalar_product(p, &sph->loc_x);
-	local_p.y = scalar_product(p, &sph->loc_y);
-	local_p.z = scalar_product(p, &sph->loc_z);
-	phi = atan2(local_p.y - sph->origin.y, local_p.x - sph->origin.x);
-	theta = acos((local_p.z - sph->origin.z) / sph->radius);
+	// local_p.x = scalar_product(p, &sph->loc_x);
+	// local_p.y = scalar_product(p, &sph->loc_y);
+	// local_p.z = scalar_product(p, &sph->loc_z);
+	phi = atan2(p->y - sph->origin.y, p->x - sph->origin.x);
+	theta = acos((p->z - sph->origin.z) / sph->radius);
 
 	coord.x = 0.5 - phi / (2 * M_PI);
 	coord.y = 1 - theta / M_PI;

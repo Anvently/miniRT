@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 11:07:17 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:31:00 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	handle_rotation(t_data *data)
 	data->scene.camera._cy = vec3f_matrix3f(&data->scene.camera._cy, &matrix_y);
 	data->scene.camera._cz = vec3f_matrix3f(&data->scene.camera._cz, &matrix_y);
 	transform_scene(data, &matrix_z);
+	transform_angle(data, -data->dnd.x / 250.f);
 		// printf("cx*cy = %f, cx*cz = %f, cy * cz = %f\n",
 		// 	scalar_product(&data->scene.camera._cx, &data->scene.camera._cy),
 		// 	scalar_product(&data->scene.camera._cx, &data->scene.camera._cz),
