@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 12:29:11 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 13:44:54 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ typedef struct s_object {
 	double				k_plastic;
 	double				k_roughness;
 	double				k_reflexion;
+	double				i_refraction;
 	t_color3f			color_diffuse;
 	t_color3f			color_ambiant;
 	t_color3f			color_specular;
@@ -212,6 +213,7 @@ typedef struct s_ray {
 	double		t_min;
 	double		t_max;
 	t_object	*inter_obj;
+	t_object	*inside_obj;
 	t_color3f	l_surface;
 	t_color3f	l_diffuse;
 	t_color3f	l_ambiant;

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:01:15 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 16:09:13 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 13:33:53 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_texture	*texture_img_get(t_data *data, char *path)
 	ft_lstadd_back(&data->textures_img, texture_node);
 	texture->file_path = path;
 	texture->data = data;
+	texture->type = TEX_IMG;
 	if (texture_img_open(data, texture))
 		return (NULL);
 	return (texture);

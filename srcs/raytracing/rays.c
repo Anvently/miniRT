@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 12:02:08 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 13:51:35 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,34 @@ t_color3f	get_reflect_color(t_data *data, t_ray *previous_ray)
 	return (reflect.l_final);
 }
 
-// t_color3f	get_refract_color(t_data *data, t_ray *previous_ray)
+// static t_vec3f	compute_refract_dir(t_ray *previous_ray)
 // {
-// 	t_ray	refract;
+// 	t_vec3f	dir;
 // 	double	theta_t;
 // 	double	k_i;
 // 	double	k_r;
 
+// 	previous_ray->theta = scalar_product(&previous_ray->dir,
+// 		&previous_ray->normal);
+// 	k_i = 1.0;
+// 	k_r = 1.0;
+// 	if (previous_ray->inside_obj == NULL)
+// 		k_r = previous_ray->inter_obj->i_refraction;
+// 	else if (previous_ray->inside_obj && previous_ray->inter_obj)
+// 		k_i = previous_ray->inside_obj->i_refraction;
+
+// }
+
+// t_color3f	get_refract_color(t_data *data, t_ray *previous_ray)
+// {
+// 	t_ray	refract;
+
+
 // 	ft_memset(&refract, 0, sizeof(t_ray));
 // 	refract.type = REFRACT_RAY;
-// 	previous_ray->theta = scalar_product(&previous_ray->dir,
-// 			&previous_ray->normal);
+
+
 // 	theta_t = sqrt(1.f - previous_ray->inter_obj)
-// 	refract.dir.x =
 // 	refract.dir.x = previous_ray->dir.x + 2.f * (previous_ray->theta)
 // 		* previous_ray->normal.x;
 // 	refract.dir.y = previous_ray->dir.y + 2.f * (previous_ray->theta)

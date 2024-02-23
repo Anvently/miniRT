@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:50:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 12:34:06 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 13:37:30 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <minirt/calculus.h>
 #include <libft.h>
 
-static void	transform_objects(t_data *data, t_matrix3f *matrix)
+static void	transform_objects(t_data *data, t_matrix3f *matrix, double angle)
 {
 	t_list		*node;
 	t_object	*obj;
@@ -29,6 +29,7 @@ static void	transform_objects(t_data *data, t_matrix3f *matrix)
 		obj->loc_x = vec3f_matrix3f(&obj->loc_x, matrix);
 		obj->loc_y = vec3f_matrix3f(&obj->loc_y, matrix);
 		obj->loc_z = vec3f_matrix3f(&obj->loc_z, matrix);
+		obj->angle += angle;
 		node = node->next;
 	}
 }
@@ -42,9 +43,8 @@ void	transform_angle(t_data *data, double angle)
 	while (node)
 	{
 		obj = (t_object *)node->content;
-		obj->angle += angle;
-		if (obj->type == SPHERE && obj->texture.type == TEX_IMG)
-			printf("angle = %f\n",obj->angle);
+		if (obj->type == SPHERE)
+			obj->angle += angle;
 		node = node->next;
 	}
 }
@@ -63,8 +63,8 @@ static void	transform_lights(t_data *data, t_matrix3f *matrix)
 	}
 }
 
-void	transform_scene(t_data *data, t_matrix3f *matrix)
+void	transform_scene(t_data *data, t_matrix3f *matrix, double angle)
 {
-	transform_objects(data, matrix);
+	transform_objects(data, matrix, angle);
 	transform_lights(data, matrix);
 }
