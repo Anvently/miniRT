@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculus.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/23 09:51:47 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/23 10:41:26 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void		get_local_base(t_object *obj);
 t_double2	revolution_map(t_object *obj, t_vec3f *p);
 t_double2	plane_map(t_object *plane, t_vec3f *p);
 t_double2	sphere_map(t_object *sph, t_vec3f *p);
+void		coord_abs(t_coord2f *coord);
 
 /*--------------TO MOVE ELSEWHERE (DEBUG)----------------*/
 int	get_pixel_dame(t_double2 *uv, double square_size);

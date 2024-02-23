@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 13:49:41 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/23 10:24:20 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/23 10:41:40 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,10 @@ int	get_pixel_dame(t_double2 *uv, double square_size)
 	return (pixel);
 }
 
+void	coord_abs(t_coord2f *coord)
+{
+	if (coord->x < 0.f)
+		coord->x = 1.f - (-coord->x);
+	if (coord->y < 0.f)
+		coord->y = 1.f - (-coord->y);
+}
