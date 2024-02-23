@@ -1,0 +1,18 @@
+A 0.5 255,255,255
+C 10,0,0 0,0,0 70
+L 0,0,0 1.0 255,255,255
+//L -20,0,0 0.5 255,255,255
+
+
+sp id:1 origin:0,0,0 diameter:10 texture:S:250,200,0 ka:0.1 kd:1.0 ks:0.0 rf:0.001 ri:1.5 sp:0 sr:1
+sp id:2 origin:-10,0,0 diameter:1 texture:I:earth.xpm ka:0.5 kd:1.0 ks:1.0 rf:0.0 ri:1.0 sp:1.0 sr:10
+//cy origin:5,0,0 orientation:1,-0.5,0 diameter:1 height:5 texture:I:earth.xpm ka:1.0 kd:1.0 ks:0.2 rf:0 ri:1.0 sp:0.5 sr:2
+//sp id:1 origin:1.5,0.5,0 diameter:1 texture:I:earth.xpm ka:1.0 kd:1.0 ks:0.5 rf:0.0 ri:1.0 sp:1.0 sr:1
+//co origin:5,0,0 orientation:0,0,0 diameter:1 height:5 texture:I:earth.xpm ka:1.0 kd:1.0 ks:0.2 rf:0 ri:1.0 sp:0.5 sr:2 id:10
+//sp
+
+//pl origin:-4,0,0 orientation:-0.7,0.2,0 texture:D:0,0,0:255,255,255:2 ka:0.5 kd:0.0 ks:0.2 rf:0.6 ri:1.2 sp:0.5 sr:2
+
+move target:2 type:R value:0,0,1 speed:0.5
+move target:2 type:Rs value:0,0,1 speed:0.5
+//move target:2 type:R value:0,0,-4 speed:1

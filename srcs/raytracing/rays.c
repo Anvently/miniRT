@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 15:18:18 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 18:47:50 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ void	launch_ray(t_data *data, t_ray *ray)
 		check_lights(data, ray);
 		if (ray->inter_obj->k_reflexion > 0.0 && ray->nbr_bounce < 3)
 		{
+			// if (ray->inter_obj->id == 1)
+			// 	printf("PING\n");
 			l_reflect = get_reflect_color(data, ray);
 			l_refract = get_refract_color(data, ray);
 			l_reflect = color_ratio(&l_reflect, ray->inter_obj->k_reflexion);
