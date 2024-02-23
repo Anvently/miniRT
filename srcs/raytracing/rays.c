@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 16:58:39 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:01:20 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,38 @@ t_color3f	get_reflect_color(t_data *data, t_ray *previous_ray)
 	return (reflect.l_final);
 }
 
+// t_color3f	get_refract_color(t_data *data, t_ray *previous_ray)
+// {
+// 	t_ray	refract;
+// 	double	theta_t;
+// 	double	k_i;
+// 	double	k_r;
+
+// 	ft_memset(&refract, 0, sizeof(t_ray));
+// 	refract.type = REFRACT_RAY;
+// 	previous_ray->theta = scalar_product(&previous_ray->dir,
+// 			&previous_ray->normal);
+// 	theta_t = sqrt(1.f - previous_ray->inter_obj)
+// 	refract.dir.x =
+// 	refract.dir.x = previous_ray->dir.x + 2.f * (previous_ray->theta)
+// 		* previous_ray->normal.x;
+// 	refract.dir.y = previous_ray->dir.y + 2.f * (previous_ray->theta)
+// 		* previous_ray->normal.y;
+// 	refract.dir.z = previous_ray->dir.z + 2.f * (previous_ray->theta)
+// 		* previous_ray->normal.z;
+// 	refract.origin = previous_ray->inter;
+// 	normalize_vec(&refract.dir);
+// 	refract.nbr_bounce = previous_ray->nbr_bounce + 1;
+// 	refract.t_min = 0.000001;
+// 	refract.t = INFINITY;
+// 	launch_ray(data, &refract);
+// 	return (refract.l_final);
+// }
+
 void	launch_ray(t_data *data, t_ray *ray)
 {
 	t_color3f	l_reflect;
+	t_color3f	l_refract;
 
 	check_inter(data, ray);
 	if (ray->inter_obj)
@@ -77,13 +106,15 @@ void	launch_ray(t_data *data, t_ray *ray)
 		ray->l_surface = (*ray->inter_obj->texture.get_color) \
 			(ray->inter_obj, &ray->inter);
 		check_lights(data, ray);
-		if (ray->inter_obj->k_reflexion > 0.0 && ray->nbr_bounce < 3)
+		if (ray->inter_obj->k_reflexion > 0.0 && ray->nbr_bounce < 4)
 		{
 			l_reflect = get_reflect_color(data, ray);
-			// l_reflect = color_ratio(&l_reflect, ray->inter_obj->k_reflexion);
-			// ray->l_final = color_ratio(&ray->l_final,
+			// l_refract = get_refract_color(data, ray);
+			l_reflect = color_ratio(&l_reflect, ray->inter_obj->k_reflexion);
+			// l_refract = color_ratio(&l_refract,
 			// 		1.f - ray->inter_obj->k_reflexion);
 			color_add(&ray->l_final, l_reflect);
+			// color_add(&ray->l_final, l_refract);
 		}
 		color_unsature(&ray->l_final);
 	}

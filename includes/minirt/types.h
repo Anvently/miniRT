@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 10:56:19 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/23 11:20:15 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ typedef enum e_ray_type
 {
 	CAMERA_RAY,
 	LIGHT_RAY,
-	REFLECT_RAY
+	REFLECT_RAY,
+	REFRACT_RAY
 }			t_ray_type;
 
 typedef enum e_texture_type
