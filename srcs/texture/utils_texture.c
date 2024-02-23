@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 13:49:41 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/22 14:24:07 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/23 09:37:11 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int	get_pixel_dame_coord(t_double2 *uv, double square_size)
 	double	temp;
 	int		pixel;
 
-	pixel = 0;
+	pixel = (1 - sign(uv->x)) * 0.5 + (1 - sign(uv->y)) * 0.5;
 	temp = square_size;
+	uv->x = fabs(uv->x);
+	uv->y = fabs(uv->y);
 	while (temp <= uv->x && temp < 1.f)
 	{
 		pixel++;
