@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:04:22 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 16:29:56 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 17:33:46 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	scene_parse_line(t_scene *scene, char *line)
 	else if (type == AMBIANT && scene_parse_ambiant(scene, nbr, &ptr, line))
 		return (1);
 	else if (type == LIGHT && scene_parse_light(scene, nbr, &ptr, line))
+		return (1);
+	else if (type == MOVE && scene_parse_move(scene, &ptr, nbr, line))
 		return (1);
 	else if (type >= SPHERE && scene_parse_object(scene, nbr, line))
 		return (1);

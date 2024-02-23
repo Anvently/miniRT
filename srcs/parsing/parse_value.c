@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:27:05 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 16:47:55 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 17:42:53 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,24 @@ int		scene_parse_double(char **ptr, double *value);
 /// @return ```0``` if no error.
 int	scene_parse_type(char **ptr, char *type)
 {
-	char	*it;
-
-	it = *ptr;
-	if (!ft_strncmp(it, "A", 1))
+	if (parse_cmp("A", ptr))
 		*type = AMBIANT;
-	else if (!ft_strncmp(it, "C", 1))
+	else if (parse_cmp("C", ptr))
 		*type = CAMERA;
-	else if (!ft_strncmp(it, "L", 1))
+	else if (parse_cmp("L", ptr))
 		*type = LIGHT;
-	else if (!ft_strncmp(it, "pl", 2))
+	else if (parse_cmp("pl", ptr))
 		*type = PLAN;
-	else if (!ft_strncmp(it, "sp", 2))
+	else if (parse_cmp("sp", ptr))
 		*type = SPHERE;
-	else if (!ft_strncmp(it, "cy", 2))
+	else if (parse_cmp("cy", ptr))
 		*type = CYLINDER;
-	else if (!ft_strncmp(it, "co", 2))
+	else if (parse_cmp("co", ptr))
 		*type = CONE;
+	else if (parse_cmp("move", ptr))
+		*type = MOVE;
 	else
 		return (1);
-	while (*it && !ft_isspace(*it))
-		it++;
-	*ptr = it;
 	return (0);
 }
 

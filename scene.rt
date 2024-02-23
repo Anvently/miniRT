@@ -10,3 +10,5 @@ co origin:5,0,0 orientation:0,0,0 diameter:1 height:5 texture:I:earth.xpm ka:1.0
 sp
 
 pl origin:-4,0,0 orientation:-0.7,0.2,0 texture:D:0,0,0:255,255,255:2 ka:0.5 kd:0.0 ks:0.2 rf:0.6 ri:1.2 sp:0.5 sr:2
+
+move type:R value:1,1,1 speed:0.1

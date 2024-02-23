@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 16:48:11 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 17:42:12 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ int		scene_parse_texture_dame(char **ptr, t_object *object,
 			int nbr, char *line);
 int		scene_parse_texture_img(char **ptr, t_object *object,
 			int nbr, char *line);
+
+/* ---------------------------------- MOVES --------------------------------- */
+
+int		scene_parse_move(t_scene *scene, char **ptr, int nbr, char *line);
+int		scene_parse_move_type(char **ptr, t_move *move);
+int		scene_parse_move_entries(t_move *move, char **ptr, int nbr, char *line);
 
 /* --------------------------------- VALUES --------------------------------- */
 

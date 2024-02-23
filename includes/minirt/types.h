@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 16:51:57 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 17:36:27 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef enum e_object_type
 	CAMERA,
 	AMBIANT,
 	LIGHT,
+	MOVE,
 	SPHERE,
 	PLAN,
 	CYLINDER,
@@ -97,6 +98,13 @@ typedef enum e_texture_type
 	TEX_DAM,
 	TEX_IMG
 }			t_texture_type;
+
+typedef enum e_move_type
+{
+	MV_R,
+	MV_T,
+	MV_S
+}			t_move_type;
 
 typedef struct s_texture {
 	char				type;
@@ -160,8 +168,16 @@ typedef struct s_scene {
 	t_light				ambiant_light;
 	t_list				*objects;
 	t_list				*lights;
+	t_list				*moves;
 	struct s_data		*data;
 }				t_scene;
+
+typedef struct s_move {
+	char				type;
+	int					target;
+	t_vec3f				value;
+	double				speed;
+}				t_move;
 
 /// @brief
 /// @param type type of object

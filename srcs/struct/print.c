@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 16:49:40 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 17:52:03 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,22 @@ void	t_object_print(void *object_ptr)
 	printf("\n");
 }
 
+void	t_move_print(void *move_ptr)
+{
+	t_move	*move;
+
+	move = (t_move *)move_ptr;
+	printf("type=%d\n", (int)move->type);
+	printf("Type: %s\n", \
+		(char *[3]){"rotation", "translation", "scale"} \
+		[(int)move->type]);
+	printf("Target: %d\n", move->target);
+	printf("Value: %.3f, %.3f, %.3f\n",
+		move->value.x, move->value.y,
+		move->value.z);
+	printf("Speed: %f\n", move->speed);
+}
+
 void	t_scene_print(t_scene *scene)
 {
 	printf("------ Scene ------\nCamera\n");
@@ -100,6 +116,8 @@ void	t_scene_print(t_scene *scene)
 	ft_lstprint(scene->lights, &t_light_print);
 	printf("Objects\n\n");
 	ft_lstprint(scene->objects, &t_object_print);
+	printf("Moves\n\n");
+	ft_lstprint(scene->moves, &t_move_print);
 	printf("\n");
 }
 

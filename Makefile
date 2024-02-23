@@ -14,7 +14,7 @@ SRCS_FILES	=	main.c error.c \
 				events/events.c events/handlers.c events/handlers2.c \
 				parsing/parsing.c parsing/parse_line.c parsing/parse_objects.c \
 				parsing/parse_value.c parsing/parse_value2.c parsing/normalize.c \
-				parsing/parse_texture.c parsing/parse_texture2.c \
+				parsing/parse_texture.c parsing/parse_texture2.c parsing/parse_move.c \
 				struct/t_scene.c struct/print.c struct/t_object.c struct/t_texture.c \
 				math/geometry_ope.c math/geometry_ope2.c math/cam_rotation.c \
 				math/plane_inter.c math/sphere_inter.c math/matrix2.c\
