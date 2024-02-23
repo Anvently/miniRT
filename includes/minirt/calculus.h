@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/23 09:56:22 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/23 10:41:26 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_double2	sphere_map(t_object *sph, t_vec3f *p);
 void		coord_abs(t_coord2f *coord);
 
 /*--------------TO MOVE ELSEWHERE (DEBUG)----------------*/
-int	get_pixel_dame_coord(t_double2 *uv, double square_size);
+int	get_pixel_dame(t_double2 *uv, double square_size);
 t_color3f	texture_get_plan_dame(void *obj, t_double3 *coord);
 void	print_t_color3f(t_color3f *color);
 
