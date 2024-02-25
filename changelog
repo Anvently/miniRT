@@ -23,3 +23,4 @@ Quelques problemes :
 			elle ne regarde pas au bon endroit
 	- lorsqu'on est à l'intérieur d'une sphere, les intersections avec elle-même ne
 		semble pas être détectée.
+	- le fov semble bizarre
