@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 18:47:50 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/25 15:18:22 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	check_inter(t_data *data, t_ray *ray)
 	while (node)
 	{
 		obj = (t_object *)node->content;
-		//if (ray->inter_obj && ray->inter_obj == obj)
-		//	return ;
 		if (obj->type == PLAN)
 			plane_intersec(obj, ray);
 		else if (obj->type == SPHERE)
@@ -37,7 +35,7 @@ void	check_inter(t_data *data, t_ray *ray)
 		else if (obj->type == CONE)
 			cone_intersec(obj, ray);
 		node = node->next;
-		if (ray->t_min < 1.0 && ray->t != INFINITY)
+		if (ray->type == LIGHT_RAY && ray->t != INFINITY)
 			break ;
 	}
 }
@@ -130,7 +128,7 @@ void	launch_ray(t_data *data, t_ray *ray)
 		ray->inter = get_inter_point(ray, ray->t);
 		ray->l_surface = (*ray->inter_obj->texture.get_color) \
 			(ray->inter_obj, &ray->inter);
-		check_lights(data, ray);
+		check_luminosity(data, ray);
 		if (ray->inter_obj->k_reflexion > 0.0 && ray->nbr_bounce < 3)
 		{
 			// if (ray->inter_obj->id == 1)

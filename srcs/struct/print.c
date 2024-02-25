@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 18:33:36 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/25 15:31:11 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ void	t_object_properties_print(t_object *obj)
 	printf("Refractive index = %f\n", obj->i_refraction);
 	printf("Portion of plastic reflexion = %f\n", obj->k_plastic);
 	printf("Roughness constant = %f\n", obj->k_roughness);
+	printf("Glow color: %f, %f, %f\n", obj->color_glow.r, obj->color_glow.g,
+		obj->color_glow.b);
+	printf("Glow color constant = %f\n", obj->k_glow);
+	printf("Emissive light color: %f, %f, %f\n", obj->color_light.r,
+		obj->color_light.g, obj->color_light.b);
+	printf("Glow color constant = %f\n", obj->k_light);
 }
 
 void	t_object_print(void *object_ptr)

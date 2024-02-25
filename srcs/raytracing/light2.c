@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:29:45 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/22 17:23:23 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/25 14:08:49 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,33 @@ static double	get_spec_ratio(t_ray *ray)
 	return (ratio);
 }
 
-t_color3f	compute_specular(t_ray *light_ray, t_light *light)
+t_color3f	compute_specular(t_ray *light_ray, t_color3f *light_color)
 {
 	t_color3f	l_specular;
 	double		ratio;
 
 	ratio = get_spec_ratio(light_ray);
-	l_specular.r = light->color.r * light_ray->inter_obj->k_specular \
+	l_specular.r = light_color->r * light_ray->inter_obj->k_specular \
 		* ratio * ((1 - light_ray->inter_obj->k_plastic) \
 			* light_ray->l_surface.r + light_ray->inter_obj->k_plastic);
-	l_specular.g = light->color.g * light_ray->inter_obj->k_specular \
+	l_specular.g = light_color->g * light_ray->inter_obj->k_specular \
 		* ratio * ((1 - light_ray->inter_obj->k_plastic) \
 			* light_ray->l_surface.g + light_ray->inter_obj->k_plastic);
-	l_specular.b = light->color.b * light_ray->inter_obj->k_specular \
+	l_specular.b = light_color->b * light_ray->inter_obj->k_specular \
 		* ratio * ((1 - light_ray->inter_obj->k_plastic) \
 			* light_ray->l_surface.b + light_ray->inter_obj->k_plastic);
 	return (l_specular);
 }
 
-t_color3f	compute_diffuse(t_ray *light_ray, t_light *light)
+t_color3f	compute_diffuse(t_ray *light_ray, t_color3f *light_color)
 {
 	t_color3f	l_diffuse;
 
-	l_diffuse.r = light->color.r * light_ray->theta \
+	l_diffuse.r = light_color->r * light_ray->theta \
 		* light_ray->l_surface.r * light_ray->inter_obj->k_diffuse;
-	l_diffuse.g = light->color.g * light_ray->theta \
+	l_diffuse.g = light_color->g * light_ray->theta \
 		* light_ray->l_surface.g * light_ray->inter_obj->k_diffuse;
-	l_diffuse.b = light->color.b * light_ray->theta \
+	l_diffuse.b = light_color->b * light_ray->theta \
 		* light_ray->l_surface.b * light_ray->inter_obj->k_diffuse;
 	return (l_diffuse);
 }
@@ -83,8 +83,8 @@ t_color3f	compute_lights(t_data *data, t_ray *ray, t_light *light)
 		check_inter(data, ray);
 		if (ray->t >= ray->t_max || ray->t == 0)
 		{
-			color_add(&ray->l_final, compute_diffuse(ray, light));
-			color_add(&ray->l_final, compute_specular(ray, light));
+			color_add(&ray->l_final, compute_diffuse(ray, &light->_color));
+			color_add(&ray->l_final, compute_specular(ray, &light->_color));
 		}
 	}
 	return (ray->l_final);

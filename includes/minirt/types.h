@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 18:28:06 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/25 15:09:27 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct s_light {
 	t_color3f	color;
 	double		ratio;
 	t_coord3f	origin;
-	t_color3f	_ambiant;
+	t_color3f	_color;
 }				t_light;
 
 /// @brief
@@ -170,6 +170,7 @@ typedef struct s_scene {
 	t_list				*objects;
 	t_list				*lights;
 	t_list				*moves;
+	t_list				*lights_obj;
 	struct s_data		*data;
 }				t_scene;
 
@@ -211,9 +212,12 @@ typedef struct s_object {
 	double				k_roughness;
 	double				k_reflexion;
 	double				i_refraction;
-	t_color3f			color_diffuse;
-	t_color3f			color_ambiant;
-	t_color3f			color_specular;
+	double				k_light;
+	double				k_glow;
+	t_color3f			color_light;
+	t_color3f			_light;
+	t_color3f			color_glow;
+	t_color3f			_glow;
 	t_texture			texture;
 	double				angle;
 	struct s_data		*data;

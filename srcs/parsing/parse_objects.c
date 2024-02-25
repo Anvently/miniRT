@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 17:04:33 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/25 15:11:34 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,13 @@ int	scene_parse_obj_properties(t_object *object, int nbr,
 		&& scene_parse_ratio(ptr, &object->k_specular))
 		return (error_parsing("object specular light reflexion",
 				nbr, line, NULL), 1);
+	else if (parse_cmp("glow-ratio:", ptr)
+		&& scene_parse_ratio(ptr, &object->k_glow))
+		return (error_parsing("object glowing ratio",
+				nbr, line, NULL), 1);
+	else if (parse_cmp("glow-color:", ptr)
+		&& scene_parse_color(ptr, &object->color_glow))
+		return (error_parsing("object glowing color", nbr, line, NULL), 1);
 	else if (scene_parse_obj_properties2(object, nbr, ptr, line))
 		return (1);
 	return (0);
@@ -104,6 +111,13 @@ int	scene_parse_obj_properties2(t_object *object, int nbr,
 		&& (scene_parse_double(ptr, &object->k_roughness)
 			|| object->k_roughness < 1.0))
 		return (error_parsing("object roughness", nbr, line, NULL), 1);
+	else if (parse_cmp("light-ratio:", ptr)
+		&& scene_parse_ratio(ptr, &object->k_light))
+		return (error_parsing("object light emission ratio",
+				nbr, line, NULL), 1);
+	else if (parse_cmp("light-color:", ptr)
+		&& scene_parse_light_obj(ptr, object))
+		return (error_parsing("object light color", nbr, line, NULL), 1);
 	else if (**ptr && ft_isspace(**ptr) == false)
 		return (error_parsing("unknown property", nbr, line, *ptr), 1);
 	return (0);

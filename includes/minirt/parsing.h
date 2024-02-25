@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 17:42:12 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/25 15:09:05 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		scene_parse_obj_properties(t_object *object, int nbr,
 			char **ptr, char *line);
 int		scene_parse_obj_properties2(t_object *object, int nbr,
 			char **ptr, char *line);
+int		scene_parse_light_obj(char **ptr, t_object *obj);
 /* -------------------------------- TEXTURES -------------------------------- */
 
 int		scene_parse_texture(char **ptr, t_object *object, int nbr, char *line);

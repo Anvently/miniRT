@@ -14,11 +14,12 @@ Changements:
 		- si id n'est pas donne ou id==0, id est genere aleatoirement (avec srand)
 - ajout des t_move et du parsing qui va avec
 	- voir notes.txt pour le fonctionnement
+- ajout des objets "glowing" (brille dans le noir mais n'emettent aucune lumière)
+- ajout des objets "light" => se comportent comme une source lumineuse.
 
 Quelques problemes :
 	- l'interieur des cones a l'air de recevoir la lumiere diffuse
 	- sur la scene du systeme solaire, lorsqu'on place la camera au dessus du systeme sur l'axe z,
 			elle ne regarde pas au bon endroit
-	- si on met un soleil transparent, on voit la terre de l'autre cote, il faudrait mettre en place
-			des objets qui diffuse de la lumiere (les considerer comme des sources de lumieres) pour
-			simuler un vrai soleil
+	- lorsqu'on est à l'intérieur d'une sphere, les intersections avec elle-même ne
+		semble pas être détectée.
