@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculus.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/23 10:41:26 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:42:05 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #endif
 
 #ifndef T_MIN
-# define T_MIN 0.00000001f
+# define T_MIN 0.0000000001f
 #endif
 
 /*-------GEOMETRY OPE-------*/
@@ -41,6 +41,7 @@ int			linear_solver(double a, double b, double *t);
 t_vec3f		get_inter_point(t_ray *ray, double t);
 void		display_vector(t_vec3f	*vec);
 double		sign(double x);
+int			quadra_cone_solver(t_double3 *coeff, t_double3 *t);
 /*-----PLANE----------*/
 void		plane_intersec(t_object *plane, t_ray *ray);
 /*-------SPHERE----------------*/
