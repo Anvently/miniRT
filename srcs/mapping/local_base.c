@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   local_base.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 10:35:00 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/23 10:56:32 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 14:33:55 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,3 @@ void	get_local_base(t_object *obj)
 	new_dir.z = 0;
 	obj->loc_y = vec3f_matrix3f(&new_dir, &m);
 }
-
-

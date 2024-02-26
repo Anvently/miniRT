@@ -6,10 +6,9 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:36:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 13:46:57 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:37:25 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <minirt/minirt.h>
 #include <minirt/calculus.h>

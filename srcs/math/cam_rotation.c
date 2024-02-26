@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:10:46 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 12:26:00 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:36:44 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,3 @@ t_matrix3f	cam_rotation(t_vec3f *dir)
 	m = matrix_product(&m_y, &m_x);
 	return (m);
 }
-
-

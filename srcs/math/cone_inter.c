@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:41:22 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 13:50:20 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:32:12 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ static void	get_body_intersec(t_object *cone, t_ray *ray, t_double3 *coeff)
 		temp = vec3_diff(&ray->inter, &cone->origin);
 		temp = vector_product(&temp, &cone->orientation);
 		temp = vector_product(&cone->orientation, &temp);
-		temp = vec3_scale(&temp, cone->radius / lenght);
-		ray->normal = vec3_scale(&cone->orientation, cone->height / lenght);
+		temp = vec3_scale(&temp, cone->height / lenght);
+		ray->normal = vec3_scale(&cone->orientation, cone->radius / lenght);
 		ray->normal = vec3_sum(&temp, &ray->normal);
 		normalize_vec(&temp);
-		if (scalar_product(&ray->normal, &ray->dir) >= 0)
+		if (scalar_product(&ray->normal, &ray->dir) >= 0.0)
 			ray->normal = vec3_scale(&ray->normal, -1);
 		if (ray->type != LIGHT_RAY)
 			ray->inter_obj = cone;
@@ -116,7 +116,7 @@ void	cone_intersec(t_object *cone, t_ray *ray)
 		ray->inter = get_inter_point(ray, t_cap);
 		ray->normal = vec3_scale(&cone->orientation, -1);
 		normalize_vec(&ray->normal);
-		if (scalar_product(&ray->inter, &ray->normal) >= 0)
+		if (scalar_product(&ray->inter, &ray->normal) >= ray->t_min)
 		{
 			ray->normal = vec3_scale(&ray->normal, -1);
 

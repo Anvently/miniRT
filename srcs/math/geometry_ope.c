@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:53:31 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 13:37:48 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:35:15 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@ void	normalize_vec(t_vec3f *t_u)
 
 	if (t_u->x == 0 && t_u->y == 0 && t_u->z == 0)
 		return ;
-
 	norm = sqrt(scalar_product(t_u, t_u));
 	t_u->x /= norm;
 	t_u->y /= norm;
 	t_u->z /= norm;
 }
-
 
 t_vec3f	vector_product(t_vec3f *t_u, t_vec3f *t_v)
 {
@@ -64,8 +62,3 @@ t_vec3f	vec3_diff(t_vec3f *t_u, t_vec3f *t_v)
 	t_w.z = t_u->z - t_v->z;
 	return (t_w);
 }
-
-
-
-
-

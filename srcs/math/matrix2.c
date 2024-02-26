@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:11:25 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 13:38:23 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:35:45 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_matrix3f	matrix_product(t_matrix3f *a, t_matrix3f *b)
 	t_matrix3f	t_b;
 
 	t_b = matrix_transpose(b);
-
 	c.m0[0] = row_col_sum(a->m0, t_b.m0);
 	c.m0[1] = row_col_sum(a->m0, t_b.m1);
 	c.m0[2] = row_col_sum(a->m0, t_b.m2);

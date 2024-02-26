@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:07:32 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 18:30:55 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:37:15 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	exec_move(t_scene *scene, t_move *move, double render_time)
 	else if (move->type == MV_Rs)
 		transform_objects(scene->data, NULL, \
 			factor * move->value.z, move->target);
-
 }
 
 void	scene_move(t_scene *scene, double render_time)

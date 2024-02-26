@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:20:20 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 13:38:47 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:36:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,4 @@ void	sphere_intersec(t_object *sphere, t_ray *ray)
 			ray->inter_obj = sphere;
 		sphere_normal(sphere, ray);
 	}
-
 }
-

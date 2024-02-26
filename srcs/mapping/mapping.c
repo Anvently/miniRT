@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:31:16 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/23 14:54:28 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:34:49 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,3 @@ t_double2	revolution_map(t_object *obj, t_vec3f *p)
 	map_coord.y = local_coord.z / obj->height;
 	return (map_coord);
 }
-
-
-// int	main(void)
-// {
-// 	t_object	cy;
-// 	t_vec3f		p;
-
-// 	ft_memset(&cy, 0, sizeof(t_object));
-// 	cy.loc_x.x = 1;
-// 	cy.loc_y.y = 1;
-// 	p.x = -1;
-// 	p.y = 0;
-// 	normalize_vec(&p);
-// 	cy.orientation.z = 1;
-// 	t_double2	map = revolution_map(&cy, &p);
-// 	printf("u:%f, v:%f\n", map.x, map.y);
-// }

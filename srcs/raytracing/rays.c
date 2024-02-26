@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 13:42:02 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:36:55 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,3 @@ t_ray	generate_ray(t_coord2f *pxl, t_data *data)
 	normalize_vec(&ray.dir);
 	return (ray);
 }
-
