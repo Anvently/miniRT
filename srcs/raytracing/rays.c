@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 14:36:55 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:08:12 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,26 @@ void	launch_ray(t_data *data, t_ray *ray)
 	t_color3f	l_refract;
 
 	check_inter(data, ray);
-	if (ray->inter_obj)
+	if (ray->inter_obj == NULL)
+		return ;
+	ray->inter = get_inter_point(ray, ray->t);
+	ray->l_surface = (*ray->inter_obj->texture.get_color) \
+		(ray->inter_obj, &ray->inter);
+	check_luminosity(data, ray);
+	if (ray->inter_obj->k_reflexion > 0.01 && ray->nbr_bounce < 3)
 	{
-		ray->inter = get_inter_point(ray, ray->t);
-		ray->l_surface = (*ray->inter_obj->texture.get_color) \
-			(ray->inter_obj, &ray->inter);
-		check_luminosity(data, ray);
-		if (ray->inter_obj->k_reflexion > 0.0 && ray->nbr_bounce < 3)
-		{
-			l_reflect = get_reflect_color(data, ray);
-			l_refract = get_refract_color(data, ray);
-			l_reflect = color_ratio(&l_reflect, ray->inter_obj->k_reflexion);
-			l_refract = color_ratio(&l_refract,
-					1.f - ray->inter_obj->k_reflexion);
-			color_add(&ray->l_final, l_reflect);
-			color_add(&ray->l_final, l_refract);
-		}
-		color_unsature(&ray->l_final);
+		l_reflect = get_reflect_color(data, ray);
+		color_add(&ray->l_final,
+			color_ratio(&l_reflect, ray->inter_obj->k_reflexion));
 	}
+	if (ray->inter_obj->k_reflexion > 0.f
+		&& ray->inter_obj->k_reflexion < 0.99 && ray->nbr_bounce < 3)
+	{
+		l_refract = get_refract_color(data, ray);
+		color_add(&ray->l_final, color_ratio(&l_refract,
+				1.f - ray->inter_obj->k_reflexion));
+	}
+	color_unsature(&ray->l_final);
 }
 
 t_ray	generate_ray(t_coord2f *pxl, t_data *data)

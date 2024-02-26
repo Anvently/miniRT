@@ -46,7 +46,7 @@ DEPS		=	$(LIBFT) $(LIBMLX) $(HEADERS)
 CC			=	cc
 STATIC_LINK	=	-Llibft/ -lft -Llibmlx/ -lmlx -lXext -lX11 -lm
 CFLAGS		=	-Wall -Wextra -Werror -g3 -I$(INCLUDES)
-CFLAGS_OPTI		=	-Wall -Wextra -Werror -O3 -I$(INCLUDES)
+CFLAGS_OPTI	=	-Wall -Wextra -Werror -O3 -I$(INCLUDES)
 
 
 .PHONY		=	all clean fclean test re bonus

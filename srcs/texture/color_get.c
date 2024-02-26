@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:36:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 14:37:25 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 18:00:46 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,17 @@ t_color3f	texture_get_cylinder_dame(void *obj, t_double3 *coord)
 
 t_color3f	texture_get_cone_dame(void *obj, t_double3 *coord)
 {
-	(void)coord;
-	return (((t_object *)obj)->texture.color1);
+	t_object	*pt;
+	t_double2	text_coord;
+	double		square_size;
+	int			pixel;
+
+	pt = (t_object *) obj;
+	text_coord = revolution_map(obj, coord);
+	square_size = 1 / (double) pt->texture.resolution;
+	pixel = get_pixel_dame(&text_coord, square_size);
+	if (pixel % 2 == 0)
+		return (pt->texture.color1);
+	else
+		return (pt->texture.color2);
 }

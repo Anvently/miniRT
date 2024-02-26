@@ -1,0 +1,36 @@
+A 0.6 255,255,255
+C 0,0,0 1,0,0 70
+L 0,-15,0 1.0 255,255,255
+
+co id:3 origin:5,0,0.5 orientation:0,0,1 texture:D:255,255,255:250,10,0:15 ks:0.2 height:2
+
+sp id:2 origin:5,0,0 texture:I:face.xpm diameter:2
+cy id:2 origin:5,0,-1 orientation:0,0,1 diameter:1.2 height:0.5 texture:S:250,204,153
+
+sp id:2 origin:5,0,-3 diameter:4.0 texture:S:250,204,153 rf:0.00 ri:1.05 kd:1.0 ks:0
+
+co id:2 origin:5,0,-6 orientation:0,0,1 texture:D:255,255,255:250,10,0:40 diameter:3.0 height:4.0
+
+sp id:2 origin:7,0,-2. diameter:1.0 texture:S:250,204,153
+sp id:2 origin:3,0,-2 diameter:1.0 texture:S:250,204,153
+
+cy id:2 origin:7.4,0,-3 orientation:-0.3,0,1.0 diameter:0.5 height:1.7 texture:S:250,204,153
+cy id:2 origin:2.6,0,-3 orientation:0.3,0,1.0 diameter:0.5 height:1.7 texture:S:250,204,153
+
+sp id:2 origin:7.7,0,-3.7. diameter:0.8 texture:S:250,204,153
+sp id:2 origin:2.3,0,-3.7 diameter:0.8 texture:S:250,204,153
+
+cy id:2 origin:7.7,0,-4.5 orientation:0,0,1.0 diameter:0.5 height:1.5 texture:S:250,204,153
+cy id:2 origin:2.3,0,-4.5 orientation:0,0,1.0 diameter:0.5 height:1.5 texture:S:250,204,153
+
+cy id:2 origin:5.7,0,-7 orientation:-0.075,0,1.0 diameter:0.7 height:4.4 texture:S:250,204,153
+cy id:2 origin:4.3,0,-7 orientation:0.075,0,1.0 diameter:0.7 height:4.4 texture:S:250,204,153
+
+sp id:2 origin:5.7,-0.15,-7 diameter:0.8 texture:S:250,204,153
+sp id:2 origin:4.3,-0.15,-7 diameter:0.8 texture:S:250,204,153
+
+move target:3 type:R value:0,0,1 speed:1
+move target:3 type:Rs value:0,0,-1 speed:2
+move target:2 type:R value:0,0,1 speed:1
+
+//pl origin:0,0,10 orientation:0,0,1 texture:S:250,250,250
