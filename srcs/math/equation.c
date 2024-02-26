@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:18:35 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 16:51:23 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 17:47:41 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	display_vector(t_vec3f	*vec)
 {
 	printf("x:%f || y:%f || z:%f\n", vec->x, vec->y, vec->z);
 }
+
 int	quadra_cone_solver(t_double3 *coeff, t_double3 *t)
 {
 	double	delta;
@@ -96,7 +97,7 @@ int	quadra_cone_solver(t_double3 *coeff, t_double3 *t)
 	delta = half_b * half_b - coeff->z;
 	if (delta < 0)
 		return (0);
-	t->x = - half_b + sqrt(delta);
-	t->y = - 2 * half_b - t->x;
+	t->x = -half_b + sqrt(delta);
+	t->y = -2 * half_b - t->x;
 	return (1);
 }
