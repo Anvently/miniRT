@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   equation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:18:35 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 13:37:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 16:51:23 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,23 @@ t_vec3f	get_inter_point(t_ray *ray, double t)
 void	display_vector(t_vec3f	*vec)
 {
 	printf("x:%f || y:%f || z:%f\n", vec->x, vec->y, vec->z);
+}
+int	quadra_cone_solver(t_double3 *coeff, t_double3 *t)
+{
+	double	delta;
+	double	half_b;
+
+	if (coeff->x == 0)
+	{
+		t->y = -1.0f;
+		return (linear_solver(coeff->y, coeff->z, &t->x));
+	}
+	half_b = 0.5f * coeff->y / coeff->x;
+	coeff->z = coeff->z / coeff->x;
+	delta = half_b * half_b - coeff->z;
+	if (delta < 0)
+		return (0);
+	t->x = - half_b + sqrt(delta);
+	t->y = - 2 * half_b - t->x;
+	return (1);
 }
