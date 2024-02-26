@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 13:33:26 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 15:44:23 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	handle_close(t_data *data)
 	ft_lstclear(&data->scene.lights, &free);
 	ft_lstclear(&data->scene.moves, &free);
 	ft_lstclear(&data->scene.objects, &free);
+	ft_lstclear(&data->scene.lights_obj, NULL);
 	exit(0);
 }
 
