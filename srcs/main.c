@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 18:23:36 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 10:19:42 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <X11/X.h>
 #include <libft.h>
 #include <math.h>
+#include <minirt/calculus.h>
 
 static int	display_init(t_data *data)
 {
@@ -73,6 +74,7 @@ int	main(int argc, char **argv)
 	t_scene_print(&data.scene);
 	normalize_scene(&data.scene);
 	init_camera(&data);
+	translate_scene(&data, &data.scene.camera.origin);
 	transform_scene(&data, &data.scene.matrix, 0.0);
 	mlx_loop(data.mlx);
 	handle_close(&data);

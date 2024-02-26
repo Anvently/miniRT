@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:50:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 18:31:51 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 10:12:37 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,32 @@ static void	transform_lights(t_data *data, t_matrix3f *matrix)
 		light->origin = vec3f_matrix3f(&light->origin, matrix);
 		node = node->next;
 	}
+}
+
+void	translate_scene(t_data *data, t_vec3f *dir)
+{
+	t_list		*node;
+	t_object	*obj;
+	t_light		*light;
+
+	node = data->scene.objects;
+	while (node)
+	{
+		obj = (t_object *)node->content;
+		obj->origin = vec3_diff(&obj->origin, dir);
+		obj->top = vec3_diff(&obj->top, dir);
+		node = node->next;
+	}
+	node = data->scene.lights;
+	while (node)
+	{
+		light = (t_light *)node->content;
+		light->origin = vec3_diff(&light->origin, dir);
+		node = node->next;
+	}
+	data->scene.camera.origin.x = 0;
+	data->scene.camera.origin.y = 0;
+	data->scene.camera.origin.z = 0;
 }
 
 void	transform_scene(t_data *data, t_matrix3f *matrix, double angle)

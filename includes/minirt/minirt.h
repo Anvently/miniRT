@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/25 14:20:48 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 10:05:19 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void		img_update_camera(t_data *data);
 void		transform_scene(t_data *data, t_matrix3f *matrix, double angle);
 void		transform_objects(t_data *data, t_matrix3f *matrix,
 				double angle, int target);
+void	translate_scene(t_data *data, t_vec3f *dir);
 
 /* -------------------------------------------------------------------------- */
 /*                                    MOVES                                   */
