@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_inter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 13:36:43 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:20:58 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 		if (ray->type != LIGHT_RAY)
 			ray->inter_obj = cylinder;
 		normalize_vec(&ray->normal);
+		if (scalar_product(&ray->normal, &ray->dir) > 0)
+			ray->normal = vec3_scale(&ray->normal, -1);
 	}
 	if (top_cap_intersec(cylinder, ray, &t_cap)
 		&& t_cap < ray->t && t_cap > ray->t_min)
@@ -96,6 +98,8 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 		if (ray->type != LIGHT_RAY)
 			ray->inter_obj = cylinder;
 		normalize_vec(&ray->normal);
+		if (scalar_product(&ray->normal, &ray->dir) > 0)
+			ray->normal = vec3_scale(&ray->normal, -1);
 	}
 	tube_intersec(cylinder, ray);
 }
