@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:41:22 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 16:52:35 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 17:18:25 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <minirt/calculus.h>
 #include <libft.h>
 #include <math.h>
-
 
 // int	check_sol_body(t_object *cone, t_vec3f *sol)
 // {
@@ -154,7 +153,7 @@ void	cone_intersec(t_object *cone, t_ray *ray)
 		ray->inter = get_inter_point(ray, t_cap);
 		ray->normal = vec3_scale(&cone->orientation, -1);
 		normalize_vec(&ray->normal);
-		if (scalar_product(&ray->inter, &ray->normal) > T_MIN)
+		if (scalar_product(&ray->dir, &ray->normal) > T_MIN)
 			ray->normal = vec3_scale(&ray->normal, -1);
 		if (ray->type != LIGHT_RAY)
 			ray->inter_obj = cone;
