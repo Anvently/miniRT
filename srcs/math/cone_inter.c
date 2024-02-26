@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:41:22 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/22 16:36:52 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:35:01 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ void	cone_intersec(t_object *cone, t_ray *ray)
 	double	t_cap;
 
 	t_cap = 0.0;
-	if (base_intersect(cone, ray, &t_cap) && t_cap > ray->t_min && t_cap < ray->t)
+	if (base_intersect(cone, ray, &t_cap) && t_cap > ray->t_min
+		&& t_cap < ray->t)
 	{
 		ray->t = t_cap;
 		ray->normal = vec3_scale(&cone->orientation, -1);

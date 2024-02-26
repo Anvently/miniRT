@@ -6,12 +6,12 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:04:58 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 18:38:56 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:37:53 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt/calculus.h"
-#include "../../includes/minirt/types.h"
+#include <minirt/minirt.h>
+#include <minirt/calculus.h>
 
 t_vec3f	vec3_scale(t_vec3f *vector, double scale)
 {

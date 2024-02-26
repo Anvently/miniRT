@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:50:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 10:12:37 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 13:28:11 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,6 @@ void	transform_objects(t_data *data, t_matrix3f *matrix,
 	}
 }
 
-void	transform_angle(t_data *data, double angle)
-{
-	t_list		*node;
-	t_object	*obj;
-
-	node = data->scene.objects;
-	while (node)
-	{
-		obj = (t_object *)node->content;
-		if (obj->type == SPHERE)
-			obj->angle += angle;
-		node = node->next;
-	}
-}
-
 static void	transform_lights(t_data *data, t_matrix3f *matrix)
 {
 	t_list		*node;
@@ -66,6 +51,20 @@ static void	transform_lights(t_data *data, t_matrix3f *matrix)
 	{
 		light = (t_light *)node->content;
 		light->origin = vec3f_matrix3f(&light->origin, matrix);
+		node = node->next;
+	}
+}
+
+static void	tranform_moves(t_data *data, t_matrix3f *matrix)
+{
+	t_list	*node;
+	t_move	*move;
+
+	node = data->scene.moves;
+	while (node)
+	{
+		move = (t_move *)node->content;
+		move->value = vec3f_matrix3f(&move->value, matrix);
 		node = node->next;
 	}
 }
@@ -100,4 +99,5 @@ void	transform_scene(t_data *data, t_matrix3f *matrix, double angle)
 {
 	transform_objects(data, matrix, angle, 0);
 	transform_lights(data, matrix);
+	tranform_moves(data, matrix);
 }

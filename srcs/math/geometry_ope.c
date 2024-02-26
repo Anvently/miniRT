@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   geometry_ope.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:53:31 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/14 17:54:39 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 13:37:48 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt/calculus.h"
-#include "../../includes/minirt/types.h"
+#include <minirt/minirt.h>
+#include <minirt/calculus.h>
 
 double	scalar_product(t_vec3f *t_u, t_vec3f *t_v)
 {

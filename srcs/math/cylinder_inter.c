@@ -6,12 +6,12 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/22 16:37:12 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:36:43 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt/types.h"
-#include "../../includes/minirt/calculus.h"
+#include <minirt/minirt.h>
+#include <minirt/calculus.h>
 
 int	check_sol_tube(t_object *cyld, t_vec3f *sol)
 {
@@ -29,17 +29,19 @@ int	check_sol_tube(t_object *cyld, t_vec3f *sol)
 	return (0);
 }
 
-void	get_tube_intersec(t_object *cyld, t_ray *ray, t_vec3f *v_a, t_vec3f *v_o)
+void	get_tube_intersec(t_object *cyld, t_ray *ray,
+			t_vec3f *v_a, t_vec3f *v_o)
 {
 	t_double3	coefficients;
-	double	t;
-	t_vec3f	temp;
+	double		t;
+	t_vec3f		temp;
 
 	t = 0.0;
 	coefficients.x = scalar_product(v_a, v_a);
 	coefficients.y = 2 * scalar_product(v_a, v_o);
 	coefficients.z = scalar_product(v_o, v_o) - cyld->radius * cyld->radius;
-	if (quadra_solver(&coefficients, &t, ray->t_min) && t > ray->t_min && t < ray->t)
+	if (quadra_solver(&coefficients, &t, ray->t_min)
+		&& t > ray->t_min && t < ray->t)
 	{
 		temp = get_inter_point(ray, t);
 		if (!check_sol_tube(cyld, &temp))
@@ -77,7 +79,8 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 	double	t_cap;
 
 	t_cap = 0.0;
-	if (bot_cap_intersec(cylinder, ray, &t_cap) && t_cap < ray->t && t_cap > ray->t_min)
+	if (bot_cap_intersec(cylinder, ray, &t_cap)
+		&& t_cap < ray->t && t_cap > ray->t_min)
 	{
 		ray->t = t_cap;
 		ray->normal = vec3_scale(&cylinder->orientation, -1);
@@ -85,7 +88,8 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 			ray->inter_obj = cylinder;
 		normalize_vec(&ray->normal);
 	}
-	if (top_cap_intersec(cylinder, ray, &t_cap) && t_cap < ray->t && t_cap > ray->t_min)
+	if (top_cap_intersec(cylinder, ray, &t_cap)
+		&& t_cap < ray->t && t_cap > ray->t_min)
 	{
 		ray->t = t_cap;
 		ray->normal = cylinder->orientation;

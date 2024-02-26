@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:22:55 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/25 15:09:26 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:39:28 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void	check_light_obj(t_data *data, t_ray *ray)
 	while (node)
 	{
 		obj = (t_object *)node->content;
-		color_add(&ray->l_final, compute_lights_obj(data, &ray_to_obj, obj));
+		if (obj != ray->inter_obj)
+			color_add(&ray->l_final,
+				compute_lights_obj(data, &ray_to_obj, obj));
 		node = node->next;
 	}
 }
@@ -94,16 +96,3 @@ void	check_luminosity(t_data *data, t_ray *ray)
 	check_lights(data, ray);
 	check_light_obj(data, ray);
 }
-
-// t_color	get_ray_color(t_ray *ray)
-// {
-// 	t_color	color;
-// 	double	a;
-
-// 	a = 0.5 * (ray->dir.y + 1.0);
-// 	color.r = (1.0 - a) * 208 + a * 127;
-// 	color.g = (1.0 - a) * 44 + a * 94;
-// 	color.b = (1.0 - a) * 44 + a * 94;
-// 	return (color);
-// }
-

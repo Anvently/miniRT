@@ -6,12 +6,12 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:20:20 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/22 16:36:16 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:38:47 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minirt/minirt.h>
-#include "../../includes/minirt/calculus.h"
+#include <minirt/calculus.h>
 
 void	sphere_normal(t_object *sphere, t_ray *ray)
 {

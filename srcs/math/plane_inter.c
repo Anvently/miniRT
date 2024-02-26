@@ -6,12 +6,12 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:56:02 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/21 17:18:21 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:38:36 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt/types.h"
-#include "../../includes/minirt/calculus.h"
+#include <minirt/minirt.h>
+#include <minirt/calculus.h>
 
 
 /// @brief check if a given ray intersect a given plane.

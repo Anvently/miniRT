@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:15:19 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 18:16:41 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:46:29 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ void		t_texture_free(void *texture_ptr);
 /* ---------------------------------- PRINT --------------------------------- */
 
 void		t_scene_print(t_scene *scene);
-void		t_camera_print(t_camera *camera);
-void		t_light_print(t_light *light);
-void		t_object_print(t_object *object);
+void		t_camera_print(void *camera_ptr);
+void		t_light_print(void *light_ptr);
+void		t_texture_print(t_texture *texture);
+void		t_object_properties_print(t_object *obj);
+void		t_object_print(void *object_ptr);
+void		t_move_print(void *move_ptr);
 
 #endif

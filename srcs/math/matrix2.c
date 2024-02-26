@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:11:25 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/20 13:37:14 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 13:38:23 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <libft.h>
 #include <math.h>
 
-double	row_col_sum(double row[3],double col[3])
+double	row_col_sum(double row[3], double col[3])
 {
 	double	sigma;
 	int		i;
@@ -30,7 +30,7 @@ double	row_col_sum(double row[3],double col[3])
 	return (sigma);
 }
 
-t_matrix3f matrix_product(t_matrix3f *a, t_matrix3f *b)
+t_matrix3f	matrix_product(t_matrix3f *a, t_matrix3f *b)
 {
 	t_matrix3f	c;
 	t_matrix3f	t_b;

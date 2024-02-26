@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   equation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:18:35 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/21 10:08:23 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 13:37:30 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt/calculus.h"
-#include "../../includes/minirt/types.h"
+#include <minirt/minirt.h>
+#include <minirt/calculus.h>
 
 /// @brief find the eventual positivive solution of the equation at + b = 0
 /// @param a the linear term
@@ -32,7 +32,9 @@ int	linear_solver(double a, double b, double *t)
 	else
 		return (0);
 }
-/// @brief Find the eventual solution of at^2 + bt + c = 0 and keeps the smallest positive one
+
+/// @brief Find the eventual solution of at^2 + bt + c = 0 and
+/// keeps the smallest positive one
 /// @param a the quadratic term
 /// @param b the linear term
 /// @param c the constant term
@@ -52,9 +54,9 @@ int	quadra_solver(t_double3 *coeff, double *t, double t_min)
 	delta = half_b * half_b - coeff->z;
 	if (delta < 0)
 		return (0);
-	sol1 = - half_b + sqrt(delta);
-	sol2 = - 2 * half_b - sol1;
-	if ( coeff->z >= 0 && sol1 >= 0 && sol2 >= t_min)
+	sol1 = -half_b + sqrt(delta);
+	sol2 = -2 * half_b - sol1;
+	if (coeff->z >= 0 && sol1 >= 0 && sol2 >= t_min)
 		*t = sol2;
 	else if (coeff->z >= 0 && sol1 >= 0 && sol2 < t_min)
 		*t = sol1;
