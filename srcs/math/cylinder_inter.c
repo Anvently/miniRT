@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 17:20:58 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 17:46:24 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ void	get_tube_intersec(t_object *cyld, t_ray *ray,
 			return ;
 		ray->t = t;
 		ray->inter = temp;
-		temp = vec3_diff(&ray->inter, &cyld->origin);
-		temp = vector_product(&temp, &cyld->orientation);
-		temp = vector_product(&cyld->orientation, &temp);
-		normalize_vec(&temp);
-		ray->normal = temp;
+		ray->normal = vec3_diff(&ray->inter, &cyld->origin);
+		ray->normal = vector_product(&temp, &cyld->orientation);
+		ray->normal = vector_product(&cyld->orientation, &temp);
+		normalize_vec(&ray->normal);
 		if (scalar_product(&ray->normal, &ray->dir) >= 0)
 			ray->normal = vec3_scale(&ray->normal, -1);
 		if (ray->type != LIGHT_RAY)
@@ -74,6 +73,21 @@ void	tube_intersec(t_object *cyld, t_ray *ray)
 	get_tube_intersec(cyld, ray, &v_a, &v_o);
 }
 
+void	cylinder_top_cap(t_object *cylinder, t_ray *ray, double t_cap)
+{
+	if (top_cap_intersec(cylinder, ray, &t_cap)
+		&& t_cap < ray->t && t_cap > ray->t_min)
+	{
+		ray->t = t_cap;
+		ray->normal = cylinder->orientation;
+		if (ray->type != LIGHT_RAY)
+			ray->inter_obj = cylinder;
+		normalize_vec(&ray->normal);
+		if (scalar_product(&ray->normal, &ray->dir) > 0)
+			ray->normal = vec3_scale(&ray->normal, -1);
+	}
+}
+
 void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 {
 	double	t_cap;
@@ -90,16 +104,6 @@ void	cylinder_intersec(t_object *cylinder, t_ray *ray)
 		if (scalar_product(&ray->normal, &ray->dir) > 0)
 			ray->normal = vec3_scale(&ray->normal, -1);
 	}
-	if (top_cap_intersec(cylinder, ray, &t_cap)
-		&& t_cap < ray->t && t_cap > ray->t_min)
-	{
-		ray->t = t_cap;
-		ray->normal = cylinder->orientation;
-		if (ray->type != LIGHT_RAY)
-			ray->inter_obj = cylinder;
-		normalize_vec(&ray->normal);
-		if (scalar_product(&ray->normal, &ray->dir) > 0)
-			ray->normal = vec3_scale(&ray->normal, -1);
-	}
+	cylinder_top_cap(cylinder, ray, t_cap);
 	tube_intersec(cylinder, ray);
 }

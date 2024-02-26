@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 16:52:10 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 17:51:00 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ int			linear_solver(double a, double b, double *t);
 t_vec3f		get_inter_point(t_ray *ray, double t);
 void		display_vector(t_vec3f	*vec);
 double		sign(double x);
+int			quadra_cone_solver(t_double3 *coeff, t_double3 *t);
 
 /* ---------------------------------- PLANE --------------------------------- */
 
-int			quadra_cone_solver(t_double3 *coeff, t_double3 *t);
-/*-----PLANE----------*/
 void		plane_intersec(t_object *plane, t_ray *ray);
 
 /* --------------------------------- SPHERE --------------------------------- */
@@ -63,6 +62,8 @@ void		cylinder_intersec(t_object *cylinder, t_ray *ray);
 /* ---------------------------------- CONE ---------------------------------- */
 
 void		cone_intersec(t_object *cone, t_ray *ray);
+int			examine_sol(t_double3 *t, t_object *cone, t_ray *ray);
+int			check_sol_body(t_object *cone, t_vec3f *sol);
 
 /* --------------------------------- MATRIX --------------------------------- */
 
