@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:37:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/19 11:17:13 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:56:47 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	img_update_chunk(t_data *data)
 	{
 		data->threads_nbr = get_inf_multiple(data->img_chunk_nbr,
 				data->threads_nbr);
-		printf("%d threads\n", data->threads_nbr);
 	}
 	data->thread_chunk_nbr = data->img_chunk_nbr / data->threads_nbr;
 	return (0);

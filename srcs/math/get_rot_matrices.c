@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:32:09 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/19 18:01:07 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:38:01 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,30 +90,3 @@ t_matrix3f	rotation_matrix(t_vec3f	*cam_dir)
 	theta = acos(cross_product);
 	return (get_rotation_matrix(&axis, theta));
 }
-
-// int	main(void)
-// {
-// 	t_vec3f	dir;
-// 	t_vec3f	ux;
-// 	t_matrix3f	mat;
-// 	// t_matrix3f	rot;
-
-// 	ux.x = 0.36;
-// 	ux.y = 0.48;
-// 	ux.z = -0.80;
-// 	normalize_vec(&ux);
-// 	mat.m0[0] = 0.36;
-// 	mat.m0[1] = 0.48;
-// 	mat.m0[2] = -0.80;
-// 	mat.m1[0] = -0.80;
-// 	mat.m1[1] = 0.60;
-// 	mat.m1[2] = 0.00;
-// 	mat.m2[0] = 0.48;
-// 	mat.m2[1] = 0.64;
-// 	mat.m2[2] = 0.60;
-// 	dir = vec3f_mat3(&ux, &mat);
-// 	double theta = scalar_product(&ux, &dir);
-// 	theta = acos(theta);
-// 	printf("%f\n", theta);
-
-// }

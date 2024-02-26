@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:29:45 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/25 14:08:49 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:06:15 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,4 @@ void	compute_ambiant(t_ray *ray, t_color3f *ambiant_color)
 		* ambiant_color->g;
 	ray->l_final.b = ray->l_surface.b * ray->inter_obj->k_ambiant
 		* ambiant_color->b;
-}
-
-t_color3f	compute_lights(t_data *data, t_ray *ray, t_light *light)
-{
-	ray->dir = vec3f_get_dir(&ray->origin, &light->origin);
-	ray->theta = scalar_product(&ray->dir, &ray->normal);
-	ray->t_max = sqrt(distance(&ray->origin, &light->origin)) - 0.000001;
-	ray->t = INFINITY;
-	if (ray->theta >= 0)
-	{
-		check_inter(data, ray);
-		if (ray->t >= ray->t_max || ray->t == 0)
-		{
-			color_add(&ray->l_final, compute_diffuse(ray, &light->_color));
-			color_add(&ray->l_final, compute_specular(ray, &light->_color));
-		}
-	}
-	return (ray->l_final);
 }

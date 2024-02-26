@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 09:55:29 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 13:32:51 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:34:12 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,36 +34,6 @@ t_color3f	color_average(t_color3f *colors, int size)
 	color.b /= size;
 	return (color);
 }
-
-// void	color_unsature(t_color3f *color)
-// {
-// 	double	*max_color;
-// 	double	factor;
-
-// 	max_color = (double *)ft_max(&color->r,
-// 			ft_max(&color->g, &color->b, sizeof(double)), sizeof(double));
-// 	if (*max_color <= 1.0)
-// 		return ;
-// 	printf("max color=%f\n", *max_color);
-// 	factor = 1.f / *max_color;
-// 	*max_color *= factor;
-// 	if (&color->r != max_color)
-// 		color->r *= factor;
-// 	if (&color->g != max_color)
-// 		color->g *= factor;
-// 	if (&color->b != max_color)
-// 		color->b *= factor;
-// }
-
-// void	color_unsature(t_color3f *color)
-// {
-// 	if (color->r > 1.0)
-// 		color->r = 1.0;
-// 	if (color->g > 1.0)
-// 		color->g = 1.0;
-// 	if (color->b > 1.0)
-// 		color->b = 1.0;
-// }
 
 void	color_unsature(t_color3f *color)
 {

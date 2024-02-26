@@ -6,13 +6,12 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:56:02 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/21 17:18:21 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:35:57 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt/types.h"
-#include "../../includes/minirt/calculus.h"
-
+#include <minirt/minirt.h>
+#include <minirt/calculus.h>
 
 /// @brief check if a given ray intersect a given plane.
 /// If so update the ray data.
@@ -40,4 +39,3 @@ void	plane_intersec(t_object *plane, t_ray *ray)
 			ray->normal = vec3_scale(&ray->normal, -1);
 	}
 }
-

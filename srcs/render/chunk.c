@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:44:43 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 09:29:17 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 15:40:03 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,10 @@ static void	render_low_res_chunk(t_data *data, int i)
 	t_coord2f	start;
 	t_color3f	color;
 
-	start.x = (i % data->img_chunk_cell_w) * data->img_chunk_size
-		+ data->img_chunk_size / 2;
-	start.y = (i / data->img_chunk_cell_w) * data->img_chunk_size
-		+ data->img_chunk_size / 2;
-	color = get_color(data, &start);
+	start.x = (i % data->img_chunk_cell_w) * data->img_chunk_size;
+	start.y = (i / data->img_chunk_cell_w) * data->img_chunk_size;
+	color = get_color(data, &(t_coord2f){start.x + data->img_chunk_size / 2, \
+		start.y + data->img_chunk_size / 2});
 	chunk_draw(data, &start, color_3f_int(&color));
 }
 

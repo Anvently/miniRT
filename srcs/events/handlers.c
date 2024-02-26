@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 17:41:29 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:33:26 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	handle_resize(t_data *data)
 	data->win_size.y = attr.height;
 	img_update(data);
 	img_update_chunk(data);
-	printf("Window size: x = %d, y = %d\n", attr.width, attr.height);
 	return (0);
 }
 

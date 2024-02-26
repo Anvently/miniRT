@@ -17,25 +17,17 @@ SRCS_FILES	=	main.c error.c \
 				parsing/parse_texture.c parsing/parse_texture2.c parsing/parse_move.c \
 				parsing/parse_value3.c \
 				struct/t_scene.c struct/print.c struct/t_object.c struct/t_texture.c \
+				struct/print2.c \
 				math/geometry_ope.c math/geometry_ope2.c math/cam_rotation.c \
 				math/plane_inter.c math/sphere_inter.c math/matrix2.c\
 				math/cylinder_inter.c math/cylinder_inter2.c math/get_rot_matrices.c \
 				math/cone_inter.c \
 				math/equation.c math/multiple.c math/matrix.c math/rotations.c \
 				raytracing/camera.c raytracing/rays.c raytracing/transform.c \
-				raytracing/light.c raytracing/light2.c \
+				raytracing/light.c raytracing/light2.c raytracing/rays2.c \
 				texture/img_texture.c texture/color_get.c texture/color_get2.c \
 				texture/utils_texture.c \
 				mapping/local_base.c mapping/mapping.c
-
-SRCS_TEST = 	math/geometry_ope.c math/geometry_ope2.c \
-				math/plane_inter.c math/sphere_inter.c\
-				math/cylinder_inter.c math/cylinder_inter2.c \
-				math/equation.c math/multiple.c math/matrix.c math/rotations.c \
-				math/get_rot_matrices.c math/cam_rotation.c math/matrix2.c \
-				struct/print.c \
-				mapping/local_base.c mapping/mapping.c \
-				texture/utils_texture.c texture/color_get.c
 
 OBJS		=	$(addprefix $(OBJS_FOLDER),$(SRCS_FILES:.c=.o))
 SRCS		=	$(addprefix $(SRCS_FOLDER),$(SRCS_FILES))

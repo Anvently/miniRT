@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:41:22 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 16:42:25 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 16:52:35 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,11 @@ static void	get_body_intersec(t_object *cone, t_ray *ray, t_double3 *coeff)
 		temp = vector_product(&cone->orientation, &temp);
 		temp = vec3_scale(&temp, cone->height / lenght);
 		ray->normal = vec3_scale(&cone->orientation, cone->radius / lenght);
+		temp = vec3_scale(&temp, cone->height / lenght);
+		ray->normal = vec3_scale(&cone->orientation, cone->radius / lenght);
 		ray->normal = vec3_sum(&temp, &ray->normal);
 		normalize_vec(&temp);
-		if (scalar_product(&ray->normal, &ray->dir) >= 0)
+		if (scalar_product(&ray->normal, &ray->dir) >= 0.0)
 			ray->normal = vec3_scale(&ray->normal, -1);
 		if (ray->type != LIGHT_RAY)
 			ray->inter_obj = cone;

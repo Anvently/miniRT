@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_inter2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 11:53:00 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/15 11:53:14 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 13:36:49 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt/types.h"
-#include "../../includes/minirt/calculus.h"
+#include <minirt/minirt.h>
+#include <minirt/calculus.h>
 
 int	bot_cap_intersec(t_object *cyld, t_ray *ray, double *t)
 {

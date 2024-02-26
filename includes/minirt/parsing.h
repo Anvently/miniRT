@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/25 15:09:05 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:42:11 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <minirt/minirt.h>
 # include <minirt/objects.h>
-
 
 int		scene_open(char *path, t_scene *scene);
 void	normalize_scene(t_scene *scene);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cam_rotation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:10:46 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/22 15:01:31 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 14:36:44 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ t_matrix3f	get_y_axis_rot(t_vec3f *dir)
 		theta = sign(dir->x) * dir->x / sqrt(dir->x * dir->x + dir->z * dir->z);
 		if (dir->x >= 0 && dir->z >= 0)
 			theta = -acos(theta);
-		else if(dir->x >= 0 && dir->z < 0)
+		else if (dir->x >= 0 && dir->z < 0)
 			theta = acos(theta);
-		else if(dir->x < 0 && dir->z >= 0)
+		else if (dir->x < 0 && dir->z >= 0)
 			theta = -(M_PI - acos(theta));
 		else
 			theta = M_PI - acos(theta);
@@ -82,5 +82,3 @@ t_matrix3f	cam_rotation(t_vec3f *dir)
 	m = matrix_product(&m_y, &m_x);
 	return (m);
 }
-
-

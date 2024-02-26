@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:19:17 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 17:14:06 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/26 13:33:13 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	event_button_press(int keycode, int x, int y, t_data *data)
 {
 	if (keycode == Button1)
 	{
-		printf("x=%d,y=%d\n", x, y);
 		data->mouse_pressed = true;
 		data->dnd.x = x;
 		data->dnd.y = y;
@@ -31,9 +30,9 @@ int	event_button_release(int keycode, int x, int y, t_data *data)
 {
 	(void) x;
 	(void) y;
-	if (keycode == Button1) //Left click
+	if (keycode == Button1)
 		data->mouse_pressed = false;
-	else if (keycode == Button3) //Right click
+	else if (keycode == Button3)
 		return (0);
 	return (0);
 }

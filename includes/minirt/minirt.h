@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 10:05:19 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/26 15:13:16 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@
 # define DFT_SIZE_Y 800
 # define PFPS 1
 # define DFT_NBR_THREADS 16
-# define DFT_IMG_CHUNK_SIZE 2
+# define DFT_IMG_CHUNK_SIZE 32
 
 typedef struct s_data {
-
-	//Window
 	t_int2			win_size;
 	void			*img;
 	void			*mlx;
@@ -37,14 +35,12 @@ typedef struct s_data {
 	int				len_line;
 	int				endian;
 
-	//Threads
 	int				threads_nbr;
 	int				thread_i;
 	pthread_t		*threads_id;
 	pthread_mutex_t	thread_mutex;
 	int				thread_chunk_nbr;
 
-	//Image
 	t_int2			img_size;
 	double			img_ratio;
 	int				img_chunk_nbr;
@@ -52,12 +48,10 @@ typedef struct s_data {
 	int				img_chunk_cell_w;
 	int				img_chunk_cell_h;
 
-	//User-inputs
 	bool			mouse_pressed;
 	t_int2			dnd;
 	double			zoom;
 
-	//Scene
 	t_scene			scene;
 	t_list			*textures_img;
 }				t_data;
@@ -83,7 +77,7 @@ void		img_update_camera(t_data *data);
 void		transform_scene(t_data *data, t_matrix3f *matrix, double angle);
 void		transform_objects(t_data *data, t_matrix3f *matrix,
 				double angle, int target);
-void	translate_scene(t_data *data, t_vec3f *dir);
+void		translate_scene(t_data *data, t_vec3f *dir);
 
 /* -------------------------------------------------------------------------- */
 /*                                    MOVES                                   */
@@ -101,7 +95,6 @@ int			event_mouse_move(int x, int y, t_data *data);
 int			event_key_release(int keycode, t_data *data);
 int			handle_close(t_data *data);
 int			handle_resize(t_data *data);
-int			handle_resize_click(t_data *data);
 int			handle_pan(t_data *data, int keycode);
 int			handle_threads_nbr(int keycode, t_data *data);
 int			handle_chunk_size(int keycode, t_data *data);
