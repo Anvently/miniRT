@@ -6,7 +6,7 @@
 /*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 17:51:00 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/27 09:08:58 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ void		cylinder_intersec(t_object *cylinder, t_ray *ray);
 void		cone_intersec(t_object *cone, t_ray *ray);
 int			examine_sol(t_double3 *t, t_object *cone, t_ray *ray);
 int			check_sol_body(t_object *cone, t_vec3f *sol);
+
+/*--------------------------------TRIANGLE------------------------------------*/
+
+void	triangle_inter(t_object *tr, t_ray *ray);
 
 /* --------------------------------- MATRIX --------------------------------- */
 

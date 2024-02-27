@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:20:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/25 15:08:52 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 08:53:36 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ static	void	normalize_cone(t_object *obj)
 	obj->top = vec3_sum(&obj->origin, &temp);
 }
 
+static void	normalize_triangle(t_object *obj)
+{
+	t_vec3f	u;
+	t_vec3f	v;
+
+	if (obj->type != TR)
+		return ;
+	u = vec3_diff(&obj->tr2, &obj->tr1);
+	v = vec3_diff(&obj->tr3, &obj->tr1);
+	obj->orientation = vector_product(&u, &v);
+	obj->origin = u;
+	obj->top = v;
+	normalize_vec(&obj->orientation);
+}
+// normalize triangle will give orientation to triangle. Therefore it must happen first
+
 static void	normalize_objects(t_list *objects)
 {
 	t_list		*node;
@@ -33,6 +49,7 @@ static void	normalize_objects(t_list *objects)
 	while (node)
 	{
 		obj = (t_object *)node->content;
+		normalize_triangle(obj);
 		normalize_vec(&obj->orientation);
 		get_local_base(obj);
 		if (obj->type == CYLINDER || obj->type == SPHERE)

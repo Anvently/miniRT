@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 14:41:54 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 08:35:09 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ typedef enum e_object_type
 	SPHERE,
 	PLAN,
 	CYLINDER,
-	CONE
+	CONE,
+	TR
 }			t_object_type;
 
 typedef enum e_ray_type
@@ -205,6 +206,9 @@ typedef struct s_object {
 	t_vec3f				loc_x;
 	t_vec3f				loc_y;
 	t_vec3f				loc_z;
+	t_vec3f				tr1;
+	t_vec3f				tr2;
+	t_vec3f				tr3;
 	double				k_ambiant;
 	double				k_diffuse;
 	double				k_specular;

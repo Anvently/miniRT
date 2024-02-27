@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 16:08:12 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 09:15:37 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	check_inter(t_data *data, t_ray *ray)
 			cylinder_intersec(obj, ray);
 		else if (obj->type == CONE)
 			cone_intersec(obj, ray);
+		else if (obj->type == TR)
+			triangle_inter(obj, ray);
 		node = node->next;
 		if (ray->type == LIGHT_RAY && ray->t != INFINITY)
 			break ;
