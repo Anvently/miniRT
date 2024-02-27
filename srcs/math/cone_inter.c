@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone_inter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:41:22 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/27 17:12:29 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 17:59:12 by lmahe            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,52 @@
 // 	return (0);
 // }
 
+// static void	get_body_intersec(t_object *cone, t_ray *ray, t_double3 *coeff)
+// {
+// 	t_double3	t;
+// 	t_vec3f		temp;
+// 	double		lenght;
+
+// 	ft_memset(&t, 0, sizeof(t_double3));
+// 	if (quadra_cone_solver(coeff, &t) && examine_sol(&t, cone, ray))
+// 	{
+// 		lenght = sqrt(cone->height * cone->height + \
+// 		cone->radius * cone->radius);
+// 		ray->t = t.z;
+// 		ray->inter = get_inter_point(ray, t.z);
+// 		temp = vec3_diff(&ray->inter, &cone->origin);
+// 		temp = vector_product(&temp, &cone->orientation);
+// 		temp = vector_product(&cone->orientation, &temp);
+// 		temp = vec3_scale(&temp, cone->height / lenght);
+// 		ray->normal = vec3_scale(&cone->orientation, cone->radius / lenght);
+// 		temp = vec3_scale(&temp, cone->height / lenght);
+// 		ray->normal = vec3_scale(&cone->orientation, cone->radius / lenght);
+// 		ray->normal = vec3_sum(&temp, &ray->normal);
+// 		normalize_vec(&ray->normal);
+// 		if (scalar_product(&ray->normal, &ray->dir) >= 0)
+// 			ray->normal = vec3_scale(&ray->normal, -1);
+// 		if (ray->type != LIGHT_RAY)
+// 			ray->inter_obj = cone;
+// 	}
+// }
+
 static void	get_body_intersec(t_object *cone, t_ray *ray, t_double3 *coeff)
 {
 	t_double3	t;
 	t_vec3f		temp;
-	double		lenght;
+	t_vec3f		temp2;
+	t_vec3f		temp3;
 
 	ft_memset(&t, 0, sizeof(t_double3));
 	if (quadra_cone_solver(coeff, &t) && examine_sol(&t, cone, ray))
 	{
-		lenght = sqrt(cone->height * cone->height + \
-		cone->radius * cone->radius);
+		temp3 = vec3_scale(&cone->orientation, -1);
 		ray->t = t.z;
 		ray->inter = get_inter_point(ray, t.z);
-		temp = vec3_diff(&ray->inter, &cone->origin);
-		temp = vector_product(&temp, &cone->orientation);
-		temp = vector_product(&cone->orientation, &temp);
-		temp = vec3_scale(&temp, cone->height / lenght);
-		ray->normal = vec3_scale(&cone->orientation, cone->radius / lenght);
-		temp = vec3_scale(&temp, cone->height / lenght);
-		ray->normal = vec3_scale(&cone->orientation, cone->radius / lenght);
-		ray->normal = vec3_sum(&temp, &ray->normal);
+		temp = vec3_diff(&ray->inter, &cone->top);
+		temp2 = vector_product(&temp3, &temp);
+		temp2 = vector_product(&temp2, &temp);
+		ray->normal = temp2;
 		normalize_vec(&ray->normal);
 		if (scalar_product(&ray->normal, &ray->dir) >= 0)
 			ray->normal = vec3_scale(&ray->normal, -1);
@@ -59,6 +84,7 @@ static void	get_body_intersec(t_object *cone, t_ray *ray, t_double3 *coeff)
 			ray->inter_obj = cone;
 	}
 }
+
 
 void	main_body_intersec(t_object *cone, t_ray *ray)
 {
