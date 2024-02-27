@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:22:55 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 16:40:00 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 17:03:53 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ t_color3f	compute_lights(t_data *data, t_ray *ray, t_light *light)
 	ray->t = INFINITY;
 	if (ray->theta >= 0)
 	{
-		// if (ray->inter_obj == CYLINDER)
-		// 	printf("theta=%f, normal=%f\n", ray->theta, ray->normal);
 		check_inter(data, ray);
 		if (ray->t >= ray->t_max || ray->t == 0)
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone_inter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:41:22 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 17:37:25 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/27 17:12:29 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	get_body_intersec(t_object *cone, t_ray *ray, t_double3 *coeff)
 		ray->normal = vec3_scale(&cone->orientation, cone->radius / lenght);
 		ray->normal = vec3_sum(&temp, &ray->normal);
 		normalize_vec(&ray->normal);
-		if (scalar_product(&ray->normal, &ray->dir) >= 0.0)
+		if (scalar_product(&ray->normal, &ray->dir) >= 0)
 			ray->normal = vec3_scale(&ray->normal, -1);
 		if (ray->type != LIGHT_RAY)
 			ray->inter_obj = cone;
