@@ -4,7 +4,7 @@ L 1000,1000,1000 1.0 250,250,250
 
 pl origin:-10,-10,-10 orientation:1,0,0
 
-co id:1 origin:0,-3.5,-5 orientation:1,0,0 texture:S:250,0,0 diameter:2.5 height:10
+cy id:1 origin:0,-5,-5 orientation:1,0,0 texture:S:250,0,0 diameter:0.5 height:10
 cy origin:-5,0,-5 orientation:0,1,0 texture:S:0,250,0 diameter:0.5 height:10 ks:0.0
 cy id:2 origin:-5,-5,0 orientation:0,0,1 texture:S:0,0,250 diameter:0.5 height:10 ks:0.0
 sp origin:-5,-5,-5 diameter:1.0 texture:S:0,0,0 ks:0.0
