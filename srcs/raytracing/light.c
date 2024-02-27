@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:22:55 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 14:28:11 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 11:16:27 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_color3f	compute_lights_obj(t_data *data, t_ray *ray,
 
 	ray->dir = vec3f_get_dir(&ray->origin, &obj->origin);
 	ray->theta = scalar_product(&ray->dir, &ray->normal);
-	ray->t_max = sqrt(distance(&ray->origin, &obj->origin)) - 0.000001;
+	ray->t_max = sqrt(distance(&ray->origin, &obj->origin)) - T_MIN;
 	ray->t = INFINITY;
 	if (ray->theta >= 0)
 	{
@@ -49,7 +49,7 @@ void	check_light_obj(t_data *data, t_ray *ray)
 	ray_to_obj.origin = ray->inter;
 	ray_to_obj.normal = ray->normal;
 	ray_to_obj.inter_obj = ray->inter_obj;
-	ray_to_obj.t_min = 0.0000000001;
+	ray_to_obj.t_min = T_MIN;
 	ray_to_obj.old_dir = ray->dir;
 	ray_to_obj.type = CAMERA_RAY;
 	node = data->scene.lights_obj;
@@ -67,7 +67,7 @@ t_color3f	compute_lights(t_data *data, t_ray *ray, t_light *light)
 {
 	ray->dir = vec3f_get_dir(&ray->origin, &light->origin);
 	ray->theta = scalar_product(&ray->dir, &ray->normal);
-	ray->t_max = sqrt(distance(&ray->origin, &light->origin)) - 0.000001;
+	ray->t_max = sqrt(distance(&ray->origin, &light->origin)) - T_MIN;
 	ray->t = INFINITY;
 	if (ray->theta >= 0)
 	{
@@ -92,7 +92,7 @@ void	check_lights(t_data *data, t_ray *ray)
 	ray_to_light.origin = ray->inter;
 	ray_to_light.normal = ray->normal;
 	ray_to_light.inter_obj = ray->inter_obj;
-	ray_to_light.t_min = 0.0000000001;
+	ray_to_light.t_min = T_MIN;
 	ray_to_light.old_dir = ray->dir;
 	ray_to_light.type = LIGHT_RAY;
 	node = data->scene.lights;

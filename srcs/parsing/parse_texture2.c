@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 16:30:31 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:04:50 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	handle_dame_texture(t_texture *texture, char obj_type)
 		texture->width = texture->height * 2;
 		texture->get_color = &texture_get_sphere_dame;
 	}
-	else if (obj_type == PLAN)
+	else if (obj_type == PLAN || obj_type == TR)
 		texture->get_color = &texture_get_plan_dame;
 	else if (obj_type == CYLINDER)
 		texture->get_color = &texture_get_cylinder_dame;
@@ -58,7 +58,7 @@ int	scene_parse_texture_img(char **ptr, t_object *object, int nbr, char *line)
 	object->texture = *texture;
 	if (object->type == SPHERE)
 		object->texture.get_color = &texture_get_sphere_img;
-	else if (object->type == PLAN)
+	else if (object->type == PLAN || object->type == TR)
 		object->texture.get_color = &texture_get_plan_img;
 	else if (object->type == CYLINDER)
 		object->texture.get_color = &texture_get_cylinder_img;

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:08:26 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/25 15:11:34 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:00:08 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,23 @@ int	scene_parse_obj_properties2(t_object *object, int nbr,
 	else if (parse_cmp("light-color:", ptr)
 		&& scene_parse_light_obj(ptr, object))
 		return (error_parsing("object light color", nbr, line, NULL), 1);
+	else if (scene_parse_obj_properties3(object, nbr, ptr, line))
+		return (1);
+	return (0);
+}
+
+int	scene_parse_obj_properties3(t_object *object, int nbr,
+		char **ptr, char *line)
+{
+	if (parse_cmp("tr1:", ptr)
+		&& scene_parse_origin(ptr, &object->tr1))
+		return (error_parsing("triangle vertex 1", nbr, line, NULL), 1);
+	else if (parse_cmp("tr2:", ptr)
+		&& scene_parse_origin(ptr, &object->tr2))
+		return (error_parsing("triangle vertex 2", nbr, line, NULL), 1);
+	else if (parse_cmp("tr3:", ptr)
+		&& scene_parse_origin(ptr, &object->tr3))
+		return (error_parsing("triangle vertex 3", nbr, line, NULL), 1);
 	else if (**ptr && ft_isspace(**ptr) == false)
 		return (error_parsing("unknown property", nbr, line, *ptr), 1);
 	return (0);

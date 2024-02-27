@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:50:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 13:28:11 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:02:46 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	transform_objects(t_data *data, t_matrix3f *matrix,
 				obj->loc_x = vec3f_matrix3f(&obj->loc_x, matrix);
 				obj->loc_y = vec3f_matrix3f(&obj->loc_y, matrix);
 				obj->loc_z = vec3f_matrix3f(&obj->loc_z, matrix);
+				obj->tr1 = vec3f_matrix3f(&obj->tr1, matrix);
+				obj->tr2 = vec3f_matrix3f(&obj->tr2, matrix);
+				obj->tr3 = vec3f_matrix3f(&obj->tr3, matrix);
 			}
 			obj->angle += angle;
 		}
@@ -81,6 +84,9 @@ void	translate_scene(t_data *data, t_vec3f *dir)
 		obj = (t_object *)node->content;
 		obj->origin = vec3_diff(&obj->origin, dir);
 		obj->top = vec3_diff(&obj->top, dir);
+		obj->tr1 = vec3_diff(&obj->tr1, dir);
+		obj->tr2 = vec3_diff(&obj->tr2, dir);
+		obj->tr3 = vec3_diff(&obj->tr3, dir);
 		node = node->next;
 	}
 	node = data->scene.lights;

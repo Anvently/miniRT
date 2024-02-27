@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle_inter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:23:19 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/27 09:07:59 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/27 11:48:11 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ double	self_sp(t_vec3f *vec)
 
 int	check_coordinates(t_double3	*cd)
 {
-	if (cd->x < 0)
+	if (cd->x < -T_MIN)
 		return (0);
-	if (cd->y < 0)
+	if (cd->y < -T_MIN)
 		return (0);
-	if (cd->z > 1)
+	if (cd->z > 1 + T_MIN)
 		return (0);
 	return (1);
 }
@@ -78,7 +78,7 @@ void	triangle_inter(t_object *tr, t_ray *ray)
 		if (ray->type != LIGHT_RAY)
 			ray->inter_obj = tr;
 		normalize_vec(&ray->normal);
-		if (scalar_product(&ray->dir, &tr->orientation) >= 0)
+		if (scalar_product(&ray->dir, &tr->orientation) >= T_MIN)
 			ray->normal = vec3_scale(&ray->normal, -1);
 	}
 }
