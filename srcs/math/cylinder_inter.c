@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 09:21:21 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/27 16:33:34 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 16:49:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	get_tube_intersec(t_object *cyld, t_ray *ray,
 		ray->t = t;
 		ray->inter = temp;
 		ray->normal = vec3_diff(&ray->inter, &cyld->origin);
-		ray->normal = vector_product(&temp, &cyld->orientation);
-		ray->normal = vector_product(&cyld->orientation, &temp);
+		ray->normal = vector_product(&ray->normal, &cyld->orientation);
+		ray->normal = vector_product(&cyld->orientation, &ray->normal);
 		normalize_vec(&ray->normal);
 		if (scalar_product(&ray->normal, &ray->dir) >= 0)
 			ray->normal = vec3_scale(&ray->normal, -1);
