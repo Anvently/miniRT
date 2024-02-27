@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:10:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/20 10:09:57 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 15:05:23 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	*render_routine(void *data_ptr)
 	}
 	i = thread_i * data->thread_chunk_nbr;
 	max = i + data->thread_chunk_nbr;
-	while (i < max)
+	while (i < max && data->img)
 		render_chunk(data, i++, colors);
 	free(colors);
 	return (NULL);

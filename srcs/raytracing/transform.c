@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:50:01 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 13:31:58 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:39:31 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,7 @@ void	translate_scene(t_data *data, t_vec3f *dir)
 		light->origin = vec3_diff(&light->origin, dir);
 		node = node->next;
 	}
-	data->scene.camera.origin.x = 0;
-	data->scene.camera.origin.y = 0;
-	data->scene.camera.origin.z = 0;
+	ft_memset(&data->scene.camera.origin, 0, sizeof(t_vec3f));
 }
 
 void	transform_scene(t_data *data, t_matrix3f *matrix, double angle)

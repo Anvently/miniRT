@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 15:44:23 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:59:01 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ int	handle_close(t_data *data)
 	ft_lstclear(&data->textures_img, &t_texture_free);
 	if (data->img)
 		mlx_destroy_image(data->mlx, data->img);
+	data->img = NULL;
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
+	data->win = NULL;
 	if (data->mlx)
 	{
-		mlx_destroy_display(data->mlx);
 		mlx_loop_end(data->mlx);
+		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
+	data->mlx = NULL;
 	if (data->threads_id)
 		free(data->threads_id);
 	pthread_mutex_destroy(&data->thread_mutex);
-	data->img = NULL;
-	data->mlx = NULL;
-	data->win = NULL;
 	ft_lstclear(&data->scene.lights, &free);
 	ft_lstclear(&data->scene.moves, &free);
 	ft_lstclear(&data->scene.objects, &free);
@@ -118,8 +118,9 @@ int	handle_chunk_size(int keycode, t_data *data)
 		else if (data->img_chunk_size > 0)
 			data->img_chunk_size /= 2;
 	}
-	printf("chunk size = %d\n", data->img_chunk_size);
 	img_update(data);
 	img_update_chunk(data);
+	printf("chunk size = %d\n%d threads\n",
+		data->img_chunk_size, data->threads_nbr);
 	return (0);
 }

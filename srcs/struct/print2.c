@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:51:38 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 11:23:38 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:39:56 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,6 @@ void	t_object_print(void *object_ptr)
 		printf("Orientation: %.3f, %.3f, %.3f\n",
 			object->orientation.x, object->orientation.y,
 			object->orientation.z);
-	if (object->type == TR)
-	{
-		printf("Vertex 1: %.3f, %.3f, %.3f\n",
-			object->tr1.x, object->tr1.y,
-			object->tr1.z);
-		printf("Vertex 2: %.3f, %.3f, %.3f\n",
-			object->tr2.x, object->tr2.y,
-			object->tr2.z);
-		printf("Vertex 3: %.3f, %.3f, %.3f\n",
-			object->tr3.x, object->tr3.y,
-			object->tr3.z);
-	}
 	t_object_properties_print(object);
 	printf("\n");
 }

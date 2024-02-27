@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 13:13:19 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 15:30:16 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	hook_init(t_data *data)
 	mlx_hook(data->win, KeyRelease, KeyReleaseMask, event_key_release, data);
 	mlx_hook(data->win, MotionNotify, PointerMotionMask,
 		event_mouse_move, data);
-	mlx_hook(data->win, DestroyNotify, ButtonPressMask, handle_close, data);
+	mlx_hook(data->win, DestroyNotify, NoEventMask, handle_close, data);
 	mlx_hook(data->win, ConfigureNotify, StructureNotifyMask,
 		handle_resize, data);
 	mlx_loop_hook(data->mlx, render, data);
@@ -74,8 +74,9 @@ int	main(int argc, char **argv)
 	normalize_scene(&data.scene);
 	init_camera(&data);
 	translate_scene(&data, &data.scene.camera.origin);
-	transform_scene(&data, &data.scene.matrix, 0.0);
 	t_scene_print(&data.scene);
+	transform_scene(&data, &data.scene.matrix, 0.0);
+
 	mlx_loop(data.mlx);
 	handle_close(&data);
 	return (0);

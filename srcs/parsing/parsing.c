@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:34 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/21 18:16:44 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:49:00 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	scene_open(char *path, t_scene *scene)
 {
 	int		fd;
 
+	if (ft_strncmp_rev(path, ".rt", 3) != 0)
+		return (error_context("wrong extension", path), 1);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (error_file("opening file", path), 1);

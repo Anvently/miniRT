@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:37:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 14:56:47 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:36:16 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	img_update_chunk(t_data *data)
 	data->img_chunk_nbr = data->img_chunk_cell_w * data->img_chunk_cell_h;
 	if (data->img_chunk_nbr % data->threads_nbr != 0)
 	{
-		data->threads_nbr = get_inf_multiple(data->img_chunk_nbr,
-				data->threads_nbr);
+		data->threads_nbr = get_sup_multiple(data->img_chunk_nbr,
+				data->threads_nbr, 1024);
 	}
 	data->thread_chunk_nbr = data->img_chunk_nbr / data->threads_nbr;
 	return (0);

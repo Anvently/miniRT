@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:23:19 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/27 11:48:11 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:40:48 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,3 @@ void	triangle_inter(t_object *tr, t_ray *ray)
 			ray->normal = vec3_scale(&ray->normal, -1);
 	}
 }
-
-

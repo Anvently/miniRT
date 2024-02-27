@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:36:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/23 16:37:19 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:48:38 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ void	error(char *context)
 		ft_putstr_fd(": ", 2);
 	}
 	ft_putendl_fd(strerror(errno), 2);
+}
+
+void	error_context(char *msg, char *context)
+{
+	ft_putstr_fd("error: ", 2);
+	ft_putstr_fd(msg, 2);
+	if (context)
+	{
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(context, 2);
+	}
+	ft_putstr_fd("\n", 2);
 }
 
 void	error_file(char *context, char *path)

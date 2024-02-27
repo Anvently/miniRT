@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/27 11:15:11 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:42:18 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			check_sol_body(t_object *cone, t_vec3f *sol);
 
 /*--------------------------------TRIANGLE------------------------------------*/
 
-void	triangle_inter(t_object *tr, t_ray *ray);
+void		triangle_inter(t_object *tr, t_ray *ray);
 
 /* --------------------------------- MATRIX --------------------------------- */
 

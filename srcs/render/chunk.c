@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:44:43 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 15:40:03 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 15:06:30 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	chunk_draw(t_data *data, t_coord2f *start, int color)
 	while (it.x < start->x + data->img_chunk_size)
 	{
 		it.y = start->y;
-		while (it.y < start->y + data->img_chunk_size)
+		while (it.y < start->y + data->img_chunk_size && data->img)
 		{
 			draw_pxl(data, &it, color);
 			it.y++;
@@ -75,6 +75,8 @@ static void	render_antialiasing_chunk(t_data *data, int i,
 		j++;
 	}
 	color = color_average(antialisaing, nbr_rays);
+	if (data->img == NULL)
+		return ;
 	draw_pxl(data, &chunk_start, color_3f_int(&color));
 }
 

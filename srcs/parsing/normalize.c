@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:20:48 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 12:15:14 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:40:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ static void	normalize_triangle(t_object *obj)
 	obj->top = v;
 	normalize_vec(&obj->orientation);
 }
-// normalize triangle will give orientation to triangle. Therefore it must happen first
 
+// normalize triangle will give orientation to
+// triangle. Therefore it must happen first
 static void	normalize_objects(t_list *objects)
 {
 	t_list		*node;
