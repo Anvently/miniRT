@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:29:52 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 10:00:30 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 13:12:42 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		scene_parse_move_entries(t_move *move, char **ptr, int nbr, char *line);
 int		scene_parse_type(char **ptr, char *type);
 int		scene_parse_origin(char **ptr, t_coord3f *origin);
 int		scene_parse_orientation(char **ptr, t_vec3f *orientation);
-int		scene_parse_fov(char **ptr, int *fov);
+int		scene_parse_fov(char **ptr, double *fov);
 int		scene_parse_ratio(char **ptr, double *ratio);
 int		scene_parse_double(char **ptr, double *value);
 int		scene_parse_int(char **ptr, int *value);

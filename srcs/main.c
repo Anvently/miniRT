@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 11:32:15 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/27 13:13:19 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	main(int argc, char **argv)
 	if (scene_open(argv[1], &data.scene) || display_init(&data)
 		|| hook_init(&data))
 		handle_close(&data);
-
 	normalize_scene(&data.scene);
 	init_camera(&data);
 	translate_scene(&data, &data.scene.camera.origin);

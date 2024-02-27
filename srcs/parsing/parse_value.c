@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_value.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:27:05 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 09:23:59 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/27 13:13:58 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #include <minirt/minirt.h>
 #include <minirt/parsing.h>
 #include <minirt/objects.h>
+#include <minirt/calculus.h>
 
 int		scene_parse_type(char **ptr, char *type);
-int		scene_parse_fov(char **ptr, int *fov);
+int		scene_parse_fov(char **ptr, double *fov);
 int		scene_parse_ratio(char **ptr, double *ratio);
 int		scene_parse_double(char **ptr, double *value);
 
@@ -51,14 +52,17 @@ int	scene_parse_type(char **ptr, char *type)
 	return (0);
 }
 
-int	scene_parse_fov(char **ptr, int *fov)
+int	scene_parse_fov(char **ptr, double *fov)
 {
+	int	d_fov;
+
 	while (ft_isspace(**ptr))
 		*ptr = *ptr + 1;
-	if (ft_strtoi(*ptr, fov) || *fov < 0 || *fov > 180)
+	if (ft_strtoi(*ptr, &d_fov) || d_fov < 0 || d_fov > 180)
 		return (1);
 	while (**ptr && !ft_isspace(**ptr))
 		*ptr = *ptr + 1;
+	*fov = (double) d_fov * ((2 * M_PI) / 360.f);
 	return (0);
 }
 

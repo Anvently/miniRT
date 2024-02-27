@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:34:20 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 08:35:09 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/02/27 13:10:43 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ typedef struct s_camera {
 	t_vec3f		_cz;
 	t_vec3f		_cy;
 	t_vec3f		_cx;
-	int			fov;
+	double		fov;
 }				t_camera;
 
 /// @brief
