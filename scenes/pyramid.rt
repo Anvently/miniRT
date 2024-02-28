@@ -1,0 +1,16 @@
+A 0.0 255,255,255
+C 3,0,3 -1,0,-1 70
+//light 0,-20,-10 1.0 255,255,255
+//light 0,20,-10 1.0 255,255,255
+
+tr tr1:5,0,0 tr2:0,5,0 tr3:0,0,5 texture:S:160,0,16 rf:0.999 light-color:160,0,16 light-ratio:1.0
+tr tr1:0,5,0 tr2:-5,0,0 tr3:0,0,5 texture:S:10,56,16 rf:0.999 light-color:10,56,16 light-ratio:1.0
+tr tr1:-5,0,0 tr2:0,-5,0 tr3:0,0,5 texture:S:60,180,54 rf:0.999 light-color:60,180,54 light-ratio:1.0
+tr tr1:5,0,0 tr2:0,-5,0 tr3:0,0,5 texture:S:60,160,16 rf:0.999 light-color:60,160,16 light-ratio:1.0
+tr tr1:5,0,0 tr2:0,5,0 tr3:0,0,-5 texture:S:0,10,16 rf:0.999 light-color:0,10,16 light-ratio:1.0
+tr tr1:0,5,0 tr2:-5,0,0 tr3:0,0,-5 texture:S:160,200,255 rf:0.999 light-color:160,200,255 light-ratio:1.0
+tr tr1:-5,0,0 tr2:0,-5,0 tr3:0,0,-5 texture:S:89,45,166 rf:0.999 light-color:189,45,166 light-ratio:1.0
+tr tr1:5,0,0 tr2:0,-5,0 tr3:0,0,-5 texture:S:10,146,255 rf:0.999 light-color:10,146,255  light-ratio:1.0
+
+sp origin:0,0,0 diameter:2.0 rf:0.5
+
