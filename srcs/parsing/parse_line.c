@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:04:22 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 13:11:01 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/28 10:00:49 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 
 int	scene_parse_camera(t_scene *scene, int nbr, char **ptr, char *line)
 {
+	static bool	is_defined;
+
+	if (is_defined++)
+		return (error_parsing("multiple definition of camera", nbr,
+				line, NULL), 1);
 	if (scene_parse_origin(ptr, &scene->camera.origin))
 		return (error_parsing("camera origin", nbr, line, NULL), 1);
 	if (scene_parse_orientation(ptr, &scene->camera.dir))
@@ -28,6 +33,11 @@ int	scene_parse_camera(t_scene *scene, int nbr, char **ptr, char *line)
 
 int	scene_parse_ambiant(t_scene *scene, int nbr, char **ptr, char *line)
 {
+	static bool	is_defined;
+
+	if (is_defined++)
+		return (error_parsing("multiple definition of ambiant light", nbr,
+				line, NULL), 1);
 	if (scene_parse_ratio(ptr, &scene->ambiant_light.ratio))
 		return (error_parsing("ambiant light ratio", nbr, line, NULL), 1);
 	if (scene_parse_color(ptr, &scene->ambiant_light.color))

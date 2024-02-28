@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 09:10:44 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 18:41:45 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/28 10:02:45 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ static void	data_init(t_data *data)
 	data->img_chunk_size = DFT_IMG_CHUNK_SIZE;
 	data->threads_nbr = DFT_NBR_THREADS;
 	data->scene.data = data;
+	data->scene.camera.dir = (t_vec3f){1, 0, 0};
+	data->scene.camera.fov = 70;
+	data->scene.ambiant_light.ratio = 0.2;
+	data->scene.ambiant_light.color = (t_color3f){255, 255, 255};
 	pthread_mutex_init(&data->thread_mutex, NULL);
 }
 

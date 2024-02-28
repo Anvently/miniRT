@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:27:05 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 13:13:58 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/28 09:53:39 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	scene_parse_type(char **ptr, char *type)
 		*type = AMBIANT;
 	else if (parse_cmp("C", ptr))
 		*type = CAMERA;
-	else if (parse_cmp("L", ptr))
+	else if (parse_cmp("light", ptr))
 		*type = LIGHT;
 	else if (parse_cmp("pl", ptr))
 		*type = PLAN;
