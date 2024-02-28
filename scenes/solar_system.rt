@@ -4,8 +4,8 @@ C 0,0,10 0,0,-1 120
 //light -20,0,0 0.5 255,255,255
 
 
-sp id:1 origin:0,0,0 diameter:10 texture:I:sunmap.xpm glow-color:250,150,0 glow-ratio:0.7 light-color:250,250,250 light-ratio:1.0 ka:0.1 kd:1.0 ks:0.0 rf:0 ri:1.5 sp:0 sr:10
-sp id:2 origin:-10,0,0 diameter:1 texture:I:earth.xpm ka:0.5 kd:1.0 ks:1.0 rf:0.0 ri:1.0 sp:1.0 sr:1
+sp id:1 origin:0,0,0 diameter:10 texture:I:"./textures/sunmap.xpm" glow-color:250,150,0 glow-ratio:0.7 light-color:250,250,250 light-ratio:1.0 ka:0.1 kd:1.0 ks:0.0 rf:0 ri:1.5 sp:0 sr:10
+sp id:2 origin:-10,0,0 diameter:1 texture:I:"./textures/earth.xpm" ka:0.5 kd:1.0 ks:1.0 rf:0.0 ri:1.0 sp:1.0 sr:1
 //cy origin:5,0,0 orientation:1,-0.5,0 diameter:1 height:5 texture:I:earth.xpm ka:1.0 kd:1.0 ks:0.2 rf:0 ri:1.0 sp:0.5 sr:2
 //sp id:1 origin:1.5,0.5,0 diameter:1 texture:I:earth.xpm ka:1.0 kd:1.0 ks:0.5 rf:0.0 ri:1.0 sp:1.0 sr:1
 //co origin:5,0,0 orientation:0,0,0 diameter:1 height:5 texture:I:earth.xpm ka:1.0 kd:1.0 ks:0.2 rf:0 ri:1.0 sp:0.5 sr:2 id:10

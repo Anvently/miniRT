@@ -4,7 +4,7 @@ light 0,-15,0 1.0 255,255,255
 
 co id:3 origin:5,0,0.5 orientation:0,0,1 texture:D:255,255,255:250,10,0:15 ks:0.2 height:2
 
-sp id:2 origin:5,0,0 texture:I:face.xpm diameter:2
+sp id:2 origin:5,0,0 texture:I:"./textures/face.xpm" diameter:2
 cy id:2 origin:5,0,-1 orientation:0,0,1 diameter:1.2 height:0.5 texture:S:250,204,153
 
 sp id:2 origin:5,0,-3 diameter:4.0 texture:S:250,204,153 rf:0.00 ri:1.05 kd:1.0 ks:0

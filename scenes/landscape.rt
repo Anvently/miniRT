@@ -4,4 +4,4 @@ light 0,0,0 0.0 255,255,255
 
 sp origin:5,0,0 diameter:3.0 texture:S:50,50,50 rf:0.9 ri:1.0 ka:0.5
 sp origin:1,0,0 diameter:3.0 texture:S:50,50,50 rf:0.1 ri:1.1 ka:0.5
-sp origin:0,0,0 diameter:2000 texture:I:landscape.xpm ka:1.0
+sp origin:0,0,0 diameter:2000 texture:I:"./textures/landscape.xpm" ka:1.0
