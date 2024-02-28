@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:41:22 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/27 18:05:01 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/28 10:56:32 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,14 @@ static void	get_body_intersec(t_object *cone, t_ray *ray, t_double3 *coeff)
 		temp = vec3_diff(&ray->inter, &cone->top);
 		temp2 = vector_product(&temp3, &temp);
 		temp2 = vector_product(&temp2, &temp);
-		ray->normal = temp2;
-		normalize_vec(&ray->normal);
-		if (scalar_product(&ray->normal, &ray->dir) >= 0)
-			ray->normal = vec3_scale(&ray->normal, -1);
 		if (ray->type != LIGHT_RAY)
+		{
 			ray->inter_obj = cone;
+			ray->normal = temp2;
+			normalize_vec(&ray->normal);
+			if (scalar_product(&ray->normal, &ray->dir) >= 0)
+				ray->normal = vec3_scale(&ray->normal, -1);
+		}
 	}
 }
 
@@ -140,11 +142,13 @@ void	cone_intersec(t_object *cone, t_ray *ray)
 	{
 		ray->t = t_cap;
 		ray->inter = get_inter_point(ray, t_cap);
-		ray->normal = vec3_scale(&cone->orientation, -1);
-		normalize_vec(&ray->normal);
-		if (scalar_product(&ray->dir, &ray->normal) > T_MIN)
-			ray->normal = vec3_scale(&ray->normal, -1);
 		if (ray->type != LIGHT_RAY)
+		{
 			ray->inter_obj = cone;
+			ray->normal = vec3_scale(&cone->orientation, -1);
+			normalize_vec(&ray->normal);
+			if (scalar_product(&ray->dir, &ray->normal) > T_MIN)
+				ray->normal = vec3_scale(&ray->normal, -1);
+		}
 	}
 }

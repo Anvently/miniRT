@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 11:53:00 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/26 13:36:49 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/28 10:55:15 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,15 @@ int	top_cap_intersec(t_object *cyld, t_ray *ray, double *t)
 	if (distance(&impact, &cyld->top) > cyld->radius * cyld->radius)
 		return (0);
 	return (1);
+}
+
+void	cylinder_update_normal(t_object *cyld, t_ray *ray, t_vec3f *temp)
+{
+	ray->inter = *temp;
+	ray->normal = vec3_diff(&ray->inter, &cyld->origin);
+	ray->normal = vector_product(&ray->normal, &cyld->orientation);
+	ray->normal = vector_product(&cyld->orientation, &ray->normal);
+	normalize_vec(&ray->normal);
+	if (scalar_product(&ray->normal, &ray->dir) >= 0)
+		ray->normal = vec3_scale(&ray->normal, -1);
 }

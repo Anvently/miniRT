@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:48:05 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/27 14:42:18 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/28 10:55:31 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void		sphere_intersec(t_object *sphere, t_ray *ray);
 int			top_cap_intersec(t_object *cyld, t_ray *ray, double *t);
 int			bot_cap_intersec(t_object *cyld, t_ray *ray, double *t);
 void		cylinder_intersec(t_object *cylinder, t_ray *ray);
+void		cylinder_update_normal(t_object *cyld, t_ray *ray, t_vec3f *temp);
 
 /* ---------------------------------- CONE ---------------------------------- */
 

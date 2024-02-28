@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/28 09:50:12 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:09:03 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define DFT_SIZE_Y 800
 # define PFPS 1
 # define DFT_NBR_THREADS 16
-# define DFT_IMG_CHUNK_SIZE 1
+# define DFT_IMG_CHUNK_SIZE 4
 
 typedef struct s_data {
 	t_int2			win_size;

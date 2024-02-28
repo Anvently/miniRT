@@ -32,8 +32,8 @@ kd = diffuse light reflexion constant (0 <= kd <= 1)
 ks = specular light reflexion constant (0 <= ks <= 1)
 kr = reflexion constant (0 <= kr <= 1)
 iref = refraction factor
-p = portion of plastic reflexion on surface (0 <= p <= 1)
-r = roughness of material constant (1 <= r <= INFINITY)
+sp = portion of plastic reflexion on surface (0 <= p <= 1)
+sr = roughness of material constant (1 <= r <= INFINITY)
 
 Move:
 target
