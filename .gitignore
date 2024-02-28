@@ -1,9 +1,0 @@
-.objs/
-includes/*.h
-*.a
-libft/*.a
-libmlx/*.a
-/minirt
-.vscode/
-/main.c
-/a.out
