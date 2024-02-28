@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:56:02 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/28 10:49:55 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:16:12 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	plane_intersec(t_object *plane, t_ray *ray)
 	if (linear_solver(a, b, &c) && c < ray->t && c > ray->t_min)
 	{
 		ray->t = c;
-
 		if (ray->type != LIGHT_RAY)
 		{
 			ray->normal = plane->orientation;

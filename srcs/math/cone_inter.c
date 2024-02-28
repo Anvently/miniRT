@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:41:22 by lmahe             #+#    #+#             */
-/*   Updated: 2024/02/28 10:56:32 by npirard          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:16:04 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,6 @@
 #include <minirt/calculus.h>
 #include <libft.h>
 #include <math.h>
-
-// int	check_sol_body(t_object *cone, t_vec3f *sol)
-// {
-// 	t_vec3f	origin_diff;
-// 	t_vec3f	top_diff;
-// 	double	x;
-// 	double	y;
-
-// 	origin_diff = vec3_diff(sol, &cone->origin);
-// 	top_diff = vec3_diff(sol, &cone->top);
-// 	x = scalar_product(&origin_diff, &cone->orientation);
-// 	y = scalar_product(&top_diff, &cone->orientation);
-// 	if ((x > 0) && (y < 0))
-// 		return (1);
-// 	return (0);
-// }
-
-// static void	get_body_intersec(t_object *cone, t_ray *ray, t_double3 *coeff)
-// {
-// 	t_double3	t;
-// 	t_vec3f		temp;
-// 	double		lenght;
-
-// 	ft_memset(&t, 0, sizeof(t_double3));
-// 	if (quadra_cone_solver(coeff, &t) && examine_sol(&t, cone, ray))
-// 	{
-// 		lenght = sqrt(cone->height * cone->height + \
-// 		cone->radius * cone->radius);
-// 		ray->t = t.z;
-// 		ray->inter = get_inter_point(ray, t.z);
-// 		temp = vec3_diff(&ray->inter, &cone->origin);
-// 		temp = vector_product(&temp, &cone->orientation);
-// 		temp = vector_product(&cone->orientation, &temp);
-// 		temp = vec3_scale(&temp, cone->height / lenght);
-// 		ray->normal = vec3_scale(&cone->orientation, cone->radius / lenght);
-// 		temp = vec3_scale(&temp, cone->height / lenght);
-// 		ray->normal = vec3_scale(&cone->orientation, cone->radius / lenght);
-// 		ray->normal = vec3_sum(&temp, &ray->normal);
-// 		normalize_vec(&ray->normal);
-// 		if (scalar_product(&ray->normal, &ray->dir) >= 0)
-// 			ray->normal = vec3_scale(&ray->normal, -1);
-// 		if (ray->type != LIGHT_RAY)
-// 			ray->inter_obj = cone;
-// 	}
-// }
 
 static void	get_body_intersec(t_object *cone, t_ray *ray, t_double3 *coeff)
 {
@@ -86,7 +41,6 @@ static void	get_body_intersec(t_object *cone, t_ray *ray, t_double3 *coeff)
 		}
 	}
 }
-
 
 void	main_body_intersec(t_object *cone, t_ray *ray)
 {
