@@ -91,7 +91,7 @@ The maximum number of child rays (bounces) is defined by the macro MAX_BOUNCE.
 
 The iref property of objects allows defining their refractive index following Fresnel's law. It defines the refractive index of the medium composing the interior of the objects. Thus, refraction is ignored for planes (since there is no interior medium to a plane).
 
-![Reflection and Refraction](insert image link describing reflection and refraction)
+![Reflection and Refraction](images/landscape.png)
 
 
 ## Camera Movement:

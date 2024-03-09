@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/03/09 16:21:46 by npirard          ###   ########.fr       */
+/*   Updated: 2024/03/09 18:57:56 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define KEY_THREAD_DECR XK_bracketleft
 # define KEY_CHUNK_INCR 61
 # define KEY_CHUNK_DECR XK_minus
+# define MAX_BOUNCES 3
 
 typedef struct s_data {
 	t_int2			win_size;
