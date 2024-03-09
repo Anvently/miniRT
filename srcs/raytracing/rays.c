@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmahe <lmahe@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:27:51 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 09:15:37 by lmahe            ###   ########.fr       */
+/*   Updated: 2024/03/09 17:03:44 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ void	launch_ray(t_data *data, t_ray *ray)
 	ray->l_surface = (*ray->inter_obj->texture.get_color) \
 		(ray->inter_obj, &ray->inter);
 	check_luminosity(data, ray);
-	if (ray->inter_obj->k_reflexion > 0.01 && ray->nbr_bounce < 3)
+	if (ray->inter_obj->k_reflexion > 0.01 && ray->nbr_bounce < MAX_BOUNCES)
 	{
 		l_reflect = get_reflect_color(data, ray);
 		color_add(&ray->l_final,
 			color_ratio(&l_reflect, ray->inter_obj->k_reflexion));
 	}
 	if (ray->inter_obj->k_reflexion > 0.f
-		&& ray->inter_obj->k_reflexion < 0.99 && ray->nbr_bounce < 3)
+		&& ray->inter_obj->k_reflexion < 0.99 && ray->nbr_bounce < MAX_BOUNCES)
 	{
 		l_refract = get_refract_color(data, ray);
 		color_add(&ray->l_final, color_ratio(&l_refract,

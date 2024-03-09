@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:19:17 by npirard           #+#    #+#             */
-/*   Updated: 2024/03/09 16:20:27 by npirard          ###   ########.fr       */
+/*   Updated: 2024/03/09 16:24:53 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	event_mouse_move(int x, int y, t_data *data)
 
 int	event_key_release(int keycode, t_data *data)
 {
+	printf("key=%d\n", keycode);
 	if (keycode == XK_Escape)
 		handle_close(data);
 	else if (keycode == KEY_RIGHT || keycode == KEY_LEFT
