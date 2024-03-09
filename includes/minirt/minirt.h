@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:49:00 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/28 11:09:03 by npirard          ###   ########.fr       */
+/*   Updated: 2024/03/09 16:21:46 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 # define PFPS 1
 # define DFT_NBR_THREADS 16
 # define DFT_IMG_CHUNK_SIZE 4
+# define KEY_RIGHT 0xff53
+# define KEY_LEFT 0xff51
+# define KEY_UP 0xff52
+# define KEY_DOWN 0xff54
+# define KEY_THREAD_INCR XK_bracketright
+# define KEY_THREAD_DECR XK_bracketleft
+# define KEY_CHUNK_INCR 61
+# define KEY_CHUNK_DECR XK_minus
 
 typedef struct s_data {
 	t_int2			win_size;

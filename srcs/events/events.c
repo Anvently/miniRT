@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:19:17 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/26 13:33:13 by npirard          ###   ########.fr       */
+/*   Updated: 2024/03/09 16:20:27 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ int	event_key_release(int keycode, t_data *data)
 {
 	if (keycode == XK_Escape)
 		handle_close(data);
-	else if (keycode == XK_Right || keycode == XK_Left
-		|| keycode == XK_Up || keycode == XK_Down)
+	else if (keycode == KEY_RIGHT || keycode == KEY_LEFT
+		|| keycode == KEY_UP || keycode == KEY_DOWN)
 		handle_pan(data, keycode);
-	else if (keycode == 58 || keycode == XK_bracketleft
-		|| keycode == 33 || keycode == XK_bracketright)
+	else if (keycode == 58 || keycode == KEY_THREAD_DECR
+		|| keycode == 33 || keycode == KEY_THREAD_INCR)
 		handle_threads_nbr(keycode, data);
-	else if (keycode == 61 || keycode == XK_minus)
+	else if (keycode == KEY_CHUNK_INCR || keycode == KEY_CHUNK_DECR)
 		handle_chunk_size(keycode, data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:04:22 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/28 10:00:49 by npirard          ###   ########.fr       */
+/*   Updated: 2024/03/09 16:13:01 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	scene_parse_camera(t_scene *scene, int nbr, char **ptr, char *line)
 {
-	static bool	is_defined;
+	static int	is_defined;
 
 	if (is_defined++)
 		return (error_parsing("multiple definition of camera", nbr,
@@ -33,7 +33,7 @@ int	scene_parse_camera(t_scene *scene, int nbr, char **ptr, char *line)
 
 int	scene_parse_ambiant(t_scene *scene, int nbr, char **ptr, char *line)
 {
-	static bool	is_defined;
+	static int	is_defined;
 
 	if (is_defined++)
 		return (error_parsing("multiple definition of ambiant light", nbr,

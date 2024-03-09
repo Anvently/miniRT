@@ -6,7 +6,7 @@
 /*   By: npirard <npirard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:58:07 by npirard           #+#    #+#             */
-/*   Updated: 2024/02/27 14:59:01 by npirard          ###   ########.fr       */
+/*   Updated: 2024/03/09 16:21:42 by npirard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ int	handle_close(t_data *data)
 
 int	handle_pan(t_data *data, int keycode)
 {
-	if (keycode == XK_Up)
+	if (keycode == KEY_UP)
 		data->scene.camera.origin = vec3_sum(&data->scene.camera.origin,
 				&data->scene.camera._cz);
-	else if (keycode == XK_Down)
+	else if (keycode == KEY_DOWN)
 		data->scene.camera.origin = vec3_diff(&data->scene.camera.origin,
 				&data->scene.camera._cz);
-	else if (keycode == XK_Right)
+	else if (keycode == KEY_RIGHT)
 		data->scene.camera.origin = vec3_diff(&data->scene.camera.origin,
 				&data->scene.camera._cy);
-	else if (keycode == XK_Left)
+	else if (keycode == KEY_LEFT)
 		data->scene.camera.origin = vec3_sum(&data->scene.camera.origin,
 				&data->scene.camera._cy);
 	img_update_camera(data);
@@ -83,14 +83,14 @@ int	handle_threads_nbr(int keycode, t_data *data)
 	int	max;
 
 	max = data->img_chunk_nbr;
-	if (keycode == 33 || keycode == XK_bracketright)
+	if (keycode == 33 || keycode == KEY_THREAD_INCR)
 	{
 		if (max > 1024)
 			max = 1024;
 		data->threads_nbr = get_sup_multiple(data->img_chunk_nbr,
 				data->threads_nbr, max);
 	}
-	else if (keycode == 58 || keycode == XK_bracketleft)
+	else if (keycode == 58 || keycode == KEY_THREAD_DECR)
 		data->threads_nbr = get_inf_multiple(data->img_chunk_nbr,
 				data->threads_nbr);
 	img_update_chunk(data);
@@ -100,7 +100,7 @@ int	handle_threads_nbr(int keycode, t_data *data)
 
 int	handle_chunk_size(int keycode, t_data *data)
 {
-	if (keycode == 61)
+	if (keycode == KEY_CHUNK_INCR)
 	{
 		if (data->img_chunk_size == -2)
 			data->img_chunk_size = 1;
@@ -109,7 +109,7 @@ int	handle_chunk_size(int keycode, t_data *data)
 		else if (data->img_chunk_size < 0)
 			data->img_chunk_size++;
 	}
-	else if (keycode == XK_minus)
+	else if (keycode == KEY_CHUNK_DECR)
 	{
 		if (data->img_chunk_size == 1)
 			data->img_chunk_size = -2;
