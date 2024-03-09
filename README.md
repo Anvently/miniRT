@@ -20,7 +20,8 @@ MiniRT is a ray tracing project written in C as part of the 42 curriculum. The p
 
 1. Clone the repository:
     ```bash
-    git clone <repo_address> <destination_dir>
+    git clone git@github.com:Anvently/miniRT.git minirt
+	cd minirt
     ```
 
 2. Compile the program:
@@ -167,7 +168,7 @@ This section outlines the properties and rules governing object movements and tr
 
 - The number of threads can also be adjusted in real-time to find the optimal balance for the machine. However, certain window dimensions may abruptly increase the number of threads used (based on the nearest multiple of the number of chunks found).
 
-![Montage with Different Chunk Sizes](insert montage image link)
+![Montage with Different Chunk Sizes](images/sampling.gif)
 
 ### Triangle
 
